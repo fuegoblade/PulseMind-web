@@ -4,177 +4,351 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>PulseMind™ — Welcome</title>
+    <title>PulseMind™ / Welcome</title>
 
+    <!-- Description & Metadata -->
     <meta name="description" content="PulseMind™ — Your Digital Biological Avatar. A new way to understand your inner world." />
+    <link rel="canonical" href="https://fuegoblade.com/" />
 
-    <!-- Canonical -->
-    <link rel="canonical" href="https://fuegoblade.com/">
-
-    <!-- Favicon + Icons -->
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-    <link rel="manifest" href="site.webmanifest">
+    <!-- Favicon & Icons -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+    <link rel="manifest" href="site.webmanifest" />
 
     <!-- OpenGraph -->
-    <meta property="og:title" content="PulseMind™">
-    <meta property="og:description" content="Your Digital Biological Avatar.">
-    <meta property="og:image" content="og-pulsemind.jpg">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://fuegoblade.com">
+    <meta property="og:title" content="PulseMind™" />
+    <meta property="og:description" content="Your Digital Biological Avatar." />
+    <meta property="og:image" content="og-pulsemind.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://fuegoblade.com" />
 
     <!-- Twitter OG -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="PulseMind™">
-    <meta name="twitter:description" content="Your Digital Biological Avatar.">
-    <meta name="twitter:image" content="og-pulsemind.jpg">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="PulseMind™" />
+    <meta name="twitter:description" content="Your Digital Biological Avatar." />
+    <meta name="twitter:image" content="og-pulsemind.jpg" />
 
     <style>
+        /*
+         * Reset & Basics
+         * ------------------------------------------------------------------
+         * Clean baseline styling for the page. The body uses a dark backdrop
+         * to highlight neon elements. We also disable horizontal scrolling.
+         */
         body {
             margin: 0;
             padding: 0;
-            background: #000000;
+            background: #000;
             font-family: Arial, sans-serif;
-            color: white;
+            color: #fff;
             overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
         }
 
-        /* ----- Jazyková tlačítka ----- */
-        .lang-buttons {
+        /*
+         * Language Switcher Styles
+         * ------------------------------------------------------------------
+         * The primary flag acts as a toggle for the language menu. The menu
+         * itself contains additional language options. Both the flag and menu
+         * are styled to fit the neon/glass aesthetic of the page.
+         */
+        .lang-switcher {
             position: absolute;
             top: 20px;
             right: 20px;
-            display: flex;
-            gap: 8px;
+            user-select: none;
+            /* High z-index ensures the flags and menu appear above the heart graphic */
+            z-index: 2000;
         }
 
-        .lang-btn {
-            background: rgba(255, 255, 255, 0.12);
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(6px);
-            padding: 6px 10px;
-            border-radius: 8px;
+        .main-flag {
             cursor: pointer;
-            font-size: 18px;
-            transition: 0.2s ease;
+            font-size: 28px;
+            border-radius: 50%;
+            line-height: 1;
+            display: inline-block;
+            padding: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(6px);
         }
 
-        .lang-btn:hover {
-            background: rgba(255, 255, 255, 0.25);
+        .lang-menu {
+            position: absolute;
+            top: 44px;
+            right: 0;
+            /* Slightly lighter, purple-toned background for contrast on dark pages */
+            background: rgba(40, 0, 70, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.75);
+            display: none;
+            z-index: 1000;
         }
 
-        /* ----- Layout ----- */
+        .lang-menu.show {
+            display: block;
+        }
+
+        .lang-option {
+            padding: 8px 12px;
+            font-size: 22px;
+            cursor: pointer;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .lang-option:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        /*
+         * Center Content
+         * ------------------------------------------------------------------
+         * A flexible container that centers its children. The heart image
+         * and title stack vertically. The continue button is positioned
+         * separately to the bottom of the viewport.
+         */
         .center-content {
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -55%);
+            transform: translate(-50%, -60%);
             text-align: center;
+            width: 100%;
+            padding: 0 20px;
+            box-sizing: border-box;
         }
 
-        /* ----- Logo / Srdce ----- */
+        /*
+         * Pulsing Heart
+         * ------------------------------------------------------------------
+         * The heart graphic animates smoothly and scales up to dominate
+         * nearly the entire upper half of the page. Responsive widths
+         * ensure it looks good on both mobile and desktop.
+         */
         .heart-img {
-            width: 260px;
-            animation: pulse 2.2s infinite;
+            width: 60vw;
+            max-width: 700px;
+            height: auto;
+            animation: pulse 2.4s infinite;
         }
 
         @keyframes pulse {
-            0% { transform: scale(1); opacity: 0.9; }
-            50% { transform: scale(1.12); opacity: 1; }
-            100% { transform: scale(1); opacity: 0.9; }
+            0%   { transform: scale(1);   opacity: 0.9; }
+            50%  { transform: scale(1.15); opacity: 1;   }
+            100% { transform: scale(1);   opacity: 0.9; }
         }
 
-        /* ----- PulseMind text ----- */
+        /*
+         * Title & Tagline
+         * ------------------------------------------------------------------
+         * The main heading uses a gradient clipped to text and a subtle
+         * purple drop shadow. The subtitle tagline sits just beneath and
+         * is styled with small uppercase lettering and extra spacing.
+         */
         .title {
-            margin-top: 25px;
-            font-size: 44px;
-            font-weight: bold;
-            letter-spacing: 1px;
+            margin-top: 24px;
+            font-size: 4rem;
+            font-weight: 900;
+            letter-spacing: -0.04em;
+            background: linear-gradient(135deg, #ffffff 0%, #d3b1ff 50%, #ffffff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 15px rgba(143, 0, 255, 0.6);
         }
 
-        /* ----- Continue button ----- */
+        .tagline {
+            color: #d8b4fe;
+            font-size: 0.75rem;
+            font-weight: bold;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            opacity: 0.9;
+            margin-top: 6px;
+        }
+
+        /*
+         * Continue Button
+         * ------------------------------------------------------------------
+         * The button is anchored near the bottom of the screen. Its default
+         * appearance is a neon purple glow. On press, it briefly flashes
+         * green and then triggers navigation to the next page.
+         */
         .continue-btn {
-            margin-top: 40px;
+            position: absolute;
+            left: 50%;
+            bottom: 40px;
+            transform: translateX(-50%);
             padding: 18px 50px;
             font-size: 22px;
             border-radius: 16px;
             border: none;
             cursor: pointer;
-            background: #b300ff; /* silná neonová fialová */
-            box-shadow: 0 0 20px #b300ff;
-            color: white;
+            background: #b300ff;
+            box-shadow: 0 0 24px #b300ff;
+            color: #fff;
             font-weight: bold;
-            transition: 0.25s;
+            transition: background-color 0.25s, box-shadow 0.25s;
         }
 
         .continue-btn:hover {
             background: #c733ff;
-            box-shadow: 0 0 28px #c733ff;
+            box-shadow: 0 0 32px #c733ff;
         }
 
-        .continue-btn:active {
-            background: #39ff14; /* neonová zelená */
-            box-shadow: 0 0 20px #39ff14;
-            transform: scale(0.96);
+        .continue-btn.neon-green {
+            background: #39ff14;
+            box-shadow: 0 0 28px #39ff14;
         }
     </style>
 </head>
 
 <body>
-
-    <!-- Jazykové tlačítka -->
-    <div class="lang-buttons">
-        <div class="lang-btn" onclick="setLang('cs')">🇨🇿</div>
-        <div class="lang-btn" onclick="setLang('en')">🇬🇧</div>
-        <div class="lang-btn" onclick="setLang('de')">🇩🇪</div>
-        <div class="lang-btn" onclick="setLang('es')">🇪🇸</div>
+    <!-- Language Switcher -->
+    <div class="lang-switcher">
+        <span class="main-flag" id="main-flag" onclick="toggleLangMenu()">🇬🇧</span>
+        <div class="lang-menu" id="lang-menu">
+            <div class="lang-option" data-lang="cs">
+                <span>🇨🇿</span>
+                <span>Čeština</span>
+            </div>
+            <div class="lang-option" data-lang="de">
+                <span>🇩🇪</span>
+                <span>Deutsch</span>
+            </div>
+            <div class="lang-option" data-lang="es">
+                <span>🇪🇸</span>
+                <span>Español</span>
+            </div>
+        </div>
     </div>
 
-    <!-- Hlavní obsah -->
+    <!-- Main Content -->
     <div class="center-content">
-        <img src="pulsemind-logo.png" class="heart-img" alt="PulseMind Heart">
-
+        <img src="pulsemind-logo.png" class="heart-img" alt="PulseMind Heart" />
         <div class="title">PulseMind™</div>
-
-        <button class="continue-btn" onclick="goNext()">CONTINUE</button>
     </div>
+
+    <!-- Continue Button -->
+    <button class="continue-btn" id="continue-btn" onclick="goNext()">CONTINUE</button>
 
     <script>
+        /*
+         * Translation Definitions
+         * ------------------------------------------------------------------
+         * Each language stores a translation for the continue button and the
+         * tagline beneath the PulseMind™ heading. Feel free to extend this
+         * object with more languages and messages if needed.
+         */
         const translations = {
-            cs: { continue: "POKRAČOVAT" },
-            en: { continue: "CONTINUE" },
-            de: { continue: "WEITER" },
-            es: { continue: "CONTINUAR" }
+            cs: {
+                continue: "POKRAČOVAT",
+                tagline: "Váš digitální biologický avatar"
+            },
+            en: {
+                continue: "CONTINUE",
+                tagline: "Your Digital Biological Avatar"
+            },
+            de: {
+                continue: "WEITER",
+                tagline: "Ihr digitaler biologischer Avatar"
+            },
+            es: {
+                continue: "CONTINUAR",
+                tagline: "Tu avatar biológico digital"
+            }
         };
 
-        const defaultLang = "en";
+        const defaultLang = 'en';
 
+        /*
+         * Initialize Language
+         * ------------------------------------------------------------------
+         * On first load, read the saved language from localStorage or fall
+         * back to the default. Update the document's lang attribute,
+         * continue button text, and tagline accordingly. Also update
+         * the main flag icon to reflect the current language.
+         */
         function loadLanguage() {
-            let lang = localStorage.getItem("language");
-            if (!lang) {
+            let lang = localStorage.getItem('language');
+            if (!lang || !translations[lang]) {
                 lang = defaultLang;
-                localStorage.setItem("language", lang);
+                localStorage.setItem('language', lang);
             }
-            document.getElementById("continue-btn").innerText = translations[lang].continue;
             document.documentElement.lang = lang;
+            const { continue: continueText, tagline } = translations[lang];
+            document.getElementById('continue-btn').innerText = continueText;
+            document.getElementById('tagline').innerText = tagline;
+            // Update the main flag icon
+            const flagMap = {
+                cs: '🇨🇿',
+                en: '🇬🇧',
+                de: '🇩🇪',
+                es: '🇪🇸'
+            };
+            document.getElementById('main-flag').innerText = flagMap[lang] || '🇬🇧';
         }
 
-        function setLang(lang) {
-            localStorage.setItem("language", lang);
-            loadLanguage();
+        /*
+         * Toggle Language Menu
+         * ------------------------------------------------------------------
+         * Show or hide the drop-down menu containing alternative language
+         * options. Clicking outside the menu will close it.
+         */
+        function toggleLangMenu() {
+            const menu = document.getElementById('lang-menu');
+            menu.classList.toggle('show');
         }
 
+        // Close the language menu when clicking elsewhere
+        document.addEventListener('click', (event) => {
+            const menu = document.getElementById('lang-menu');
+            const flag = document.getElementById('main-flag');
+            if (!menu.contains(event.target) && event.target !== flag) {
+                menu.classList.remove('show');
+            }
+        });
+
+        /*
+         * Register Click Events for Language Options
+         * ------------------------------------------------------------------
+         * When a language option is clicked, update the language,
+         * persist it to localStorage, refresh the UI, and hide the menu.
+         */
+        document.querySelectorAll('.lang-option').forEach(option => {
+            option.addEventListener('click', function() {
+                const lang = this.getAttribute('data-lang');
+                localStorage.setItem('language', lang);
+                loadLanguage();
+                document.getElementById('lang-menu').classList.remove('show');
+            });
+        });
+
+        /*
+         * Continue Button Logic
+         * ------------------------------------------------------------------
+         * When the button is clicked, briefly apply a neon-green class
+         * to create the glowing effect. After a short delay, navigate
+         * to web.html, preserving the selected language via query string.
+         */
         function goNext() {
-        const lang = localStorage.getItem("language")     || defaultLang;
+            const btn = document.getElementById('continue-btn');
+            const lang = localStorage.getItem('language') || defaultLang;
+            // apply neon green effect
+            btn.classList.add('neon-green');
+            setTimeout(() => {
+                window.location.href = `web.html?lang=${lang}`;
+            }, 1500);
+        }
 
-        setTimeout(() => {
-            window.location.href = `web.html?lang=$    {lang}`;
-        }, 500);
-    }
-
-        window.onload = loadLanguage;
+        // Initialize the interface once the DOM is ready
+        window.addEventListener('DOMContentLoaded', loadLanguage);
     </script>
 </body>
 </html>
