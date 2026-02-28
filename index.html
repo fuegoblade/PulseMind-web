@@ -1,13 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>PulseMind™ / Welcome</title>
 
     <meta name="description" content="PulseMind™ — Your Digital Biological Avatar. A new way to understand your inner world." />
-    <link rel="canonical" href="https://fuegoblade.com/" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://fuegoblade.com/">
+
+    <!-- Favicon + Icons -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
+
+    <!-- OpenGraph -->
+    <meta property="og:title" content="PulseMind™">
+    <meta property="og:description" content="Your Digital Biological Avatar.">
+    <meta property="og:image" content="og-pulsemind.jpg">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://fuegoblade.com">
+
+    <!-- Twitter OG -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="PulseMind™">
+    <meta name="twitter:description" content="Your Digital Biological Avatar.">
+    <meta name="twitter:image" content="og-pulsemind.jpg">
 
     <style>
         /*
@@ -23,7 +46,7 @@
             margin: 0;
             padding: 0;
             background: #000;
-            /* Jednotný systémový font pro celou appku (stejný pro nadpis i tlačítko) */
+            /* Jednotný systémový font pro celou appku */
             font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             color: #fff;
             overflow: hidden; /* Zabrání jakémukoliv rolování */
@@ -40,29 +63,71 @@
          * Cyber Background
          * ------------------------------------------------------------------
          */
+        .bg-container {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
         .bg-cyber-grid {
             position: absolute;
             inset: 0;
             background-image: 
-              linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
-              linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
-            background-size: 40px 40px;
-            animation: gridMove 20s linear infinite;
-            z-index: 1;
-            pointer-events: none;
+              linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 30s linear infinite;
+            opacity: 0.8;
         }
 
         .bg-glow {
             position: absolute;
             inset: 0;
-            background: radial-gradient(circle at center, rgba(143, 0, 255, 0.15) 0%, #000 70%);
+            background: radial-gradient(circle at center, rgba(143, 0, 255, 0.1) 0%, #000 80%);
             z-index: 2;
-            pointer-events: none;
         }
 
         @keyframes gridMove {
             0% { background-position: 0 0; }
-            100% { background-position: 40px 40px; }
+            100% { background-position: 50px 50px; }
+        }
+
+        /*
+         * ⚡ EKG Pulse (Nahradilo žubrienku)
+         * ------------------------------------------------------------------
+         */
+        .ekg-container {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 200px;
+            /* Precizní vycentrování za srdeční logo */
+            transform: translateY(calc(-50% - 12vh - 40px));
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        .ekg-line {
+            fill: none;
+            stroke: #fff;
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            /* Zářící laserový efekt (bílé jádro, fialovo-růžová záře) */
+            filter: drop-shadow(0 0 4px #fff) drop-shadow(0 0 12px #8F00FF) drop-shadow(0 0 25px #ff0055);
+            /* Délka laseru 300, mezera 1500 */
+            stroke-dasharray: 300 1500;
+            animation: ekgPulse 2.4s linear infinite;
+        }
+
+        @keyframes ekgPulse {
+            0% { stroke-dashoffset: 1800; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { stroke-dashoffset: 0; opacity: 0; }
         }
 
         /*
@@ -137,21 +202,21 @@
         }
 
         /*
-         * Center Content (Těsnější rozložení)
+         * Center Content (Logo & Title)
          * ------------------------------------------------------------------
          */
         .center-content {
             display: flex;
             flex-direction: column;
             align-items: center;
-            z-index: 10;
-            margin-top: -12vh; /* Posunuto lehce nahoru, aby bylo místo pro tlačítko dole */
+            z-index: 10; 
+            margin-top: -12vh;
             text-align: center;
         }
 
         .logo-container {
             position: relative;
-            margin-bottom: 8px; /* Zmenšená mezera mezi logem a nadpisem */
+            margin-bottom: 8px;
         }
 
         .logo-glow {
@@ -164,45 +229,43 @@
             background: #8F00FF;
             border-radius: 50%;
             filter: blur(35px);
-            opacity: 0.4;
+            opacity: 0.3; 
             animation: pulse-glow 3s infinite;
         }
 
-        /* OBRÁZEK Z REPOZITÁŘE */
         .heart-img {
             position: relative;
-            width: 110px; /* Perfektní velikost pro mobil */
+            width: 110px;
             height: auto;
             animation: heartbeat 2.4s infinite ease-in-out;
             z-index: 2;
-            filter: drop-shadow(0 0 15px rgba(143, 0, 255, 0.5));
-            /* Pojistka, kdyby měl obrázek pozadí */
+            filter: drop-shadow(0 0 10px rgba(143, 0, 255, 0.3));
             mix-blend-mode: screen; 
         }
 
         @keyframes heartbeat {
-            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(143, 0, 255, 0.5)); }
-            50% { transform: scale(1.08); filter: drop-shadow(0 0 25px rgba(236, 72, 153, 0.7)); }
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.06); }
         }
 
         @keyframes pulse-glow {
-            0%, 100% { opacity: 0.3; filter: blur(35px); }
-            50% { opacity: 0.6; filter: blur(45px); }
+            0%, 100% { opacity: 0.2; filter: blur(35px); }
+            50% { opacity: 0.4; filter: blur(45px); }
         }
 
         /*
-         * Title & Tagline
+         * Title 
          * ------------------------------------------------------------------
          */
         .title {
             font-size: 3.2rem;
-            font-weight: 900; /* Extrémní tloušťka, stejná jako u tlačítka */
+            font-weight: 900; 
             letter-spacing: -0.04em;
             background: linear-gradient(135deg, #ffffff 0%, #d3b1ff 50%, #ffffff 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 20px rgba(143, 0, 255, 0.4);
-            margin-bottom: 2px; /* Zmenšená mezera nad podtitulem */
+            text-shadow: 0 0 20px rgba(143, 0, 255, 0.3);
+            margin-bottom: 2px;
         }
 
         .tagline {
@@ -211,7 +274,7 @@
             font-weight: bold;
             letter-spacing: 0.25em;
             text-transform: uppercase;
-            opacity: 0.9;
+            opacity: 0.8;
         }
 
         /*
@@ -220,7 +283,7 @@
          */
         .bottom-container {
             position: absolute;
-            bottom: 40px; /* Bezpečně nad okrajem displeje */
+            bottom: 40px; 
             left: 50%;
             transform: translateX(-50%);
             width: 100%;
@@ -234,9 +297,9 @@
         .continue-btn {
             width: 100%;
             padding: 18px;
-            font-family: inherit; /* Použije systémový font z body */
+            font-family: inherit;
             font-size: 16px;
-            font-weight: 900; /* Stejná tloušťka jako hlavní nadpis PulseMind */
+            font-weight: 900; 
             letter-spacing: 0.25em; 
             border-radius: 20px;
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -290,8 +353,14 @@
 </head>
 
 <body>
-    <div class="bg-cyber-grid"></div>
-    <div class="bg-glow"></div>
+    <div class="bg-container">
+        <div class="bg-cyber-grid"></div>
+        <div class="bg-glow"></div>
+        
+        <svg class="ekg-container" viewBox="0 0 1000 200" preserveAspectRatio="none">
+            <path class="ekg-line" d="M -10 100 L 350 100 C 360 100, 365 90, 375 90 C 385 90, 390 100, 400 100 L 420 100 L 435 120 L 460 20 L 485 150 L 505 100 L 530 100 C 545 100, 555 80, 575 80 C 595 80, 605 100, 620 100 L 1010 100" />
+        </svg>
+    </div>
 
     <div class="lang-switcher">
         <div class="main-flag" id="main-flag" onclick="toggleLangMenu()">🇬🇧</div>
