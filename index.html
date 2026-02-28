@@ -31,125 +31,124 @@
     <meta name="twitter:description" content="Your Digital Biological Avatar.">
     <meta name="twitter:image" content="og-pulsemind.jpg">
 
-    <!-- Styles -->
     <style>
         body {
             margin: 0;
             padding: 0;
-            background: linear-gradient(180deg, #3a0000, #1a0000);
+            background: #000000;
             font-family: Arial, sans-serif;
             color: white;
-            text-align: center;
+            overflow-x: hidden;
         }
 
-        .center-box {
-            margin: 80px auto;
-            padding: 40px;
-            width: 90%;
-            max-width: 450px;
-            background: rgba(0, 0, 0, 0.35);
-            backdrop-filter: blur(12px);
-            border-radius: 20px;
-            box-shadow: 0 0 25px rgba(0,0,0,0.4);
-        }
-
-        .heart-img {
-            width: 160px;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 0.95; }
-            50% { transform: scale(1.08); opacity: 1; }
-            100% { transform: scale(1); opacity: 0.95; }
-        }
-
+        /* ----- Jazyková tlačítka ----- */
         .lang-buttons {
-            margin-top: 20px;
+            position: absolute;
+            top: 20px;
+            right: 20px;
             display: flex;
-            justify-content: center;
-            gap: 12px;
+            gap: 8px;
         }
 
         .lang-btn {
-            background: rgba(255,255,255,0.15);
-            padding: 10px 14px;
-            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(6px);
+            padding: 6px 10px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 22px;
+            font-size: 18px;
             transition: 0.2s ease;
         }
 
         .lang-btn:hover {
-            background: rgba(255,255,255,0.3);
+            background: rgba(255, 255, 255, 0.25);
         }
 
+        /* ----- Layout ----- */
+        .center-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -55%);
+            text-align: center;
+        }
+
+        /* ----- Logo / Srdce ----- */
+        .heart-img {
+            width: 260px;
+            animation: pulse 2.2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.9; }
+            50% { transform: scale(1.12); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.9; }
+        }
+
+        /* ----- PulseMind text ----- */
         .title {
-            margin-top: 20px;
-            font-size: 32px;
+            margin-top: 25px;
+            font-size: 44px;
             font-weight: bold;
+            letter-spacing: 1px;
         }
 
-        .welcome {
-            margin-top: 10px;
-            font-size: 20px;
-            opacity: 0.9;
-        }
-
+        /* ----- Continue button ----- */
         .continue-btn {
-            margin-top: 30px;
-            padding: 15px 40px;
-            font-size: 20px;
-            border-radius: 14px;
+            margin-top: 40px;
+            padding: 18px 50px;
+            font-size: 22px;
+            border-radius: 16px;
             border: none;
             cursor: pointer;
-            background: #b05eff;
+            background: #b300ff; /* silná neonová fialová */
+            box-shadow: 0 0 20px #b300ff;
             color: white;
             font-weight: bold;
-            transition: 0.3s;
+            transition: 0.25s;
+        }
+
+        .continue-btn:hover {
+            background: #c733ff;
+            box-shadow: 0 0 28px #c733ff;
         }
 
         .continue-btn:active {
-            background: #3bff55;
-            transform: scale(0.97);
+            background: #39ff14; /* neonová zelená */
+            box-shadow: 0 0 20px #39ff14;
+            transform: scale(0.96);
         }
     </style>
 </head>
 
 <body>
 
-    <div class="center-box">
+    <!-- Jazykové tlačítka -->
+    <div class="lang-buttons">
+        <div class="lang-btn" onclick="setLang('cs')">🇨🇿</div>
+        <div class="lang-btn" onclick="setLang('en')">🇬🇧</div>
+        <div class="lang-btn" onclick="setLang('de')">🇩🇪</div>
+        <div class="lang-btn" onclick="setLang('es')">🇪🇸</div>
+    </div>
 
-        <img src="pulsemind-logo.png" class="heart-img" alt="PulseMind Logo">
+    <!-- Hlavní obsah -->
+    <div class="center-content">
+        <img src="pulsemind-logo.png" class="heart-img" alt="PulseMind Heart">
 
         <div class="title">PulseMind™</div>
 
-        <!-- Jazyková tlačítka -->
-        <div class="lang-buttons">
-            <div class="lang-btn" onclick="setLang('cs')">🇨🇿</div>
-            <div class="lang-btn" onclick="setLang('en')">🇬🇧</div>
-            <div class="lang-btn" onclick="setLang('de')">🇩🇪</div>
-            <div class="lang-btn" onclick="setLang('es')">🇪🇸</div>
-        </div>
-
-        <!-- Dynamický text -->
-        <div class="welcome" id="welcome-text">Welcome</div>
-
-        <!-- Pokračovat -->
-        <button class="continue-btn" id="continue-btn" onclick="goNext()">CONTINUE</button>
-
+        <button class="continue-btn" onclick="goNext()">CONTINUE</button>
     </div>
 
-    <!-- JavaScript -->
     <script>
         const translations = {
-            cs: { welcome: "Vítej u nás", continue: "POKRAČOVAT" },
-            en: { welcome: "Welcome", continue: "CONTINUE" },
-            de: { welcome: "Willkommen", continue: "WEITER" },
-            es: { welcome: "Bienvenido", continue: "CONTINUAR" }
+            cs: { continue: "POKRAČOVAT" },
+            en: { continue: "CONTINUE" },
+            de: { continue: "WEITER" },
+            es: { continue: "CONTINUAR" }
         };
 
-        // Default jazyk (EN)
         const defaultLang = "en";
 
         function loadLanguage() {
@@ -158,10 +157,7 @@
                 lang = defaultLang;
                 localStorage.setItem("language", lang);
             }
-            document.getElementById("welcome-text").innerText = translations[lang].welcome;
             document.getElementById("continue-btn").innerText = translations[lang].continue;
-
-            // Nastavení lang pro HTML tag
             document.documentElement.lang = lang;
         }
 
@@ -171,14 +167,14 @@
         }
 
         function goNext() {
-            // efekt zmáčknutí už řeší CSS
-            setTimeout(() => {
-                window.location.href = "web.html";
-            }, 400);
-        }
+        const lang = localStorage.getItem("language")     || defaultLang;
 
-        loadLanguage();
+        setTimeout(() => {
+            window.location.href = `web.html?lang=$    {lang}`;
+        }, 500);
+    }
+
+        window.onload = loadLanguage;
     </script>
-
 </body>
 </html>
