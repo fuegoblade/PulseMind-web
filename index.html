@@ -95,7 +95,7 @@
         }
 
         /*
-         * ⚡ EKG Pulse (Nahradilo žubrienku)
+         * ⚡ EKG Pulse (Nahradilo žubrienku) - BARVA ZMĚNĚNA NA NEON ZELENOU
          * ------------------------------------------------------------------
          */
         .ekg-container {
@@ -112,12 +112,12 @@
 
         .ekg-line {
             fill: none;
-            stroke: #fff;
+            stroke: #39ff14; /* ZMĚNĚNO NA NEONOVĚ ZELENOU (Barva tlačítka) */
             stroke-width: 3;
             stroke-linecap: round;
             stroke-linejoin: round;
-            /* Zářící laserový efekt (bílé jádro, fialovo-růžová záře) */
-            filter: drop-shadow(0 0 4px #fff) drop-shadow(0 0 12px #8F00FF) drop-shadow(0 0 25px #ff0055);
+            /* Zářící laserový efekt (Zelené jádro, silná zelená záře) */
+            filter: drop-shadow(0 0 4px #39ff14) drop-shadow(0 0 12px #39ff14) drop-shadow(0 0 25px #39ff14);
             /* Délka laseru 300, mezera 1500 */
             stroke-dasharray: 300 1500;
             animation: ekgPulse 2.4s linear infinite;
@@ -337,6 +337,7 @@
             transform: scale(0.98);
         }
 
+        /* Neonová zelená barva při zmáčknutí (zachováno) */
         .continue-btn.neon-green {
             background: #39ff14;
             box-shadow: 0 0 35px #39ff14;
