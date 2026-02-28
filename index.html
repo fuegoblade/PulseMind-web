@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -131,7 +130,7 @@
         }
 
         /*
-         * Language Switcher (Flags Only)
+         * Language Switcher (Vertical Pill Style)
          * ------------------------------------------------------------------
          */
         .lang-switcher {
@@ -139,6 +138,16 @@
             top: 24px;
             right: 24px;
             z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(20, 20, 25, 0.7); /* Tmavší sklo */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 30px; /* Vytvoří krásnou pilulku */
+            padding: 4px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+            transition: all 0.3s ease;
         }
 
         .main-flag {
@@ -150,9 +159,6 @@
             justify-content: center;
             width: 44px;
             height: 44px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
             transition: background 0.3s;
         }
 
@@ -161,18 +167,11 @@
         }
 
         .lang-menu {
-            position: absolute;
-            top: 54px;
-            right: 0;
-            background: rgba(15, 15, 20, 0.9);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
-            backdrop-filter: blur(12px);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
             display: none;
             flex-direction: column;
-            padding: 8px;
-            gap: 8px;
+            padding: 0;
+            gap: 4px;
+            margin-top: 4px; /* Drobná mezera mezi hlavní a první možností */
             animation: fadeIn 0.2s ease-out;
         }
 
@@ -183,8 +182,8 @@
         .lang-option {
             font-size: 24px;
             cursor: pointer;
-            width: 40px;
-            height: 40px;
+            width: 44px; /* Stejná velikost jako main-flag pro perfektní linii */
+            height: 44px;
             display: flex;
             align-items: center;
             justify-content: center;
