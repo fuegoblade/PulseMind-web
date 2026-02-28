@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Title -->
+    <title>PulseMind™ — Welcome</title>
+
+    <!-- Description -->
+    <meta name="description" content="PulseMind™ — Your Digital Biological Avatar. A new way to understand your inner world." />
+
+    <!-- Favicon + Icons -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
+
+    <!-- OpenGraph -->
+    <meta property="og:title" content="PulseMind™">
+    <meta property="og:description" content="Your Digital Biological Avatar.">
+    <meta property="og:image" content="og-pulsemind.jpg">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://fuegoblade.com">
+
+    <!-- Twitter OG -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="PulseMind™">
+    <meta name="twitter:description" content="Your Digital Biological Avatar.">
+    <meta name="twitter:image" content="og-pulsemind.jpg">
+
+    <!-- Styles -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(180deg, #3a0000, #1a0000);
+            font-family: Arial, sans-serif;
+            color: white;
+            text-align: center;
+        }
+
+        .center-box {
+            margin: 80px auto;
+            padding: 40px;
+            width: 90%;
+            max-width: 450px;
+            background: rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            box-shadow: 0 0 25px rgba(0,0,0,0.4);
+        }
+
+        .heart-img {
+            width: 160px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.95; }
+            50% { transform: scale(1.08); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.95; }
+        }
+
+        .lang-buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .lang-btn {
+            background: rgba(255,255,255,0.15);
+            padding: 10px 14px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 22px;
+            transition: 0.2s ease;
+        }
+
+        .lang-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .title {
+            margin-top: 20px;
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+        .welcome {
+            margin-top: 10px;
+            font-size: 20px;
+            opacity: 0.9;
+        }
+
+        .continue-btn {
+            margin-top: 30px;
+            padding: 15px 40px;
+            font-size: 20px;
+            border-radius: 14px;
+            border: none;
+            cursor: pointer;
+            background: #b05eff;
+            color: white;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .continue-btn:active {
+            background: #3bff55;
+            transform: scale(0.97);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="center-box">
+
+        <img src="your-heart.png" class="heart-img" alt="PulseMind Heart">
+
+        <div class="title">PulseMind™</div>
+
+        <!-- Jazyková tlačítka -->
+        <div class="lang-buttons">
+            <div class="lang-btn" onclick="setLang('cs')">🇨🇿</div>
+            <div class="lang-btn" onclick="setLang('en')">🇬🇧</div>
+            <div class="lang-btn" onclick="setLang('de')">🇩🇪</div>
+            <div class="lang-btn" onclick="setLang('es')">🇪🇸</div>
+        </div>
+
+        <!-- Dynamický text -->
+        <div class="welcome" id="welcome-text">Welcome</div>
+
+        <!-- Pokračovat -->
+        <button class="continue-btn" id="continue-btn" onclick="goNext()">CONTINUE</button>
+
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        const translations = {
+            cs: { welcome: "Vítej u nás", continue: "POKRAČOVAT" },
+            en: { welcome: "Welcome", continue: "CONTINUE" },
+            de: { welcome: "Willkommen", continue: "WEITER" },
+            es: { welcome: "Bienvenido", continue: "CONTINUAR" }
+        };
+
+        // Default jazyk (EN)
+        const defaultLang = "en";
+
+        function loadLanguage() {
+            let lang = localStorage.getItem("language");
+            if (!lang) {
+                lang = defaultLang;
+                localStorage.setItem("language", lang);
+            }
+            document.getElementById("welcome-text").innerText = translations[lang].welcome;
+            document.getElementById("continue-btn").innerText = translations[lang].continue;
+
+            // Nastavení lang pro HTML tag
+            document.documentElement.lang = lang;
+        }
+
+        function setLang(lang) {
+            localStorage.setItem("language", lang);
+            loadLanguage();
+        }
+
+        function goNext() {
+            // efekt zmáčknutí už řeší CSS
+            setTimeout(() => {
+                window.location.href = "web.html";
+            }, 400);
+        }
+
+        loadLanguage();
+    </script>
+
+</body>
+</html>
