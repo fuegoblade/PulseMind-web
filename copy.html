@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>PulseMind™ / Autorská práva</title>
+
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <meta name="googlebot" content="noindex, nofollow, noarchive">
+    <meta name="google" content="nositelinkssearchbox">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="fuegoblade-logo.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="fuegoblade-logo.png">
+    <link rel="apple-touch-icon" href="fuegoblade-logo.png">
+
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Background */
+        .bg {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(143,0,255,0.1) 0%, #000 80%);
+            z-index: -2;
+        }
+
+        .grid {
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 30s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes gridMove {
+            from { background-position: 0 0; }
+            to { background-position: 50px 50px; }
+        }
+
+        /* Top Bar with Logo */
+        .top-bar {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+
+        /* Back Arrow */
+        .back-arrow {
+            width: 16px;
+            height: 16px;
+            border-left: 2px solid #39ff14;
+            border-bottom: 2px solid #39ff14;
+            transform: rotate(45deg);
+            cursor: pointer;
+            filter: drop-shadow(0 0 6px #39ff14);
+            transition: 0.3s;
+        }
+        
+        .back-arrow:hover {
+            transform: rotate(45deg) scale(1.1);
+            filter: drop-shadow(0 0 10px #39ff14);
+        }
+
+        /* Top Right Controls (Sound + Logo) */
+        .top-right-controls {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Sound Toggle Button */
+        .sound-toggle {
+            cursor: pointer;
+            width: 24px;
+            height: 24px;
+            color: rgba(255, 255, 255, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .sound-toggle:hover {
+            color: #39ff14;
+            filter: drop-shadow(0 0 5px rgba(57, 255, 20, 0.5));
+        }
+
+        .sound-toggle.active {
+            color: #39ff14;
+            filter: drop-shadow(0 0 8px #39ff14);
+        }
+
+        .sound-toggle svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* FuegoBlade Logo */
+        .logo-wrapper {
+            background: #fff; 
+            border-radius: 50%;
+            width: 70px; 
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden; 
+            box-shadow: 0 0 20px rgba(143, 0, 255, 0.3);
+            border: 2px solid #8F00FF; 
+            margin-left: 25px;
+        }
+
+        .logo-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* Code Window */
+        .code-window {
+            max-width: 900px;
+            margin: 120px auto 80px; /* Zvětšený horní margin kvůli chybějícímu velkému obrázku */
+            background: rgba(12, 12, 18, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid rgba(143,0,255,0.3);
+            box-shadow: 0 0 40px rgba(143,0,255,0.15), inset 0 0 20px rgba(0,0,0,0.8);
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        .code-header {
+            margin-bottom: 30px;
+            font-size: 1.4rem;
+            font-weight: 900;
+            border-bottom: 1px dashed rgba(255,255,255,0.2);
+            padding-bottom: 15px;
+        }
+
+        .purple { color: #8F00FF; text-shadow: 0 0 10px rgba(143,0,255,0.5); }
+        .white { color: #ffffff; }
+
+        .code-content {
+            white-space: pre-wrap;
+            display: inline; /* To align correctly with the cursor */
+        }
+
+        /* Třídy pro formátování psaného textu */
+        .text-boot { color: #39ff14; font-weight: bold; opacity: 0.8; }
+        .text-body { color: #d1d1d1; font-family: system-ui, -apple-system, sans-serif; font-size: 1.1rem; line-height: 1.7; }
+        .text-summary { color: #00e5ff; font-weight: 700; text-shadow: 0 0 10px rgba(0, 229, 255, 0.4); font-family: system-ui, -apple-system, sans-serif; font-size: 1.1rem; line-height: 1.7; display: block; margin-top: 20px; border-left: 3px solid #00e5ff; padding-left: 15px; }
+
+        /* Neonový obdélníkový kurzor */
+        .cursor {
+            display: inline-block;
+            width: 12px;
+            height: 1.1em;
+            background: #39ff14;
+            vertical-align: middle;
+            margin-left: 5px;
+            box-shadow: 0 0 10px #39ff14;
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin: 40px 0 40px;
+            font-size: 0.85rem;
+            opacity: 0.5;
+            font-weight: 600;
+        }
+
+        @media (max-width: 600px) {
+            .code-window { padding: 25px; margin: 100px 20px 20px; font-size: 0.95rem; }
+            .code-header { font-size: 1.1rem; }
+            .text-body, .text-summary { font-size: 1rem; }
+            .logo-wrapper { width: 50px; height: 50px; margin-left: 15px; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="bg"></div>
+    <div class="grid"></div>
+
+    <div class="top-bar">
+        <div class="back-arrow" onclick="goBack()"></div>
+        
+        <div class="top-right-controls">
+            <div class="sound-toggle" id="soundToggle" onclick="toggleSound()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                    <line x1="23" y1="9" x2="17" y2="15"></line>
+                    <line x1="17" y1="9" x2="23" y2="15"></line>
+                </svg>
+            </div>
+            
+            <div class="logo-wrapper">
+                <img src="fuegoblade-logo.png" alt="FuegoBlade">
+            </div>
+        </div>
+    </div>
+
+    <div class="code-window">
+        <div class="code-header" id="section-title">
+            </div>
+        <div class="code-content" id="typedText"></div><span class="cursor"></span>
+    </div>
+
+    <div class="footer" id="copyright-text">
+        © 2026 FuegoBlade™. Všechna práva vyhrazena.
+    </div>
+
+    <script>
+        // Jazyková databáze
+        const langData = {
+            cs: {
+                title1: "Autorská práva:",
+                title2: "Ochrana duševního vlastnictví",
+                boot: "> INICIALIZACE PRÁVNÍCH PROTOKOLŮ...\n> OVĚŘOVÁNÍ DUŠEVNÍHO VLASTNICTVÍ...\n> PŘÍSTUP POVOLEN.\n\n",
+                body: "1. Vlastník projektu\nProvozovatelem projektu FuegoBlade™ a aplikace PulseMind™ je:\n\nRichard Zak\nMichael-Ulmer-Weg 10\n73235 Weilheim an der Teck\nNěmecko\nE-mail: richardzak@fuegoblade.com\n\nProjekt je provozován jako fyzická osoba (Einzelunternehmer).\n\n----------------------------------------\n\n2. Autorská práva\nVeškerý obsah zveřejněný v rámci webových stránek FuegoBlade™ a aplikace PulseMind™ je chráněn autorským právem a předpisy o ochraně duševního vlastnictví.\n\nTo zahrnuje zejména:\n- zdrojový kód aplikace\n- algoritmy a modely umělé inteligence\n- databázovou strukturu\n- grafiku, loga a vizuální identitu\n- design uživatelského rozhraní (UI/UX)\n- textový obsah a generované výstupy\n- koncepční a architektonické procesy systému\n\nJakékoliv neoprávněné kopírování, úpravy, šíření nebo jiné využití bez předchozího písemného souhlasu vlastníka je zakázáno.\n\n----------------------------------------\n\n3. Ochranné označení\nOznačení FuegoBlade™ a PulseMind™ jsou používána jako obchodní označení projektu. Neoprávněné užití těchto označení v obchodním styku nebo marketingu bez souhlasu provozovatele je nepřípustné.\n\n----------------------------------------\n\n4. Licence k užívání\nUživateli je udělena omezená, nevýhradní, nepřenosná a odvolatelná licence k používání aplikace PulseMind™ výhradně pro osobní a nekomerční účely.\n\nJe zakázáno zejména:\n- provádět reverzní inženýrství (reverse engineering)\n- dekompilovat nebo analyzovat algoritmy systému\n- automatizovaně získávat data (scraping)\n- komerčně využívat generované výstupy bez samostatné dohody\n- vytvářet odvozená díla založená na technologii PulseMind™\n\n",
+                summaryTitle: ">>> 5. OCHRANA PRÁV <<<\n",
+                summary: "V případě porušení práv duševního vlastnictví si provozovatel vyhrazuje právo podniknout právní kroky podle platných právních předpisů Spolkové republiky Německo.",
+                copyright: "© 2026 FuegoBlade™. Všechna práva vyhrazena."
+            },
+            en: {
+                title1: "Copyright:",
+                title2: "Intellectual Property Protection",
+                boot: "> LEGAL PROTOCOLS INITIALIZATION...\n> VERIFYING INTELLECTUAL PROPERTY...\n> ACCESS GRANTED.\n\n",
+                body: "1. Project Owner\nThe operator of the FuegoBlade™ project and the PulseMind™ application is:\n\nRichard Zak\nMichael-Ulmer-Weg 10\n73235 Weilheim an der Teck\nGermany\nE-mail: richardzak@fuegoblade.com\n\nThe project is operated as a sole proprietorship (Einzelunternehmer).\n\n----------------------------------------\n\n2. Copyright\nAll content published on the FuegoBlade™ website and the PulseMind™ application is protected by copyright and intellectual property protection regulations.\n\nThis specifically includes:\n- application source code\n- artificial intelligence algorithms and models\n- database structure\n- graphics, logos, and visual identity\n- user interface design (UI/UX)\n- text content and generated outputs\n- conceptual and architectural system processes\n\nAny unauthorized copying, modification, distribution, or other use without the prior written consent of the owner is prohibited.\n\n----------------------------------------\n\n3. Trademarks\nThe designations FuegoBlade™ and PulseMind™ are used as commercial designations of the project. Unauthorized use of these designations in business or marketing without the operator's consent is strictly prohibited.\n\n----------------------------------------\n\n4. License to Use\nThe user is granted a limited, non-exclusive, non-transferable, and revocable license to use the PulseMind™ application solely for personal and non-commercial purposes.\n\nIt is specifically prohibited to:\n- perform reverse engineering\n- decompile or analyze system algorithms\n- automatically scrape data\n- commercially use generated outputs without a separate agreement\n- create derivative works based on PulseMind™ technology\n\n",
+                summaryTitle: ">>> 5. RIGHTS PROTECTION <<<\n",
+                summary: "In the event of a breach of intellectual property rights, the operator reserves the right to take legal action in accordance with the applicable laws of the Federal Republic of Germany.",
+                copyright: "© 2026 FuegoBlade™. All rights reserved."
+            },
+            de: {
+                title1: "Urheberrechte:",
+                title2: "Schutz des geistigen Eigentums",
+                boot: "> INITIALISIERUNG DER RECHTSPROTOKOLLE...\n> ÜBERPRÜFUNG DES GEISTIGEN EIGENTUMS...\n> ZUGRIFF GEWÄHRT.\n\n",
+                body: "1. Projektinhaber\nDer Betreiber des Projekts FuegoBlade™ und der Anwendung PulseMind™ ist:\n\nRichard Zak\nMichael-Ulmer-Weg 10\n73235 Weilheim an der Teck\nDeutschland\nE-Mail: richardzak@fuegoblade.com\n\nDas Projekt wird als Einzelunternehmer betrieben.\n\n----------------------------------------\n\n2. Urheberrechte\nDer gesamte auf der FuegoBlade™-Website und in der PulseMind™-Anwendung veröffentlichte Inhalt ist durch Urheberrechte und Vorschriften zum Schutz des geistigen Eigentums geschützt.\n\nDies umfasst insbesondere:\n- Quellcode der Anwendung\n- Algorithmen und Modelle der künstlichen Intelligenz\n- Datenbankstruktur\n- Grafiken, Logos und visuelle Identität\n- Design der Benutzeroberfläche (UI/UX)\n- Textinhalte und generierte Ausgaben\n- konzeptionelle und architektonische Systemprozesse\n\nJegliches unbefugte Kopieren, Ändern, Verbreiten oder anderweitige Verwenden ohne vorherige schriftliche Zustimmung des Eigentümers ist untersagt.\n\n----------------------------------------\n\n3. Markenzeichen\nDie Bezeichnungen FuegoBlade™ und PulseMind™ werden als geschäftliche Bezeichnungen des Projekts verwendet. Die unbefugte Verwendung dieser Bezeichnungen im Geschäftsverkehr oder Marketing ohne Zustimmung des Betreibers ist unzulässig.\n\n----------------------------------------\n\n4. Nutzungslizenz\nDem Nutzer wird eine eingeschränkte, nicht exklusive, nicht übertragbare und widerrufliche Lizenz zur Nutzung der PulseMind™-Anwendung ausschließlich für persönliche und nicht kommerzielle Zwecke gewährt.\n\nEs ist insbesondere untersagt:\n- Reverse Engineering durchzuführen\n- Systemalgorithmen zu dekompilieren oder zu analysieren\n- Daten automatisiert zu erfassen (Scraping)\n- generierte Ausgaben ohne gesonderte Vereinbarung kommerziell zu nutzen\n- abgeleitete Werke basierend auf der PulseMind™-Technologie zu erstellen\n\n",
+                summaryTitle: ">>> 5. SCHUTZ DER RECHTE <<<\n",
+                summary: "Im Falle einer Verletzung der Rechte des geistigen Eigentums behält sich der Betreiber das Recht vor, rechtliche Schritte gemäß den geltenden Gesetzen der Bundesrepublik Deutschland einzuleiten.",
+                copyright: "© 2026 FuegoBlade™. Alle Rechte vorbehalten."
+            },
+            es: {
+                title1: "Derechos de Autor:",
+                title2: "Protección de la Propiedad Intelectual",
+                boot: "> INICIALIZACIÓN DE PROTOCOLOS LEGALES...\n> VERIFICANDO PROPIEDAD INTELECTUAL...\n> ACCESO CONCEDIDO.\n\n",
+                body: "1. Propietario del Proyecto\nEl operador del proyecto FuegoBlade™ y la aplicación PulseMind™ es:\n\nRichard Zak\nMichael-Ulmer-Weg 10\n73235 Weilheim an der Teck\nAlemania\nCorreo electrónico: richardzak@fuegoblade.com\n\nEl proyecto se opera como un negocio unipersonal (Einzelunternehmer).\n\n----------------------------------------\n\n2. Derechos de Autor\nTodo el contenido publicado en el sitio web de FuegoBlade™ y la aplicación PulseMind™ está protegido por derechos de autor y regulaciones de protección de propiedad intelectual.\n\nEsto incluye específicamente:\n- código fuente de la aplicación\n- algoritmos y modelos de inteligencia artificial\n- estructura de la base de datos\n- gráficos, logotipos e identidad visual\n- diseño de la interfaz de usuario (UI/UX)\n- contenido de texto y salidas generadas\n- procesos conceptuales y arquitectónicos del sistema\n\nCualquier copia, modificación, distribución u otro uso no autorizado sin el consentimiento previo por escrito del propietario está prohibido.\n\n----------------------------------------\n\n3. Marcas Comerciales\nLas designaciones FuegoBlade™ y PulseMind™ se utilizan como designaciones comerciales del proyecto. El uso no autorizado de estas designaciones en negocios o marketing sin el consentimiento del operador es inaceptable.\n\n----------------------------------------\n\n4. Licencia de Uso\nSe otorga al usuario una licencia limitada, no exclusiva, intransferible y revocable para usar la aplicación PulseMind™ exclusivamente para fines personales y no comerciales.\n\nEstá específicamente prohibido:\n- realizar ingeniería inversa\n- descompilar o analizar algoritmos del sistema\n- extraer datos automáticamente (scraping)\n- utilizar comercialmente las salidas generadas sin un acuerdo por separado\n- crear obras derivadas basadas en la tecnología PulseMind™\n\n",
+                summaryTitle: ">>> 5. PROTECCIÓN DE DERECHOS <<<\n",
+                summary: "En caso de violación de los derechos de propiedad intelectual, el operador se reserva el derecho de emprender acciones legales de acuerdo con las leyes aplicables de la República Federal de Alemania.",
+                copyright: "© 2026 FuegoBlade™. Todos los derechos reservados."
+            }
+        };
+
+        const lang = localStorage.getItem("language") || "cs";
+        const currentData = langData[lang] || langData["cs"];
+        
+        document.documentElement.lang = lang;
+        document.getElementById("copyright-text").innerText = currentData.copyright;
+        
+        document.getElementById("section-title").innerHTML = `
+            <span class="purple">${currentData.title1}</span> 
+            <span class="white">${currentData.title2}</span>
+        `;
+
+        const contentBlocks = [
+            { text: currentData.boot, cssClass: "text-boot" },
+            { text: currentData.body, cssClass: "text-body" },
+            { text: currentData.summaryTitle + currentData.summary, cssClass: "text-summary" }
+        ];
+
+        let blockIndex = 0;
+        let charIndex = 0;
+        const container = document.getElementById("typedText");
+        let currentSpan = null;
+        const typeSpeed = 8; // Rychlost malinko zrychlena, aby právní text nebyl nudně dlouhý
+
+        // --- AUDIO SYSTÉM PRO PÍPÁNÍ A TLAČÍTKO ---
+        let audioCtx;
+        let isSoundEnabled = false;
+
+        function toggleSound() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+
+            isSoundEnabled = !isSoundEnabled;
+            const btn = document.getElementById("soundToggle");
+
+            if (isSoundEnabled) {
+                btn.classList.add('active');
+                btn.innerHTML = `
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                    </svg>
+                `;
+            } else {
+                btn.classList.remove('active');
+                btn.innerHTML = `
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                        <line x1="23" y1="9" x2="17" y2="15"></line>
+                        <line x1="17" y1="9" x2="23" y2="15"></line>
+                    </svg>
+                `;
+            }
+        }
+
+        function playBeep() {
+            if (!audioCtx || audioCtx.state === 'suspended' || !isSoundEnabled) return;
+            try {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                
+                osc.type = 'square'; 
+                osc.frequency.setValueAtTime(800, audioCtx.currentTime); 
+                
+                gain.gain.setValueAtTime(0.015, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.03);
+                
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.03);
+            } catch (e) {}
+        }
+
+        // --- EFEKT PSANÍ KÓDU ---
+        function typeWriter() {
+            if (blockIndex < contentBlocks.length) {
+                if (charIndex === 0) {
+                    currentSpan = document.createElement("span");
+                    currentSpan.className = contentBlocks[blockIndex].cssClass;
+                    container.appendChild(currentSpan);
+                }
+                
+                let char = contentBlocks[blockIndex].text.charAt(charIndex);
+                
+                if (char === '\n') {
+                    currentSpan.innerHTML += '<br>';
+                } else {
+                    currentSpan.innerHTML += char;
+                }
+                
+                if (char !== ' ' && char !== '\n' && Math.random() > 0.6) {
+                    playBeep();
+                }
+
+                charIndex++;
+                
+                if (charIndex >= contentBlocks[blockIndex].text.length) {
+                    blockIndex++;
+                    charIndex = 0;
+                    setTimeout(typeWriter, 400);
+                } else {
+                    setTimeout(typeWriter, typeSpeed);
+                }
+            }
+        }
+
+        function goBack() {
+            window.location.href = "web.html";
+        }
+
+        window.onload = () => {
+            setTimeout(typeWriter, 400); 
+        };
+    </script>
+</body>
+</html>
