@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>PulseMind™ / Info</title>
+
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <meta name="googlebot" content="noindex, nofollow, noarchive">
+    <meta name="google" content="nositelinkssearchbox">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="fuegoblade-logo.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="fuegoblade-logo.png">
+    <link rel="apple-touch-icon" href="fuegoblade-logo.png">
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+    font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    background:#000;
+    color:#fff;
+    overflow-x:hidden;
+}
+
+/* Background */
+.bg{
+    position:fixed;
+    inset:0;
+    background:radial-gradient(circle at center, rgba(143,0,255,0.1) 0%, #000 80%);
+    z-index:-2;
+}
+
+.grid{
+    position:fixed;
+    inset:0;
+    background-image:
+        linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size:50px 50px;
+    animation:gridMove 30s linear infinite;
+    z-index:-1;
+}
+
+@keyframes gridMove{
+    from{background-position:0 0;}
+    to{background-position:50px 50px;}
+}
+
+/* Back Arrow */
+.top-bar{
+    position:fixed;
+    top:20px;
+    left:20px;
+    z-index:100;
+}
+
+.back-arrow{
+    width:16px;
+    height:16px;
+    border-left:2px solid #39ff14;
+    border-bottom:2px solid #39ff14;
+    transform:rotate(45deg);
+    cursor:pointer;
+    filter:drop-shadow(0 0 6px #39ff14);
+    transition:0.3s;
+}
+.back-arrow:hover{
+    transform:rotate(45deg) scale(1.1);
+}
+
+/* Image Section */
+.hero-image{
+    margin-top:100px;
+    display:flex;
+    justify-content:center;
+    position:relative;
+}
+
+.hero-image img{
+    width:70%;
+    max-width:600px;
+    height:auto;
+    object-fit:contain;
+    filter:blur(0px);
+    position:relative;
+    z-index:2;
+}
+
+/* Fade effect */
+.hero-image::after{
+    content:"";
+    position:absolute;
+    bottom:-100px;
+    width:100%;
+    height:200px;
+    background:linear-gradient(to bottom, rgba(0,0,0,0) 0%, #000 100%);
+    z-index:1;
+}
+
+/* Code Window */
+.code-window{
+    max-width:900px;
+    margin:80px auto;
+    background:#0c0c12;
+    border-radius:20px;
+    padding:40px;
+    border:1px solid rgba(143,0,255,0.3);
+    box-shadow:0 0 40px rgba(143,0,255,0.15);
+    font-family:monospace;
+    font-size:0.95rem;
+    line-height:1.7;
+    position:relative;
+}
+
+.code-header{
+    margin-bottom:20px;
+    color:#39ff14;
+    font-weight:bold;
+}
+
+.code-content{
+    white-space:pre-wrap;
+}
+
+.purple{color:#8F00FF;}
+.green{color:#39ff14;}
+.white{color:#ffffff;}
+
+.cursor{
+    display:inline-block;
+    width:8px;
+    background:#39ff14;
+    animation:blink 1s infinite;
+    margin-left:4px;
+}
+
+@keyframes blink{
+    0%,50%,100%{opacity:1;}
+    25%,75%{opacity:0;}
+}
+
+/* Footer */
+.footer{
+    text-align:center;
+    margin:80px 0 40px;
+    font-size:0.85rem;
+    opacity:0.6;
+    font-weight:600;
+}
+</style>
+</head>
+
+<body>
+
+<div class="bg"></div>
+<div class="grid"></div>
+
+<div class="top-bar">
+    <div class="back-arrow" onclick="goBack()"></div>
+</div>
+
+<div class="hero-image">
+    <img src="img-pulsemind.png" alt="PulseMind">
+</div>
+
+<div class="code-window">
+    <div class="code-header">
+        <span class="purple">&lt;PulseMind™&gt;</span> 
+        <span class="green">Metabolic.Engine()</span>
+    </div>
+    <div class="code-content" id="typedText"></div><span class="cursor"></span>
+</div>
+
+<div class="footer">
+© 2026 FuegoBlade™. Všechna práva vyhrazena.
+</div>
+
+<script>
+const text = `
+<system>
+Většina dietních plánů selhává, protože jsou statické a ignorují to nejdůležitější – tvou aktuální fyziologickou realitu.
+
+Jídlo nepředstavuje jen obyčejnou energii,
+ale biochemickou informaci, která dává tvým buňkám pokyn,
+zda mají budovat svaly, spalovat tuk nebo opravovat poškozené tkáně.
+
+PulseMind™ přistupuje k výživě jako k preciznímu metabolickému inženýrství.
+
+Systém neustále vyhodnocuje tréninkovou zátěž,
+kvalitu spánku a stav nervového systému,
+aby v reálném čase určil přesné palivo pro tvůj motor.
+
+Pokud tělo hlásí únavu →
+AI dynamicky upraví potřebu makroživin
+a doporučí cílenou suplementaci
+pro urychlení buněčné obnovy a potlačení zánětů.
+
+V odpočinkové dny optimalizuje příjem tak,
+aby nedocházelo k ukládání přebytečného tuku.
+
+Interakce je minimalistická:
+Stačí vyfotit talíř.
+AI okamžitě rozklíčuje nutriční hodnoty
+a zasadí je do kontextu celého dne.
+
+Už žádné dogmatické trendy.
+Žádné ruční počítání soust.
+
+PulseMind™ vytváří dynamický,
+na míru střižený protokol,
+který zásobuje organismus přesně tím,
+co potřebuje – ve správný čas.
+
+Tvá strava už nikdy nebude založena na odhadech.
+S PulseMind™ se výživa mění v exaktní vědu.
+
+</system>
+`;
+
+let i = 0;
+const speed = 18;
+
+function typeWriter(){
+    if(i < text.length){
+        document.getElementById("typedText").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, speed);
+    }
+}
+
+function goBack(){
+    window.location.href = "web.html";
+}
+
+window.onload = typeWriter;
+</script>
+
+</body>
+</html>
