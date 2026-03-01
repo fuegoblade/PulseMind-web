@@ -1,0 +1,25 @@
+User-agent: *
+Allow: /$
+Allow: /index.html
+
+Disallow: /web.html
+Disallow: /sekce-pulsemind.html
+Disallow: /sekce-ai.html
+Disallow: /sekce-gravidite.html
+Disallow: /sekce-invalid.html
+Disallow: /sekce-eat.html
+Disallow: /sekce-professional.html
+Disallow: /sekce-senior.html
+Disallow: /sekce-child.html
+Disallow: /sekce-relax.html
+Disallow: /sekce-mother.html
+
+Disallow: /impressum.html
+Disallow: /terms.html
+Disallow: /policy.html
+Disallow: /copy.html
+
+# Nepovolovat indexaci ničeho dalšího
+Disallow: /*.html$
+
+Sitemap: https://fuegoblade.com/sitemap.xml
