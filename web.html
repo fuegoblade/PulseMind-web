@@ -1,173 +1,188 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cs">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PulseMind™</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <meta name="robots" content="noindex, nofollow, noarchive">
-  <meta name="googlebot" content="noindex, nofollow, noarchive">
+<title>PulseMind™</title>
+
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="googlebot" content="noindex, nofollow, noarchive">
 
 <style>
-* { box-sizing: border-box; }
-body {
-    margin:0;
-    font-family: system-ui, -apple-system, sans-serif;
-    background:#000;
-    color:#fff;
-    overflow-x:hidden;
+*{box-sizing:border-box}
+body{
+margin:0;
+font-family:system-ui,-apple-system,sans-serif;
+background:#000;
+color:#fff;
+overflow-x:hidden;
 }
 
 /* Background */
-.bg {
-    position:fixed;
-    inset:0;
-    background:
-      radial-gradient(circle at center, rgba(143,0,255,0.1) 0%, #000 70%);
-    z-index:-2;
+.bg{
+position:fixed;
+inset:0;
+background:radial-gradient(circle at center, rgba(143,0,255,0.1) 0%, #000 70%);
+z-index:-2;
+}
+.grid{
+position:fixed;
+inset:0;
+background-image:
+linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
+linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+background-size:50px 50px;
+animation:gridMove 30s linear infinite;
+z-index:-1;
+}
+@keyframes gridMove{
+from{background-position:0 0}
+to{background-position:50px 50px}
 }
 
-.grid {
-    position:fixed;
-    inset:0;
-    background-image:
-      linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
-    background-size:50px 50px;
-    animation:gridMove 30s linear infinite;
-    z-index:-1;
+/* Top bar */
+.top-bar{
+position:fixed;
+top:20px;
+left:20px;
+right:20px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+z-index:10;
 }
 
-@keyframes gridMove {
-    from { background-position:0 0; }
-    to { background-position:50px 50px; }
+.back-arrow{
+width:18px;
+height:18px;
+border-left:2px solid #39ff14;
+border-bottom:2px solid #39ff14;
+transform:rotate(45deg);
+cursor:pointer;
+filter:drop-shadow(0 0 6px #39ff14);
 }
 
-/* Top navigation */
-.top-bar {
-    position:fixed;
-    top:20px;
-    left:20px;
-    right:20px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    z-index:10;
+.logo-wrapper{
+background:#fff;
+border-radius:50%;
+width:64px;
+height:64px;
+display:flex;
+align-items:center;
+justify-content:center;
 }
-
-/* Back arrow */
-.back-arrow {
-    width:28px;
-    height:28px;
-    border-left:3px solid #39ff14;
-    border-bottom:3px solid #39ff14;
-    transform:rotate(45deg);
-    cursor:pointer;
-    filter:drop-shadow(0 0 6px #39ff14);
-}
-
-/* Logo */
-.logo-wrapper {
-    background:#fff;
-    border-radius:50%;
-    padding:8px;
-    width:64px;
-    height:64px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
-.logo-wrapper img {
-    width:100%;
-    border-radius:50%;
+.logo-wrapper img{
+width:100%;
+height:100%;
+object-fit:cover;
+border-radius:50%;
 }
 
 /* Header */
-.header {
-    text-align:center;
-    margin-top:140px;
+.header{
+text-align:center;
+margin-top:140px;
 }
 
-.ekg svg {
-    width:100%;
-    height:100px;
+.title{
+font-size:3rem;
+font-weight:900;
+background:linear-gradient(135deg,#fff,#d3b1ff,#fff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
 }
 
-.ekg path {
-    fill:none;
-    stroke:#39ff14;
-    stroke-width:3;
-    stroke-dasharray:300 1500;
-    animation:ekg 2.4s linear infinite;
-    filter:drop-shadow(0 0 8px #39ff14);
-}
-
-@keyframes ekg {
-    0% { stroke-dashoffset:1800; opacity:0; }
-    10% { opacity:1; }
-    90% { opacity:1; }
-    100% { stroke-dashoffset:0; opacity:0; }
-}
-
-.title {
-    font-size:3rem;
-    font-weight:900;
-    margin-top:10px;
-    background:linear-gradient(135deg,#fff,#d3b1ff,#fff);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
+.app-btn{
+margin-top:20px;
+padding:12px 26px;
+border-radius:20px;
+border:none;
+background:#39ff14;
+color:#000;
+font-weight:700;
+cursor:pointer;
+box-shadow:0 0 15px #39ff14;
 }
 
 /* Sections */
-.sections {
-    max-width:1000px;
-    margin:80px auto;
-    padding:0 24px;
+.sections{
+max-width:1100px;
+margin:80px auto;
+padding:0 24px;
 }
 
-.section-card {
-    padding:30px;
-    border-radius:20px;
-    margin-bottom:30px;
-    background:rgba(20,20,30,0.6);
-    backdrop-filter:blur(12px);
-    border:1px solid rgba(255,255,255,0.05);
-    transition:0.3s;
-    cursor:pointer;
+.section-card{
+position:relative;
+padding:30px;
+border-radius:20px;
+margin-bottom:30px;
+background:rgba(20,20,30,0.6);
+backdrop-filter:blur(12px);
+border:1px solid rgba(255,255,255,0.05);
+transition:.3s;
+cursor:pointer;
+display:flex;
+gap:20px;
 }
 
-.section-card:hover {
-    transform:translateY(-4px);
-    border-color:#8F00FF;
+.section-card:hover{
+transform:translateY(-4px);
+border-color:#8F00FF;
 }
 
-.section-card h3 {
-    margin-top:0;
-    color:#8F00FF;
+.section-card img{
+width:80px;
+height:80px;
+object-fit:contain;
+}
+
+.section-content{
+flex:1;
+}
+
+.section-content h3{
+margin-top:0;
+font-size:1.2rem;
+}
+
+.purple{color:#8F00FF}
+.green{color:#39ff14}
+
+.section-arrow{
+position:absolute;
+right:20px;
+bottom:20px;
+width:16px;
+height:16px;
+border-top:2px solid #39ff14;
+border-right:2px solid #39ff14;
+transform:rotate(45deg);
+filter:drop-shadow(0 0 6px #39ff14);
 }
 
 /* Footer */
-.footer-links {
-    display:flex;
-    justify-content:center;
-    gap:40px;
-    margin:60px 0 20px;
-    flex-wrap:wrap;
+.footer-links{
+display:flex;
+justify-content:center;
+gap:40px;
+margin:60px 0 20px;
+flex-wrap:wrap;
 }
 
-.footer-links a {
-    text-decoration:none;
-    font-weight:600;
+.footer-links a{
+text-decoration:none;
+font-weight:600;
 }
 
-.contact { color:#8F00FF; }
-.policy, .terms, .copy { color:#39ff14; }
+.contact{color:#39ff14}
+.policy,.terms,.copy{color:#ff2a2a}
 
-.copyright {
-    text-align:center;
-    font-size:0.8rem;
-    opacity:0.6;
-    margin-bottom:40px;
+.copyright{
+text-align:center;
+font-size:.8rem;
+opacity:.6;
+margin-bottom:40px;
 }
 </style>
 </head>
@@ -178,28 +193,24 @@ body {
 <div class="grid"></div>
 
 <div class="top-bar">
-    <div class="back-arrow" onclick="goBack()"></div>
-    <div class="logo-wrapper">
-        <img src="fuegoblade-logo.png" alt="FuegoBlade">
-    </div>
+<div class="back-arrow" onclick="goBack()"></div>
+<div class="logo-wrapper">
+<img src="fuegoblade-logo.png" alt="FuegoBlade">
+</div>
 </div>
 
 <div class="header">
-    <div class="ekg">
-        <svg viewBox="0 0 1000 200" preserveAspectRatio="none">
-            <path d="M -10 100 L 350 100 C 360 100, 365 90, 375 90 C 385 90, 390 100, 400 100 L 420 100 L 435 120 L 460 20 L 485 150 L 505 100 L 530 100 C 545 100, 555 80, 575 80 C 595 80, 605 100, 620 100 L 1010 100"/>
-        </svg>
-    </div>
-    <div class="title">PulseMind™</div>
+<div class="title">PulseMind™</div>
+<button class="app-btn" onclick="goApp()" id="appBtn">Vstoupit do aplikace</button>
 </div>
 
 <div class="sections" id="sections"></div>
 
 <div class="footer-links">
-    <a href="kontakt.html" class="contact">Kontakt</a>
-    <a href="policy.html" class="policy">Zásady ochrany osobních údajů</a>
-    <a href="terms.html" class="terms">Obchodní podmínky</a>
-    <a href="copy.html" class="copy">Autorská práva a zákaz kopírování</a>
+<a href="kontakt.html" class="contact">Kontakt</a>
+<a href="policy.html" class="policy">Zásady ochrany osobních údajů</a>
+<a href="terms.html" class="terms">Obchodní podmínky</a>
+<a href="copy.html" class="copy">Autorská práva a zákaz kopírování</a>
 </div>
 
 <div class="copyright">
@@ -207,42 +218,53 @@ body {
 </div>
 
 <script>
-
-/* Slovník */
-const dictionary = {
-cs: {
-sections: [
-["PulseMind™: Tvůj Digitální Biologický Avatar","Zapomeň na univerzální šablony a obecné fitness rady...","sekce-pulsemind.html"],
-["Kognitivní Jádro: Umělá Inteligence bez kompromisů","Pod kapotou PulseMind™ tepe to nejpokročilejší...","sekce-ai.html"],
-["Gravidita: Ultimátní Biologická Transformace","Těhotenství není nemoc...","sekce-gravidite.html"],
-["Adaptivní Rekalibrace: Inteligentní návrat k výkonu","Zranění není konec...","sekce-invalid.html"],
-["Metabolická Architektura: Palivo bez dohadů","Jídlo nejsou jen prázdné kalorie...","sekce-eat.html"],
-["Elitní Výkon: Architektura Profesionálů","Ve světě, kde o vítězství rozhodují zlomky procent...","sekce-professional.html"],
-["Longevity Protokol: Architektura Aktivního Věku","Věk je pouhý datový bod...","sekce-senior.html"],
-["Architektura Růstu: Inteligentní základ pro budoucnost","Dětské tělo není zmenšenina dospělého...","sekce-child.html"],
-["Architektura Klidu: Exaktně řízená regenerace","Odpočinek není slabost...","sekce-relax.html"],
-["Architektura Energie: Inteligentní obnova mateřské síly","Mateřství je extrémní biologický výkon...","sekce-mother.html"]
+const dictionary={
+cs:{
+app:"Vstoupit do aplikace",
+sections:[
+["PulseMind™","Tvůj Digitální Biologický Avatar","Zapomeň na univerzální šablony a obecné fitness rady. Tvoje biologie je unikátní kód. PulseMind™ je první AI systém, který ho dokáže přečíst, pochopit a optimalizovat v reálném čase. Převezmi absolutní kontrolu nad svým tělem i výkonem.","sekce-pulsemind.html"],
+["Kognitivní Jádro","Umělá Inteligence bez kompromisů","Pod kapotou PulseMind™ tepe to nejpokročilejší z moderních neuronových sítí. Není to jen kód, je to tvůj osobní tým elitních vědců a trenérů, který nikdy nespí a učí se z každého tvého úderu srdce.","sekce-ai.html"],
+["Gravidita","Ultimátní Biologická Transformace","Těhotenství není nemoc, je to ten nejkomplexnější metabolický proces tvého života. PulseMind™ se adaptuje na tvé měnící se tělo v reálném čase. Hlídá tvou energii, spánek i nervový systém, abys tuto transformaci zvládla v plné síle a absolutní rovnováze.","sekce-gravidite.html"],
+["Adaptivní Rekalibrace","Inteligentní návrat k výkonu","Zranění není konec, je to jen nová proměnná v tvém kódu. PulseMind™ dynamicky překalibruje tvou strategii tak, abys chránil svá slabá místa, urychlil hojení a nepřišel o svůj těžce vybudovaný základ. Přeměň omezení ve svou taktickou výhodu.","sekce-invalid.html"],
+["Metabolická Architektura","Palivo bez dohadů","Jídlo nejsou jen prázdné kalorie, je to informační kód, který programuje tvé tělo. PulseMind™ neuznává univerzální diety. Vypočítá tvou přesnou biologickou rovnici a navrhne stravu i suplementaci tak, abys maximalizoval výkon a zkrátil regeneraci na minimum.","sekce-eat.html"],
+["Elitní Výkon","Architektura Profesionálů","Ve světě, kde o vítězství rozhodují zlomky procent, už nestačí jen tvrdě dřít. PulseMind™ ti dává do rukou analytickou převahu světových šampionů. Eliminuj dohady, vylaď svůj motor na absolutní maximum a posouvej hranice lidského potenciálu s chladnou přesností.","sekce-professional.html"],
+["Longevity Protokol","Architektura Aktivního Věku","Věk je pouhý datový bod, nikoliv tvůj limit. PulseMind™ přepisuje tradiční pravidla stárnutí a mění je v exaktně řízený proces aktivní dlouhověkosti. Udrž si ostrou mysl, silné tělo a absolutní svobodu pohybu díky personalizované biologické strategii.","sekce-senior.html"],
+["Architektura Růstu","Inteligentní základ pro budoucnost","Dětské tělo není zmenšenina dospělého, je to systém v neustálém, dynamickém vývoji. PulseMind™ pomáhá rodičům pochopit přirozené biologické rytmy svých dětí. Bez tlaku na výkon chráníme regeneraci, podporujeme vývoj mozku a budujeme zdravé návyky už od samého začátku.","sekce-child.html"],
+["Architektura Klidu","Exaktně řízená regenerace","Odpočinek není slabost, je to tvá nejmocnější taktická zbraň. PulseMind™ mění pasivní lenošení na vědecky řízený proces buněčné obnovy. Nauč se vědomě přepínat svůj nervový systém, snižovat kortizol a nabíjet baterie s maximální možnou efektivitou.","sekce-relax.html"],
+["Architektura Energie","Inteligentní obnova mateřské síly","Mateřství je extrémní biologický výkon, který vyžaduje tu nejchytřejší možnou strategii. PulseMind™ tě nenutí k vyčerpávajícím tréninkům na úkor spánku. Analyzuje tvůj deficit, optimalizuje tvou regeneraci a pomáhá ti budovat nezdolnou energii pro tebe i tvé dítě.","sekce-mother.html"]
 ]
 }
 };
 
-function loadContent() {
-let lang = localStorage.getItem("language") || "cs";
-document.documentElement.lang = lang;
+function loadContent(){
+let lang=localStorage.getItem("language")||"cs";
+document.documentElement.lang=lang;
+document.getElementById("appBtn").innerText=dictionary[lang].app;
 
-const container = document.getElementById("sections");
+const container=document.getElementById("sections");
 dictionary[lang].sections.forEach(sec=>{
 let div=document.createElement("div");
 div.className="section-card";
-div.innerHTML=`<h3>${sec[0]}</h3><p>${sec[1]}</p>`;
-div.onclick=()=>window.location.href=sec[2];
+div.innerHTML=`
+<img src="pulsemind-logo.png">
+<div class="section-content">
+<h3><span class="purple">${sec[0]}:</span> <span class="green">${sec[1]}</span></h3>
+<p>${sec[2]}</p>
+</div>
+<div class="section-arrow"></div>
+`;
+div.onclick=()=>window.location.href=sec[3];
 container.appendChild(div);
 });
 }
 
 function goBack(){
-let lang = localStorage.getItem("language") || "cs";
+let lang=localStorage.getItem("language")||"cs";
 window.location.href=`index.html?lang=${lang}`;
+}
+
+function goApp(){
+window.location.href="https://app.fuegoblade.com";
 }
 
 loadContent();
