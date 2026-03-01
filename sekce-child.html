@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>PulseMind™ / Protokol 08</title>
+
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <meta name="googlebot" content="noindex, nofollow, noarchive">
+    <meta name="google" content="nositelinkssearchbox">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="fuegoblade-logo.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="fuegoblade-logo.png">
+    <link rel="apple-touch-icon" href="fuegoblade-logo.png">
+
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Background */
+        .bg {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(143,0,255,0.1) 0%, #000 80%);
+            z-index: -2;
+        }
+
+        .grid {
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 30s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes gridMove {
+            from { background-position: 0 0; }
+            to { background-position: 50px 50px; }
+        }
+
+        /* Top Bar */
+        .top-bar {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+
+        /* Back Arrow */
+        .back-arrow {
+            width: 16px;
+            height: 16px;
+            border-left: 2px solid #39ff14;
+            border-bottom: 2px solid #39ff14;
+            transform: rotate(45deg);
+            cursor: pointer;
+            filter: drop-shadow(0 0 6px #39ff14);
+            transition: 0.3s;
+        }
+        
+        .back-arrow:hover {
+            transform: rotate(45deg) scale(1.1);
+            filter: drop-shadow(0 0 10px #39ff14);
+        }
+
+        /* Sound Toggle Button */
+        .sound-toggle {
+            cursor: pointer;
+            width: 24px;
+            height: 24px;
+            color: rgba(255, 255, 255, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .sound-toggle:hover {
+            color: #39ff14;
+            filter: drop-shadow(0 0 5px rgba(57, 255, 20, 0.5));
+        }
+
+        .sound-toggle.active {
+            color: #39ff14;
+            filter: drop-shadow(0 0 8px #39ff14);
+        }
+
+        .sound-toggle svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Image Section */
+        .hero-image {
+            margin-top: 80px;
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 80%;
+            max-width: 600px;
+            height: auto;
+            object-fit: contain;
+            border-radius: 20px;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 0 30px rgba(143,0,255,0.15);
+        }
+
+        .hero-image::after {
+            content: "";
+            position: absolute;
+            bottom: -50px;
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, #000 100%);
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        /* Code Window */
+        .code-window {
+            max-width: 900px;
+            margin: 40px auto 80px;
+            background: rgba(12, 12, 18, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid rgba(143,0,255,0.3);
+            box-shadow: 0 0 40px rgba(143,0,255,0.15), inset 0 0 20px rgba(0,0,0,0.8);
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        .code-header {
+            margin-bottom: 30px;
+            font-size: 1.4rem;
+            font-weight: 900;
+            border-bottom: 1px dashed rgba(255,255,255,0.2);
+            padding-bottom: 15px;
+        }
+
+        .purple { color: #8F00FF; text-shadow: 0 0 10px rgba(143,0,255,0.5); }
+        .white { color: #ffffff; }
+
+        .code-content {
+            white-space: pre-wrap;
+            display: inline; /* To align correctly with the cursor */
+        }
+
+        /* Třídy pro formátování psaného textu */
+        .text-boot { color: #39ff14; font-weight: bold; opacity: 0.8; }
+        .text-body { color: #d1d1d1; font-family: system-ui, -apple-system, sans-serif; font-size: 1.1rem; line-height: 1.7; }
+        .text-summary { color: #00e5ff; font-weight: 700; text-shadow: 0 0 10px rgba(0, 229, 255, 0.4); font-family: system-ui, -apple-system, sans-serif; font-size: 1.1rem; line-height: 1.7; display: block; margin-top: 20px; border-left: 3px solid #00e5ff; padding-left: 15px; }
+
+        /* Neonový obdélníkový kurzor */
+        .cursor {
+            display: inline-block;
+            width: 12px;
+            height: 1.1em;
+            background: #39ff14;
+            vertical-align: middle;
+            margin-left: 5px;
+            box-shadow: 0 0 10px #39ff14;
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin: 40px 0 40px;
+            font-size: 0.85rem;
+            opacity: 0.5;
+            font-weight: 600;
+        }
+
+        @media (max-width: 600px) {
+            .code-window { padding: 25px; margin: 20px; font-size: 0.95rem; }
+            .code-header { font-size: 1.1rem; }
+            .text-body, .text-summary { font-size: 1rem; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="bg"></div>
+    <div class="grid"></div>
+
+    <div class="top-bar">
+        <div class="back-arrow" onclick="goBack()"></div>
+        
+        <div class="sound-toggle" id="soundToggle" onclick="toggleSound()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                <line x1="23" y1="9" x2="17" y2="15"></line>
+                <line x1="17" y1="9" x2="23" y2="15"></line>
+            </svg>
+        </div>
+    </div>
+
+    <div class="hero-image">
+        <img src="image-child.png" alt="Architektura Růstu">
+    </div>
+
+    <div class="code-window">
+        <div class="code-header" id="section-title">
+            </div>
+        <div class="code-content" id="typedText"></div><span class="cursor"></span>
+    </div>
+
+    <div class="footer" id="copyright-text">
+        © 2026 FuegoBlade™. Všechna práva vyhrazena.
+    </div>
+
+    <script>
+        // Jazyková databáze s TYKÁNÍM ve všech verzích (Protokol 08)
+        const langData = {
+            cs: {
+                title1: "Architektura Růstu:",
+                title2: "Inteligentní základ pro budoucnost",
+                boot: "> INICIALIZACE VÝVOJOVÉ BIO-LOGIKY...\n> ANALÝZA RŮSTOVÉ ARCHITEKTURY...\n> PŘÍSTUP POVOLEN.\n\n",
+                body: "Aplikovat principy pokročilé biologie na děti absolutně neznamená tvrdý tréninkový dril nebo omezování stravy; znamená to vytvořit naprosto bezpečné a optimální prostředí pro jejich neurologický a fyzický růst. Dětský organismus se vyvíjí raketovým tempem a jeho potřeby se mění doslova před očima.\n\nPulseMind™ ti nabízí exaktní, ale nesmírně citlivý nástroj, jak těmto skrytým změnám porozumět. Namísto nucení dětí do rigidních sportovních rozvrhů systém analyzuje jejich přirozené energetické vzorce, hluboké nároky na spánek a nutnost mentálního odpočinku po kognitivní zátěži ve škole.\n\nUmělá inteligence ti pomůže rozklíčovat, proč je dítě v určité dny neklidné, unavené nebo nesoustředěné, a navrhne jemné úpravy v denním režimu. Systém inteligentně radí, jak poskládat stravu tak, aby rostoucí mozek dostal ty nejlepší stavební látky pro učení a tělo dostatek kvalitního paliva pro hru, imunitu i tvorbu kostí.\n\nCílem PulseMind™ není vychovávat z dětí předčasné vrcholové sportovce, ale chránit jejich formující se nervový systém před syndromem vyhoření z přetížení. Funguje jako tvůj chytrý průvodce, který pomáhá u dětí budovat celoživotní, zdravý a naprosto přirozený vztah k vlastnímu tělu a pohybu.\n\n",
+                summaryTitle: ">>> SHRNUTÍ PROTOKOLU <<<\n",
+                summary: "Nejdůležitější investicí do budoucnosti tvého dítěte je jeho zdravý základ. S PulseMind™ odstraňuješ stres z rodičovských dohadů a získáváš jasný vhled do skutečných fyziologických potřeb svých dětí. Zabezpečíš jim tak optimální růst, silnou imunitu a neomezenou energii pro objevování světa.",
+                copyright: "© 2026 FuegoBlade™. Všechna práva vyhrazena."
+            },
+            en: {
+                title1: "Growth Architecture:",
+                title2: "Intelligent foundation for the future",
+                boot: "> DEVELOPMENTAL BIO-LOGIC INITIALIZATION...\n> GROWTH ARCHITECTURE ANALYSIS...\n> ACCESS GRANTED.\n\n",
+                body: "Applying advanced biology principles to children absolutely does not mean harsh training drills or diet restrictions; it means creating an absolutely safe and optimal environment for their neurological and physical growth. A child's organism develops at rocket speed, and its needs change literally before your eyes.\n\nPulseMind™ offers you an exact yet extremely sensitive tool to understand these hidden changes. Instead of forcing children into rigid sports schedules, the system analyzes their natural energy patterns, deep sleep requirements, and the need for mental rest after cognitive load at school.\n\nThe artificial intelligence helps you decipher why your child is restless, tired, or unfocused on certain days and suggests gentle adjustments to their daily routine. The system intelligently advises how to structure their diet so the growing brain gets the best building blocks for learning and the body gets enough quality fuel for play, immunity, and bone formation.\n\nThe goal of PulseMind™ is not to raise premature elite athletes, but to protect their forming nervous system from burnout due to overload. It acts as your smart guide, helping to build a lifelong, healthy, and completely natural relationship with their own body and movement.\n\n",
+                summaryTitle: ">>> PROTOCOL SUMMARY <<<\n",
+                summary: "The most important investment in your child's future is a healthy foundation. With PulseMind™, you eliminate the stress of parental guesswork and gain clear insight into the actual physiological needs of your children. You ensure their optimal growth, strong immunity, and unlimited energy for discovering the world.",
+                copyright: "© 2026 FuegoBlade™. All rights reserved."
+            },
+            de: {
+                title1: "Wachstumsarchitektur:",
+                title2: "Intelligente Basis für die Zukunft",
+                boot: "> INITIALISIERUNG DER ENTWICKLUNGS-BIO-LOGIK...\n> ANALYSE DER WACHSTUMSARCHITEKTUR...\n> ZUGRIFF GEWÄHRT.\n\n",
+                body: "Die Anwendung fortgeschrittener Biologie-Prinzipien auf Kinder bedeutet absolut nicht harten Trainingsdrill oder Ernährungseinschränkungen; es bedeutet, ein absolut sicheres und optimales Umfeld für ihr neurologisches und körperliches Wachstum zu schaffen. Der kindliche Organismus entwickelt sich in rasantem Tempo und seine Bedürfnisse ändern sich buchstäblich vor deinen Augen.\n\nPulseMind™ bietet dir ein exaktes, aber extrem sensibles Werkzeug, um diese verborgenen Veränderungen zu verstehen. Anstatt Kinder in starre Sportpläne zu zwingen, analysiert das System ihre natürlichen Energiemuster, ihren tiefen Schlafbedarf und die Notwendigkeit mentaler Ruhe nach kognitiver Belastung in der Schule.\n\nDie künstliche Intelligenz hilft dir zu entschlüsseln, warum dein Kind an bestimmten Tagen unruhig, müde oder unkonzentriert ist, und schlägt sanfte Anpassungen im Tagesablauf vor. Das System berät intelligent, wie die Ernährung so zusammengestellt werden kann, dass das wachsende Gehirn die besten Bausteine zum Lernen und der Körper genügend hochwertigen Treibstoff für Spiel, Immunität und Knochenbildung erhält.\n\nDas Ziel von PulseMind™ ist es nicht, vorzeitige Spitzensportler heranzuziehen, sondern ihr sich bildendes Nervensystem vor einem Burnout durch Überlastung zu schützen. Es fungiert als dein intelligenter Begleiter, der hilft, eine lebenslange, gesunde und völlig natürliche Beziehung zum eigenen Körper und zur Bewegung aufzubauen.\n\n",
+                summaryTitle: ">>> PROTOKOLLZUSAMMENFASSUNG <<<\n",
+                summary: "Die wichtigste Investition in die Zukunft deines Kindes ist ein gesundes Fundament. Mit PulseMind™ beseitigst du den Stress des elterlichen Ratens und gewinnst klare Einblicke in die tatsächlichen physiologischen Bedürfnisse deiner Kinder. So sicherst du ihnen optimales Wachstum, starke Immunität und grenzenlose Energie, um die Welt zu entdecken.",
+                copyright: "© 2026 FuegoBlade™. Alle Rechte vorbehalten."
+            },
+            es: {
+                title1: "Arquitectura de Crecimiento:",
+                title2: "Base inteligente para el futuro",
+                boot: "> INICIALIZACIÓN DE BIO-LÓGICA DE DESARROLLO...\n> ANÁLISIS DE ARQUITECTURA DE CRECIMIENTO...\n> ACCESO CONCEDIDO.\n\n",
+                body: "Aplicar principios de biología avanzada a los niños no significa en absoluto duros ejercicios de entrenamiento o restricciones dietéticas; significa crear un entorno absolutamente seguro y óptimo para su crecimiento neurológico y físico. El organismo infantil se desarrolla a la velocidad de un cohete, y sus necesidades cambian literalmente ante tus ojos.\n\nPulseMind™ te ofrece una herramienta exacta pero extremadamente sensible para comprender estos cambios ocultos. En lugar de obligar a los niños a horarios deportivos rígidos, el sistema analiza sus patrones de energía naturales, sus profundas necesidades de sueño y la necesidad de descanso mental después de la carga cognitiva en la escuela.\n\nLa inteligencia artificial te ayuda a descifrar por qué tu hijo está inquieto, cansado o desconcentrado en ciertos días y sugiere ajustes suaves en la rutina diaria. El sistema aconseja inteligentemente cómo estructurar la dieta para que el cerebro en crecimiento obtenga los mejores componentes básicos para el aprendizaje y el cuerpo obtenga suficiente combustible de calidad para el juego, la inmunidad y la formación de huesos.\n\nEl objetivo de PulseMind™ no es criar atletas de élite prematuros, sino proteger su sistema nervioso en formación del agotamiento por sobrecarga. Actúa como tu guía inteligente, ayudando a construir una relación de por vida, saludable y completamente natural con su propio cuerpo y movimiento.\n\n",
+                summaryTitle: ">>> RESUMEN DEL PROTOCOLO <<<\n",
+                summary: "La inversión más importante en el futuro de tu hijo es una base saludable. Con PulseMind™, eliminas el estrés de las conjeturas de los padres y obtienes una visión clara de las necesidades fisiológicas reales de tus hijos. Aseguras su crecimiento óptimo, una fuerte inmunidad y energía ilimitada para descubrir el mundo.",
+                copyright: "© 2026 FuegoBlade™. Todos los derechos reservados."
+            }
+        };
+
+        const lang = localStorage.getItem("language") || "cs";
+        const currentData = langData[lang] || langData["cs"];
+        
+        document.documentElement.lang = lang;
+        document.getElementById("copyright-text").innerText = currentData.copyright;
+        
+        document.getElementById("section-title").innerHTML = `
+            <span class="purple">${currentData.title1}</span> 
+            <span class="white">${currentData.title2}</span>
+        `;
+
+        const contentBlocks = [
+            { text: currentData.boot, cssClass: "text-boot" },
+            { text: currentData.body, cssClass: "text-body" },
+            { text: currentData.summaryTitle + currentData.summary, cssClass: "text-summary" }
+        ];
+
+        let blockIndex = 0;
+        let charIndex = 0;
+        const container = document.getElementById("typedText");
+        let currentSpan = null;
+        const typeSpeed = 15; 
+
+        // --- AUDIO SYSTÉM PRO PÍPÁNÍ A TLAČÍTKO ---
+        let audioCtx;
+        let isSoundEnabled = false;
+
+        function toggleSound() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+
+            isSoundEnabled = !isSoundEnabled;
+            const btn = document.getElementById("soundToggle");
+
+            if (isSoundEnabled) {
+                btn.classList.add('active');
+                btn.innerHTML = `
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                    </svg>
+                `;
+            } else {
+                btn.classList.remove('active');
+                btn.innerHTML = `
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                        <line x1="23" y1="9" x2="17" y2="15"></line>
+                        <line x1="17" y1="9" x2="23" y2="15"></line>
+                    </svg>
+                `;
+            }
+        }
+
+        function playBeep() {
+            if (!audioCtx || audioCtx.state === 'suspended' || !isSoundEnabled) return;
+            try {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                
+                osc.type = 'square'; 
+                osc.frequency.setValueAtTime(800, audioCtx.currentTime); 
+                
+                gain.gain.setValueAtTime(0.015, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.03);
+                
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.03);
+            } catch (e) {}
+        }
+
+        // --- EFEKT PSANÍ KÓDU ---
+        function typeWriter() {
+            if (blockIndex < contentBlocks.length) {
+                if (charIndex === 0) {
+                    currentSpan = document.createElement("span");
+                    currentSpan.className = contentBlocks[blockIndex].cssClass;
+                    container.appendChild(currentSpan);
+                }
+                
+                let char = contentBlocks[blockIndex].text.charAt(charIndex);
+                
+                if (char === '\n') {
+                    currentSpan.innerHTML += '<br>';
+                } else {
+                    currentSpan.innerHTML += char;
+                }
+                
+                if (char !== ' ' && char !== '\n' && Math.random() > 0.6) {
+                    playBeep();
+                }
+
+                charIndex++;
+                
+                if (charIndex >= contentBlocks[blockIndex].text.length) {
+                    blockIndex++;
+                    charIndex = 0;
+                    setTimeout(typeWriter, 500);
+                } else {
+                    setTimeout(typeWriter, typeSpeed);
+                }
+            }
+        }
+
+        function goBack() {
+            window.location.href = "web.html";
+        }
+
+        window.onload = () => {
+            setTimeout(typeWriter, 400); 
+        };
+    </script>
+</body>
+</html>
