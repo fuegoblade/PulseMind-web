@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+
+<meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>PulseMind™ / Protokol 03</title>
+
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <meta name="googlebot" content="noindex, nofollow, noarchive">
+    <meta name="google" content="nositelinkssearchbox">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="fuegoblade-logo.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="fuegoblade-logo.png">
+    <link rel="apple-touch-icon" href="fuegoblade-logo.png">
+
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Background */
+        .bg {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(143,0,255,0.1) 0%, #000 80%);
+            z-index: -2;
+        }
+
+        .grid {
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 30s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes gridMove {
+            from { background-position: 0 0; }
+            to { background-position: 50px 50px; }
+        }
+
+        /* Top Bar */
+        .top-bar {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+
+        /* Back Arrow */
+        .back-arrow {
+            width: 16px;
+            height: 16px;
+            border-left: 2px solid #39ff14;
+            border-bottom: 2px solid #39ff14;
+            transform: rotate(45deg);
+            cursor: pointer;
+            filter: drop-shadow(0 0 6px #39ff14);
+            transition: 0.3s;
+        }
+        
+        .back-arrow:hover {
+            transform: rotate(45deg) scale(1.1);
+            filter: drop-shadow(0 0 10px #39ff14);
+        }
+
+        /* Sound Toggle Button */
+        .sound-toggle {
+            cursor: pointer;
+            width: 24px;
+            height: 24px;
+            color: rgba(255, 255, 255, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .sound-toggle:hover {
+            color: #39ff14;
+            filter: drop-shadow(0 0 5px rgba(57, 255, 20, 0.5));
+        }
+
+        .sound-toggle.active {
+            color: #39ff14;
+            filter: drop-shadow(0 0 8px #39ff14);
+        }
+
+        .sound-toggle svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Image Section */
+        .hero-image {
+            margin-top: 80px;
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 80%;
+            max-width: 600px;
+            height: auto;
+            object-fit: contain;
+            border-radius: 20px;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 0 30px rgba(143,0,255,0.15);
+        }
+
+        .hero-image::after {
+            content: "";
+            position: absolute;
+            bottom: -50px;
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, #000 100%);
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        /* Code Window */
+        .code-window {
+            max-width: 900px;
+            margin: 40px auto 80px;
+            background: rgba(12, 12, 18, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid rgba(143,0,255,0.3);
+            box-shadow: 0 0 40px rgba(143,0,255,0.15), inset 0 0 20px rgba(0,0,0,0.8);
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        .code-header {
+            margin-bottom: 30px;
+            font-size: 1.4rem;
+            font-weight: 900;
+            border-bottom: 1px dashed rgba(255,255,255,0.2);
+            padding-bottom: 15px;
+        }
+
+        .purple { color: #8F00FF; text-shadow: 0 0 10px rgba(143,0,255,0.5); }
+        .white { color: #ffffff; }
+
+        .code-content {
+            white-space: pre-wrap;
+            display: inline; /* To align correctly with the cursor */
+        }
+
+        /* Třídy pro formátování psaného textu */
+        .text-boot { color: #39ff14; font-weight: bold; opacity: 0.8; }
+        .text-body { color: #d1d1d1; font-family: system-ui, -apple-system, sans-serif; font-size: 1.1rem; line-height: 1.7; }
+        .text-summary { color: #00e5ff; font-weight: 700; text-shadow: 0 0 10px rgba(0, 229, 255, 0.4); font-family: system-ui, -apple-system, sans-serif; font-size: 1.1rem; line-height: 1.7; display: block; margin-top: 20px; border-left: 3px solid #00e5ff; padding-left: 15px; }
+
+        /* Neonový obdélníkový kurzor */
+        .cursor {
+            display: inline-block;
+            width: 12px;
+            height: 1.1em;
+            background: #39ff14;
+            vertical-align: middle;
+            margin-left: 5px;
+            box-shadow: 0 0 10px #39ff14;
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin: 40px 0 40px;
+            font-size: 0.85rem;
+            opacity: 0.5;
+            font-weight: 600;
+        }
+
+        @media (max-width: 600px) {
+            .code-window { padding: 25px; margin: 20px; font-size: 0.95rem; }
+            .code-header { font-size: 1.1rem; }
+            .text-body, .text-summary { font-size: 1rem; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="bg"></div>
+    <div class="grid"></div>
+
+    <div class="top-bar">
+        <div class="back-arrow" onclick="goBack()"></div>
+        
+        <div class="sound-toggle" id="soundToggle" onclick="toggleSound()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                <line x1="23" y1="9" x2="17" y2="15"></line>
+                <line x1="17" y1="9" x2="23" y2="15"></line>
+            </svg>
+        </div>
+    </div>
+
+    <div class="hero-image">
+        <img src="image-gravidite.png" alt="Gravidita">
+    </div>
+
+    <div class="code-window">
+        <div class="code-header" id="section-title">
+            </div>
+        <div class="code-content" id="typedText"></div><span class="cursor"></span>
+    </div>
+
+    <div class="footer" id="copyright-text">
+        © 2026 FuegoBlade™. Všechna práva vyhrazena.
+    </div>
+
+    <script>
+        // Jazyková databáze s TYKÁNÍM ve všech verzích (Protokol 03)
+        const langData = {
+            cs: {
+                title1: "Gravidita:",
+                title2: "Ultimátní Biologická Transformace",
+                boot: "> INICIALIZACE PRENATÁLNÍ BIO-LOGIKY...\n> ANALÝZA METABOLICKÉ DYNAMIKY...\n> PŘÍSTUP POVOLEN.\n\n",
+                body: "Vytvořit nový život je ten nejnáročnější metabolický a neurologický proces, jakým může lidský organismus projít. Není to období, kdy bys měla spoléhat na zastaralé, univerzální poučky z internetu nebo srovnávat svůj stav s ostatními. Tvé tělo se mění doslova každým dnem a s ním i jeho fyziologické nároky.\n\nPulseMind™ přistupuje k těhotenství s maximálním respektem k této dynamice a zcela opouští statické tabulky. Umělá inteligence chápe, že se tvůj krevní objem zvětšuje, tvá klidová tepová frekvence přirozeně stoupá a variabilita srdečního tepu (HRV) reaguje na to, jak tvůj organismus pracuje za dva.\n\nNamísto toho, aby tě systém tlačil do nesmyslných limitů, nebo tě naopak zbytečně omezoval, funguje jako tvůj tichý ochranný štít. Neúnavně analyzuje data z tvých chytrých zařízení a vyhodnocuje aktuální propustnost tvého fyzického i mentálního stresu.\n\nPokud zaznamená, že je tvůj nervový systém přetížený, okamžitě upraví denní protokol, doporučí techniku pro zklidnění parasympatiku a optimalizuje tvůj nutriční příjem tak, aby podpořil hlubokou buněčnou regeneraci. PulseMind™ tě učí dokonale naslouchat signálům tvého těla a dává jim vědecky podložený kontext, abys měla stoprocentní jistotu, že ty i tvé dítě máte přesně to, co v danou chvíli potřebujete.\n\n",
+                summaryTitle: ">>> SHRNUTÍ PROTOKOLU <<<\n",
+                summary: "Těhotenství vyžaduje absolutní soulad mezi tvou myslí a biologickými procesy. PulseMind™ ti dává hluboký klid podložený tvrdými fyziologickými daty. Už žádné pochybnosti o tom, zda děláš příliš mnoho, nebo příliš málo. Získáš dokonalý přehled, stabilitu a energii na to nejdůležitější.",
+                copyright: "© 2026 FuegoBlade™. Všechna práva vyhrazena."
+            },
+            en: {
+                title1: "Pregnancy:",
+                title2: "The Ultimate Biological Transformation",
+                boot: "> PRENATAL BIO-LOGIC INITIALIZATION...\n> METABOLIC DYNAMICS ANALYSIS...\n> ACCESS GRANTED.\n\n",
+                body: "Creating new life is the most demanding metabolic and neurological process the human body can undergo. It's not a time to rely on outdated, universal internet advice or compare your condition to others. Your body changes literally every day, and with it, its physiological demands.\n\nPulseMind™ approaches pregnancy with maximum respect for this dynamics and completely abandons static tables. The artificial intelligence understands that your blood volume is expanding, your resting heart rate naturally rises, and your heart rate variability (HRV) reacts to how your organism is working for two.\n\nInstead of pushing you to senseless limits or unnecessarily restricting you, the system acts as your silent protective shield. It tirelessly analyzes data from your smart devices and evaluates the current throughput of your physical and mental stress.\n\nIf it detects that your nervous system is overloaded, it immediately adjusts your daily protocol, recommends a technique to calm the parasympathetic system, and optimizes your nutritional intake to support deep cellular regeneration. PulseMind™ teaches you to perfectly listen to your body's signals and gives them a scientifically backed context, so you have 100% certainty that you and your baby have exactly what you need at any given moment.\n\n",
+                summaryTitle: ">>> PROTOCOL SUMMARY <<<\n",
+                summary: "Pregnancy requires absolute harmony between your mind and biological processes. PulseMind™ gives you deep peace backed by hard physiological data. No more doubts about whether you are doing too much or too little. You gain a perfect overview, stability, and energy for what matters most.",
+                copyright: "© 2026 FuegoBlade™. All rights reserved."
+            },
+            de: {
+                title1: "Schwangerschaft:",
+                title2: "Die ultimative biologische Transformation",
+                boot: "> PRÄNATALE BIO-LOGIK INITIALISIERUNG...\n> ANALYSE DER METABOLISCHEN DYNAMIK...\n> ZUGRIFF GEWÄHRT.\n\n",
+                body: "Neues Leben zu erschaffen, ist der anspruchsvollste metabolische und neurologische Prozess, den der menschliche Körper durchlaufen kann. Es ist nicht die Zeit, dich auf veraltete, universelle Internetratschläge zu verlassen oder deinen Zustand mit anderen zu vergleichen. Dein Körper verändert sich buchstäblich jeden Tag, und damit auch seine physiologischen Anforderungen.\n\nPulseMind™ geht mit maximalem Respekt vor dieser Dynamik an die Schwangerschaft heran und verabschiedet sich komplett von statischen Tabellen. Die künstliche Intelligenz versteht, dass sich dein Blutvolumen ausdehnt, dein Ruhepuls natürlich ansteigt und deine Herzfrequenzvariabilität (HRV) darauf reagiert, wie dein Organismus für zwei arbeitet.\n\nAnstatt dich an sinnlose Grenzen zu treiben oder dich unnötig einzuschränken, fungiert das System als dein stiller Schutzschild. Es analysiert unermüdlich Daten von deinen Smart-Geräten und bewertet den aktuellen Durchsatz deines physischen und mentalen Stresses.\n\nWenn es feststellt, dass dein Nervensystem überlastet ist, passt es sofort dein Tagesprotokoll an, empfiehlt eine Technik zur Beruhigung des Parasympathikus und optimiert deine Nahrungsaufnahme, um die tiefe Zellregeneration zu unterstützen. PulseMind™ lehrt dich, perfekt auf die Signale deines Körpers zu hören, und gibt ihnen einen wissenschaftlich fundierten Kontext, damit du zu 100 % sicher sein kannst, dass du und dein Baby in jedem Moment genau das haben, was ihr braucht.\n\n",
+                summaryTitle: ">>> PROTOKOLLZUSAMMENFASSUNG <<<\n",
+                summary: "Schwangerschaft erfordert absolute Harmonie zwischen deinem Geist und biologischen Prozessen. PulseMind™ gibt dir tiefen Frieden, gestützt auf harte physiologische Daten. Keine Zweifel mehr, ob du zu viel oder zu wenig tust. Du gewinnst den perfekten Überblick, Stabilität und Energie für das Wichtigste.",
+                copyright: "© 2026 FuegoBlade™. Alle Rechte vorbehalten."
+            },
+            es: {
+                title1: "Embarazo:",
+                title2: "La Transformación Biológica Definitiva",
+                boot: "> INICIALIZACIÓN DE BIO-LÓGICA PRENATAL...\n> ANÁLISIS DE DINÁMICA METABÓLICA...\n> ACCESO CONCEDIDO.\n\n",
+                body: "Crear una nueva vida es el proceso metabólico y neurológico más exigente por el que puede pasar el cuerpo humano. No es momento de depender de consejos universales obsoletos de Internet o de comparar tu estado con el de otras. Tu cuerpo cambia literalmente cada día, y con él, sus demandas fisiológicas.\n\nPulseMind™ aborda el embarazo con el máximo respeto por esta dinámica y abandona por completo las tablas estáticas. La inteligencia artificial comprende que tu volumen sanguíneo se expande, tu frecuencia cardíaca en reposo aumenta naturalmente y la variabilidad de tu frecuencia cardíaca (VFC) reacciona a cómo tu organismo trabaja por dos.\n\nEn lugar de empujarte a límites sin sentido o restringirte innecesariamente, el sistema actúa como tu escudo protector silencioso. Analiza incansablemente los datos de tus dispositivos inteligentes y evalúa el rendimiento actual de tu estrés físico y mental.\n\nSi detecta que tu sistema nervioso está sobrecargado, ajusta inmediatamente tu protocolo diario, recomienda una técnica para calmar el sistema parasimpático y optimiza tu ingesta nutricional para apoyar la regeneración celular profunda. PulseMind™ te enseña a escuchar perfectamente las señales de tu cuerpo y les da un contexto científicamente respaldado, para que tengas la certeza al 100% de que tú y tu bebé tienen exactamente lo que necesitan en cualquier momento dado.\n\n",
+                summaryTitle: ">>> RESUMEN DEL PROTOCOLO <<<\n",
+                summary: "El embarazo requiere una armonía absoluta entre tu mente y los procesos biológicos. PulseMind™ te brinda una paz profunda respaldada por datos fisiológicos sólidos. Se acabaron las dudas sobre si estás haciendo demasiado o demasiado poco. Obtienes una visión perfecta, estabilidad y energía para lo que más importa.",
+                copyright: "© 2026 FuegoBlade™. Todos los derechos reservados."
+            }
+        };
+
+        const lang = localStorage.getItem("language") || "cs";
+        const currentData = langData[lang] || langData["cs"];
+        
+        document.documentElement.lang = lang;
+        document.getElementById("copyright-text").innerText = currentData.copyright;
+        
+        document.getElementById("section-title").innerHTML = `
+            <span class="purple">${currentData.title1}</span> 
+            <span class="white">${currentData.title2}</span>
+        `;
+
+        const contentBlocks = [
+            { text: currentData.boot, cssClass: "text-boot" },
+            { text: currentData.body, cssClass: "text-body" },
+            { text: currentData.summaryTitle + currentData.summary, cssClass: "text-summary" }
+        ];
+
+        let blockIndex = 0;
+        let charIndex = 0;
+        const container = document.getElementById("typedText");
+        let currentSpan = null;
+        const typeSpeed = 15; 
+
+        // --- AUDIO SYSTÉM PRO PÍPÁNÍ A TLAČÍTKO ---
+        let audioCtx;
+        let isSoundEnabled = false;
+
+        function toggleSound() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+
+            isSoundEnabled = !isSoundEnabled;
+            const btn = document.getElementById("soundToggle");
+
+            if (isSoundEnabled) {
+                btn.classList.add('active');
+                btn.innerHTML = `
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                    </svg>
+                `;
+            } else {
+                btn.classList.remove('active');
+                btn.innerHTML = `
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                        <line x1="23" y1="9" x2="17" y2="15"></line>
+                        <line x1="17" y1="9" x2="23" y2="15"></line>
+                    </svg>
+                `;
+            }
+        }
+
+        function playBeep() {
+            if (!audioCtx || audioCtx.state === 'suspended' || !isSoundEnabled) return;
+            try {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                
+                osc.type = 'square'; 
+                osc.frequency.setValueAtTime(800, audioCtx.currentTime); 
+                
+                gain.gain.setValueAtTime(0.015, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.03);
+                
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.03);
+            } catch (e) {}
+        }
+
+        // --- EFEKT PSANÍ KÓDU ---
+        function typeWriter() {
+            if (blockIndex < contentBlocks.length) {
+                if (charIndex === 0) {
+                    currentSpan = document.createElement("span");
+                    currentSpan.className = contentBlocks[blockIndex].cssClass;
+                    container.appendChild(currentSpan);
+                }
+                
+                let char = contentBlocks[blockIndex].text.charAt(charIndex);
+                
+                if (char === '\n') {
+                    currentSpan.innerHTML += '<br>';
+                } else {
+                    currentSpan.innerHTML += char;
+                }
+                
+                if (char !== ' ' && char !== '\n' && Math.random() > 0.6) {
+                    playBeep();
+                }
+
+                charIndex++;
+                
+                if (charIndex >= contentBlocks[blockIndex].text.length) {
+                    blockIndex++;
+                    charIndex = 0;
+                    setTimeout(typeWriter, 500);
+                } else {
+                    setTimeout(typeWriter, typeSpeed);
+                }
+            }
+        }
+
+        function goBack() {
+            window.location.href = "web.html";
+        }
+
+        window.onload = () => {
+            setTimeout(typeWriter, 400); 
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+
+<meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>PulseMind™ / Protokol 02</title>
+
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <meta name="googlebot" content="noindex, nofollow, noarchive">
+    <meta name="google" content="nositelinkssearchbox">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="fuegoblade-logo.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="fuegoblade-logo.png">
+    <link rel="apple-touch-icon" href="fuegoblade-logo.png">
+
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Background */
+        .bg {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(143,0,255,0.1) 0%, #000 80%);
+            z-index: -2;
+        }
+
+        .grid {
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 30s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes gridMove {
+            from { background-position: 0 0; }
+            to { background-position: 50px 50px; }
+        }
+
+        /* Top Bar */
+        .top-bar {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+
+        /* Back Arrow */
+        .back-arrow {
+            width: 16px;
+            height: 16px;
+            border-left: 2px solid #39ff14;
+            border-bottom: 2px solid #39ff14;
+            transform: rotate(45deg);
+            cursor: pointer;
+            filter: drop-shadow(0 0 6px #39ff14);
+            transition: 0.3s;
+        }
+        
+        .back-arrow:hover {
+            transform: rotate(45deg) scale(1.1);
+            filter: drop-shadow(0 0 10px #39ff14);
+        }
+
+        /* Sound Toggle Button */
+        .sound-toggle {
+            cursor: pointer;
+            width: 24px;
+            height: 24px;
+            color: rgba(255, 255, 255, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .sound-toggle:hover {
+            color: #39ff14;
+            filter: drop-shadow(0 0 5px rgba(57, 255, 20, 0.5));
+        }
+
+        .sound-toggle.active {
+            color: #39ff14;
+            filter: drop-shadow(0 0 8px #39ff14);
+        }
+
+        .sound-toggle svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Image Section */
+        .hero-image {
+            margin-top: 80px;
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 80%;
+            max-width: 600px;
+            height: auto;
+            object-fit: contain;
+            border-radius: 20px;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 0 30px rgba(143,0,255,0.15);
+        }
+
+        .hero-image::after {
+            content: "";
+            position: absolute;
+            bottom: -50px;
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, #000 100%);
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        /* Code Window */
+        .code-window {
+            max-width: 900px;
+            margin: 40px auto 80px;
+            background: rgba(12, 12, 18, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid rgba(143,0,255,0.3);
+            box-shadow: 0 0 40px rgba(143,0,255,0.15), inset 0 0 20px rgba(0,0,0,0.8);
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        .code-header {
+            margin-bottom: 30px;
+            font-size: 1.4rem;
+            font-weight: 900;
+            border-bottom: 1px dashed rgba(255,255,255,0.2);
+            padding-bottom: 15px;
+        }
+
+        .purple { color: #8F00FF; text-shadow: 0 0 10px rgba(143,0,255,0.5); }
+        .white { color: #ffffff; }
+
+        .code-content {
+            white-space: pre-wrap;
+            display: inline; /* To align correctly with the cursor */
+        }
+
+        /* Třídy pro formátování psaného textu */
+        .text-boot { color: #39ff14; font-weight: bold; opacity: 0.8; }
+        .text-body { color: #d1d1d1; font-family: system-ui, -apple-system, sans-serif; font-size: 1.1rem; line-height: 1.7; }
+        .text-summary { color: #00e5ff; font-weight: 700; text-shadow: 0 0 10px rgba(0, 229, 255, 0.4); font-family: system-ui, -apple-system, sans-serif; font-size: 1.1rem; line-height: 1.7; display: block; margin-top: 20px; border-left: 3px solid #00e5ff; padding-left: 15px; }
+
+        /* Neonový obdélníkový kurzor */
+        .cursor {
+            display: inline-block;
+            width: 12px;
+            height: 1.1em;
+            background: #39ff14;
+            vertical-align: middle;
+            margin-left: 5px;
+            box-shadow: 0 0 10px #39ff14;
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin: 40px 0 40px;
+            font-size: 0.85rem;
+            opacity: 0.5;
+            font-weight: 600;
+        }
+
+        @media (max-width: 600px) {
+            .code-window { padding: 25px; margin: 20px; font-size: 0.95rem; }
+            .code-header { font-size: 1.1rem; }
+            .text-body, .text-summary { font-size: 1rem; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="bg"></div>
+    <div class="grid"></div>
+
+    <div class="top-bar">
+        <div class="back-arrow" onclick="goBack()"></div>
+        
+        <div class="sound-toggle" id="soundToggle" onclick="toggleSound()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                <line x1="23" y1="9" x2="17" y2="15"></line>
+                <line x1="17" y1="9" x2="23" y2="15"></line>
+            </svg>
+        </div>
+    </div>
+
+    <div class="hero-image">
+        <img src="image-ai.png" alt="Kognitivní Jádro">
+    </div>
+
+    <div class="code-window">
+        <div class="code-header" id="section-title">
+            </div>
+        <div class="code-content" id="typedText"></div><span class="cursor"></span>
+    </div>
+
+    <div class="footer" id="copyright-text">
+        © 2026 FuegoBlade™. Všechna práva vyhrazena.
+    </div>
+
+    <script>
+        // Jazyková databáze s TYKÁNÍM ve všech verzích (Protokol 02)
+        const langData = {
+            cs: {
+                title1: "Kognitivní Jádro:",
+                title2: "Umělá Inteligence bez kompromisů",
+                boot: "> INICIALIZACE KOGNITIVNÍHO JÁDRA...\n> ANALÝZA NEURONOVÝCH SÍTÍ...\n> PŘÍSTUP POVOLEN.\n\n",
+                body: "Aby mohl systém dokonale pochopit tak složitý a proměnlivý mechanismus, jakým je lidské tělo, vyžaduje absolutní technologický vrchol. Kognitivní jádro PulseMind™ je proto poháněno tou nejbrilantnější a nejvyspělejší dostupnou AI architekturou současnosti.\n\nTento motor nespoléhá na statické tabulky nebo předem napsané scénáře, ale v reálném čase skutečně uvažuje, dedukuje a plánuje. Disponuje špičkovým multimodálním vnímáním, což znamená, že tvá data nejen pasivně přijímá, ale doslova je vidí a chápe v širokých souvislostech.\n\nAť už do systému pošleš komplikovaný graf z chytrého prstenu, tabulku krevních testů nebo jen vyfotíš svůj aktuální oběd, umělá inteligence okamžitě analyzuje křivky, čísla i pixely s precizností celého institutu sportovní medicíny.\n\nBleskově zpracuje obrovské objemy tvé osobní fyziologické historie, identifikuje pouhým okem neviditelné vzorce a vyvodí z nich krystalicky čistou strategii. Není to obyčejný algoritmus, ale vysoce adaptivní bio-logický systém, který se s každým tvým dnem učí a kalibruje svou přesnost tak, aby tě vždy udržel o krok napřed před tvými vlastními limity.\n\n",
+                summaryTitle: ">>> SHRNUTÍ PROTOKOLU <<<\n",
+                summary: "Představ si, že máš 24 hodin denně k dispozici ty nejbystřejší výpočetní mozky planety, jejichž jediným úkolem je analyzovat a maximalizovat tvůj biologický potenciál. To je síla, kterou ti PulseMind™ dává přímo do kapsy. Čistá inteligence, neomezený výkon.",
+                copyright: "© 2026 FuegoBlade™. Všechna práva vyhrazena."
+            },
+            en: {
+                title1: "Cognitive Core:",
+                title2: "Artificial Intelligence without compromise",
+                boot: "> COGNITIVE CORE INITIALIZATION...\n> NEURAL NETWORK ANALYSIS...\n> ACCESS GRANTED.\n\n",
+                body: "For the system to perfectly understand a mechanism as complex and variable as the human body, it requires the absolute pinnacle of technology. The cognitive core of PulseMind™ is therefore powered by the most brilliant and advanced AI architecture available today.\n\nThis engine does not rely on static tables or pre-written scenarios, but truly reasons, deduces, and plans in real-time. It features cutting-edge multimodal perception, meaning it doesn't just passively receive your data, but literally sees and understands it in broad contexts.\n\nWhether you send the system a complicated graph from a smart ring, a blood test table, or just snap a picture of your current lunch, the artificial intelligence instantly analyzes the curves, numbers, and pixels with the precision of an entire sports medicine institute.\n\nIt processes massive volumes of your personal physiological history in a flash, identifies patterns invisible to the naked eye, and derives a crystal-clear strategy from them. It is not an ordinary algorithm, but a highly adaptive bio-logical system that learns and calibrates its accuracy with your every day, always keeping you one step ahead of your own limits.\n\n",
+                summaryTitle: ">>> PROTOCOL SUMMARY <<<\n",
+                summary: "Imagine having the sharpest computing brains on the planet at your disposal 24 hours a day, whose sole task is to analyze and maximize your biological potential. That is the power PulseMind™ puts right in your pocket. Pure intelligence, unlimited performance.",
+                copyright: "© 2026 FuegoBlade™. All rights reserved."
+            },
+            de: {
+                title1: "Kognitiver Kern:",
+                title2: "Künstliche Intelligenz ohne Kompromisse",
+                boot: "> INITIALISIERUNG DES KOGNITIVEN KERNS...\n> ANALYSE DER NEURONALEN NETZWERKE...\n> ZUGRIFF GEWÄHRT.\n\n",
+                body: "Damit das System einen so komplexen und variablen Mechanismus wie den menschlichen Körper perfekt versteht, bedarf es der absoluten Spitze der Technologie. Der kognitive Kern von PulseMind™ wird daher von der brillantesten und fortschrittlichsten heute verfügbaren KI-Architektur angetrieben.\n\nDieser Motor verlässt sich nicht auf statische Tabellen oder vorgefertigte Szenarien, sondern überlegt, schlussfolgert und plant in Echtzeit. Er verfügt über eine hochmoderne multimodale Wahrnehmung, was bedeutet, dass er deine Daten nicht nur passiv empfängt, sondern sie buchstäblich sieht und in weiten Zusammenhängen versteht.\n\nEgal, ob du dem System ein kompliziertes Diagramm von einem Smart-Ring, eine Bluttest-Tabelle schickst oder einfach dein aktuelles Mittagessen fotografierst – die künstliche Intelligenz analysiert sofort die Kurven, Zahlen und Pixel mit der Präzision eines ganzen sportmedizinischen Instituts.\n\nSie verarbeitet blitzschnell riesige Mengen deiner persönlichen physiologischen Geschichte, erkennt für das bloße Auge unsichtbare Muster und leitet daraus eine kristallklare Strategie ab. Es ist kein gewöhnlicher Algorithmus, sondern ein hochanpassungsfähiges bio-logisches System, das mit jedem deiner Tage lernt und seine Genauigkeit kalibriert, um dich deinen eigenen Grenzen immer einen Schritt voraus zu halten.\n\n",
+                summaryTitle: ">>> PROTOKOLLZUSAMMENFASSUNG <<<\n",
+                summary: "Stell dir vor, du hättest 24 Stunden am Tag die schärfsten Computergehirne des Planeten zur Verfügung, deren einzige Aufgabe es ist, dein biologisches Potenzial zu analysieren und zu maximieren. Das ist die Kraft, die dir PulseMind™ direkt in die Tasche steckt. Reine Intelligenz, unbegrenzte Leistung.",
+                copyright: "© 2026 FuegoBlade™. Alle Rechte vorbehalten."
+            },
+            es: {
+                title1: "Núcleo Cognitivo:",
+                title2: "Inteligencia Artificial sin compromisos",
+                boot: "> INICIALIZACIÓN DEL NÚCLEO COGNITIVO...\n> ANÁLISIS DE REDES NEURONALES...\n> ACCESO CONCEDIDO.\n\n",
+                body: "Para que el sistema comprenda perfectamente un mecanismo tan complejo y variable como el cuerpo humano, requiere la cima absoluta de la tecnología. Por lo tanto, el núcleo cognitivo de PulseMind™ está impulsado por la arquitectura de IA más brillante y avanzada disponible en la actualidad.\n\nEste motor no depende de tablas estáticas o escenarios preescritos, sino que realmente razona, deduce y planea en tiempo real. Cuenta con una percepción multimodal de vanguardia, lo que significa que no solo recibe tus datos pasivamente, sino que literalmente los ve y los comprende en amplios contextos.\n\nYa sea que envíes al sistema un gráfico complicado de un anillo inteligente, una tabla de análisis de sangre o simplemente tomes una foto de tu almuerzo actual, la inteligencia artificial analiza instantáneamente las curvas, números y píxeles con la precisión de todo un instituto de medicina deportiva.\n\nProcesa volúmenes masivos de tu historial fisiológico personal en un instante, identifica patrones invisibles a simple vista y deriva de ellos una estrategia cristalina. No es un algoritmo ordinario, sino un sistema bio-lógico altamente adaptativo que aprende y calibra su precisión con cada uno de tus días, manteniéndote siempre un paso por delante de tus propios límites.\n\n",
+                summaryTitle: ">>> RESUMEN DEL PROTOCOLO <<<\n",
+                summary: "Imagina tener los cerebros informáticos más agudos del planeta a tu disposición las 24 horas del día, cuya única tarea es analizar y maximizar tu potencial biológico. Ese es el poder que PulseMind™ pone directamente en tu bolsillo. Inteligencia pura, rendimiento ilimitado.",
+                copyright: "© 2026 FuegoBlade™. Todos los derechos reservados."
+            }
+        };
+
+        const lang = localStorage.getItem("language") || "cs";
+        const currentData = langData[lang] || langData["cs"];
+        
+        document.documentElement.lang = lang;
+        document.getElementById("copyright-text").innerText = currentData.copyright;
+        
+        document.getElementById("section-title").innerHTML = `
+            <span class="purple">${currentData.title1}</span> 
+            <span class="white">${currentData.title2}</span>
+        `;
+
+        const contentBlocks = [
+            { text: currentData.boot, cssClass: "text-boot" },
+            { text: currentData.body, cssClass: "text-body" },
+            { text: currentData.summaryTitle + currentData.summary, cssClass: "text-summary" }
+        ];
+
+        let blockIndex = 0;
+        let charIndex = 0;
+        const container = document.getElementById("typedText");
+        let currentSpan = null;
+        const typeSpeed = 15; 
+
+        // --- AUDIO SYSTÉM PRO PÍPÁNÍ A TLAČÍTKO ---
+        let audioCtx;
+        let isSoundEnabled = false;
+
+        function toggleSound() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+
+            isSoundEnabled = !isSoundEnabled;
+            const btn = document.getElementById("soundToggle");
+
+            if (isSoundEnabled) {
+                btn.classList.add('active');
+                btn.innerHTML = `
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                    </svg>
+                `;
+            } else {
+                btn.classList.remove('active');
+                btn.innerHTML = `
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                        <line x1="23" y1="9" x2="17" y2="15"></line>
+                        <line x1="17" y1="9" x2="23" y2="15"></line>
+                    </svg>
+                `;
+            }
+        }
+
+        function playBeep() {
+            if (!audioCtx || audioCtx.state === 'suspended' || !isSoundEnabled) return;
+            try {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                
+                osc.type = 'square'; 
+                osc.frequency.setValueAtTime(800, audioCtx.currentTime); 
+                
+                gain.gain.setValueAtTime(0.015, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.03);
+                
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.03);
+            } catch (e) {}
+        }
+
+        // --- EFEKT PSANÍ KÓDU ---
+        function typeWriter() {
+            if (blockIndex < contentBlocks.length) {
+                if (charIndex === 0) {
+                    currentSpan = document.createElement("span");
+                    currentSpan.className = contentBlocks[blockIndex].cssClass;
+                    container.appendChild(currentSpan);
+                }
+                
+                let char = contentBlocks[blockIndex].text.charAt(charIndex);
+                
+                if (char === '\n') {
+                    currentSpan.innerHTML += '<br>';
+                } else {
+                    currentSpan.innerHTML += char;
+                }
+                
+                if (char !== ' ' && char !== '\n' && Math.random() > 0.6) {
+                    playBeep();
+                }
+
+                charIndex++;
+                
+                if (charIndex >= contentBlocks[blockIndex].text.length) {
+                    blockIndex++;
+                    charIndex = 0;
+                    setTimeout(typeWriter, 500);
+                } else {
+                    setTimeout(typeWriter, typeSpeed);
+                }
+            }
+        }
+
+        function goBack() {
+            window.location.href = "web.html";
+        }
+
+        window.onload = () => {
+            setTimeout(typeWriter, 400); 
+        };
+    </script>
+</body>
+</html>
