@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-    <meta charset="UTF-8" />
+
+<meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>PulseMind™ / Info</title>
+    <title>PulseMind™ / Protokol 01</title>
 
     <meta name="robots" content="noindex, nofollow, noarchive">
     <meta name="googlebot" content="noindex, nofollow, noarchive">
@@ -14,227 +15,333 @@
     <link rel="icon" type="image/png" sizes="192x192" href="fuegoblade-logo.png">
     <link rel="apple-touch-icon" href="fuegoblade-logo.png">
 
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{
-    font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-    background:#000;
-    color:#fff;
-    overflow-x:hidden;
-}
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
 
-/* Background */
-.bg{
-    position:fixed;
-    inset:0;
-    background:radial-gradient(circle at center, rgba(143,0,255,0.1) 0%, #000 80%);
-    z-index:-2;
-}
+        /* Background */
+        .bg {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(143,0,255,0.1) 0%, #000 80%);
+            z-index: -2;
+        }
 
-.grid{
-    position:fixed;
-    inset:0;
-    background-image:
-        linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
-    background-size:50px 50px;
-    animation:gridMove 30s linear infinite;
-    z-index:-1;
-}
+        .grid {
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 30s linear infinite;
+            z-index: -1;
+        }
 
-@keyframes gridMove{
-    from{background-position:0 0;}
-    to{background-position:50px 50px;}
-}
+        @keyframes gridMove {
+            from { background-position: 0 0; }
+            to { background-position: 50px 50px; }
+        }
 
-/* Back Arrow */
-.top-bar{
-    position:fixed;
-    top:20px;
-    left:20px;
-    z-index:100;
-}
+        /* Back Arrow */
+        .top-bar {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+        }
 
-.back-arrow{
-    width:16px;
-    height:16px;
-    border-left:2px solid #39ff14;
-    border-bottom:2px solid #39ff14;
-    transform:rotate(45deg);
-    cursor:pointer;
-    filter:drop-shadow(0 0 6px #39ff14);
-    transition:0.3s;
-}
-.back-arrow:hover{
-    transform:rotate(45deg) scale(1.1);
-}
+        .back-arrow {
+            width: 16px;
+            height: 16px;
+            border-left: 2px solid #39ff14;
+            border-bottom: 2px solid #39ff14;
+            transform: rotate(45deg);
+            cursor: pointer;
+            filter: drop-shadow(0 0 6px #39ff14);
+            transition: 0.3s;
+        }
+        
+        .back-arrow:hover {
+            transform: rotate(45deg) scale(1.1);
+            filter: drop-shadow(0 0 10px #39ff14);
+        }
 
-/* Image Section */
-.hero-image{
-    margin-top:100px;
-    display:flex;
-    justify-content:center;
-    position:relative;
-}
+        /* Image Section */
+        .hero-image {
+            margin-top: 80px;
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
 
-.hero-image img{
-    width:70%;
-    max-width:600px;
-    height:auto;
-    object-fit:contain;
-    filter:blur(0px);
-    position:relative;
-    z-index:2;
-}
+        .hero-image img {
+            width: 80%;
+            max-width: 600px;
+            height: auto;
+            object-fit: contain;
+            border-radius: 20px;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 0 30px rgba(143,0,255,0.15);
+        }
 
-/* Fade effect */
-.hero-image::after{
-    content:"";
-    position:absolute;
-    bottom:-100px;
-    width:100%;
-    height:200px;
-    background:linear-gradient(to bottom, rgba(0,0,0,0) 0%, #000 100%);
-    z-index:1;
-}
+        .hero-image::after {
+            content: "";
+            position: absolute;
+            bottom: -50px;
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, #000 100%);
+            z-index: 3;
+            pointer-events: none;
+        }
 
-/* Code Window */
-.code-window{
-    max-width:900px;
-    margin:80px auto;
-    background:#0c0c12;
-    border-radius:20px;
-    padding:40px;
-    border:1px solid rgba(143,0,255,0.3);
-    box-shadow:0 0 40px rgba(143,0,255,0.15);
-    font-family:monospace;
-    font-size:0.95rem;
-    line-height:1.7;
-    position:relative;
-}
+        /* Code Window */
+        .code-window {
+            max-width: 900px;
+            margin: 40px auto 80px;
+            background: rgba(12, 12, 18, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid rgba(143,0,255,0.3);
+            box-shadow: 0 0 40px rgba(143,0,255,0.15), inset 0 0 20px rgba(0,0,0,0.8);
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            position: relative;
+        }
 
-.code-header{
-    margin-bottom:20px;
-    color:#39ff14;
-    font-weight:bold;
-}
+        .code-header {
+            margin-bottom: 30px;
+            font-size: 1.4rem;
+            font-weight: 900;
+            border-bottom: 1px dashed rgba(255,255,255,0.2);
+            padding-bottom: 15px;
+        }
 
-.code-content{
-    white-space:pre-wrap;
-}
+        .purple { color: #8F00FF; text-shadow: 0 0 10px rgba(143,0,255,0.5); }
+        .white { color: #ffffff; }
 
-.purple{color:#8F00FF;}
-.green{color:#39ff14;}
-.white{color:#ffffff;}
+        .code-content {
+            white-space: pre-wrap;
+            display: inline; /* To align correctly with the cursor */
+        }
 
-.cursor{
-    display:inline-block;
-    width:8px;
-    background:#39ff14;
-    animation:blink 1s infinite;
-    margin-left:4px;
-}
+        /* Třídy pro formátování psaného textu */
+        .text-boot { color: #39ff14; font-weight: bold; opacity: 0.8; }
+        .text-body { color: #d1d1d1; font-family: system-ui, -apple-system, sans-serif; font-size: 1.1rem; line-height: 1.7; }
+        .text-summary { color: #00e5ff; font-weight: 700; text-shadow: 0 0 10px rgba(0, 229, 255, 0.4); font-family: system-ui, -apple-system, sans-serif; font-size: 1.1rem; line-height: 1.7; display: block; margin-top: 20px; border-left: 3px solid #00e5ff; padding-left: 15px; }
 
-@keyframes blink{
-    0%,50%,100%{opacity:1;}
-    25%,75%{opacity:0;}
-}
+        /* Neonový obdélníkový kurzor */
+        .cursor {
+            display: inline-block;
+            width: 12px;
+            height: 1.1em;
+            background: #39ff14;
+            vertical-align: middle;
+            margin-left: 5px;
+            box-shadow: 0 0 10px #39ff14;
+            animation: blink 1s step-end infinite;
+        }
 
-/* Footer */
-.footer{
-    text-align:center;
-    margin:80px 0 40px;
-    font-size:0.85rem;
-    opacity:0.6;
-    font-weight:600;
-}
-</style>
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin: 40px 0 40px;
+            font-size: 0.85rem;
+            opacity: 0.5;
+            font-weight: 600;
+        }
+
+        @media (max-width: 600px) {
+            .code-window { padding: 25px; margin: 20px; font-size: 0.95rem; }
+            .code-header { font-size: 1.1rem; }
+            .text-body, .text-summary { font-size: 1rem; }
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="bg"></div>
-<div class="grid"></div>
+    <div class="bg"></div>
+    <div class="grid"></div>
 
-<div class="top-bar">
-    <div class="back-arrow" onclick="goBack()"></div>
-</div>
-
-<div class="hero-image">
-    <img src="image-pulsemind.png" alt="PulseMind">
-</div>
-
-<div class="code-window">
-    <div class="code-header">
-        <span class="purple">&lt;PulseMind™&gt;</span> 
-        <span class="green">Metabolic.Engine()</span>
+    <div class="top-bar">
+        <div class="back-arrow" onclick="goBack()"></div>
     </div>
-    <div class="code-content" id="typedText"></div><span class="cursor"></span>
-</div>
 
-<div class="footer">
-© 2026 FuegoBlade™. Všechna práva vyhrazena.
-</div>
+    <div class="hero-image">
+        <img src="image-pulsemind.png" alt="PulseMind">
+    </div>
 
-<script>
-const text = `
-<system>
-Většina dietních plánů selhává, protože jsou statické a ignorují to nejdůležitější – tvou aktuální fyziologickou realitu.
+    <div class="code-window">
+        <div class="code-header" id="section-title">
+            </div>
+        <div class="code-content" id="typedText"></div><span class="cursor"></span>
+    </div>
 
-Jídlo nepředstavuje jen obyčejnou energii,
-ale biochemickou informaci, která dává tvým buňkám pokyn,
-zda mají budovat svaly, spalovat tuk nebo opravovat poškozené tkáně.
+    <div class="footer" id="copyright-text">
+        © 2026 FuegoBlade™. Všechna práva vyhrazena.
+    </div>
 
-PulseMind™ přistupuje k výživě jako k preciznímu metabolickému inženýrství.
+    <script>
+        // Jazyková databáze s TYKÁNÍM ve všech verzích
+        const langData = {
+            cs: {
+                title1: "PulseMind™:",
+                title2: "Tvůj Digitální Biologický Avatar",
+                boot: "> INICIALIZACE SYSTÉMU...\n> NAČÍTÁNÍ BIOMETRICKÝCH DAT...\n> PŘÍSTUP POVOLEN.\n\n",
+                body: "PulseMind™ není jen další fitness aplikace nebo obyčejný chatbot; je to tvůj osobní digitální biologický avatar, který funguje jako centrální mozek pro tvůj životní styl.\n\nNeustále syntetizuje špičkové poznatky z fyziologie, spánkové vědy a biomechaniky, aby je mohl s chirurgickou přesností aplikovat na tvé unikátní tělo. Z prázdných doporučení o zdravém životním stylu vytváří exaktní, na míru střižené protokoly.\n\nDíky pokročilé kontextové inteligenci si systém pamatuje tvou historii, zranění, cíle i včerejší únavu, a vidí tak souvislosti, které lidskému oku běžně unikají.\n\nCelé kouzlo přitom spočívá v naprosté jednoduchosti pro uživatele. Nemusíš nic zdlouhavě vypisovat ani ručně datlovat do tabulek – stačí jednoduše nahrát screenshot ze svého Garminu, Oura ringu či Apple Health. Umělá inteligence si během vteřiny sama načte tvé grafy spánku, úroveň stresu i klidovou tepovku.\n\nKdyž k tomu přidáš fotku svého talíře, systém okamžitě rozklíčuje nutriční hodnoty a spojí všechny tyto proměnné do jednoho logického celku. Tvá data představují palivo, na které tento ekosystém funguje. Čím více upřímných informací a vizuálních vstupů mu poskytneš, tím ostřejší a přesnější bude tvůj každodenní strategický plán.\n\n",
+                summaryTitle: ">>> SHRNUTÍ PROTOKOLU <<<\n",
+                summary: "Tvé tělo neustále generuje obrovské množství dat, ale bez chytrého překladače je to jen zbytečný šum. PulseMind™ dává těmto číslům logiku a mění je na jasný, vysoce personalizovaný akční plán. Už nemusíš hádat, co tvé tělo potřebuje. S PulseMind™ to jednoduše víš.",
+                copyright: "© 2026 FuegoBlade™. Všechna práva vyhrazena."
+            },
+            en: {
+                title1: "PulseMind™:",
+                title2: "Your Digital Biological Avatar",
+                boot: "> SYSTEM INITIALIZATION...\n> LOADING BIOMETRIC DATA...\n> ACCESS GRANTED.\n\n",
+                body: "PulseMind™ is not just another fitness app or a regular chatbot; it's your personal digital biological avatar that acts as the central brain for your lifestyle.\n\nIt constantly synthesizes cutting-edge knowledge from physiology, sleep science, and biomechanics to apply them to your unique body with surgical precision. It turns empty healthy lifestyle recommendations into exact, custom-tailored protocols.\n\nThanks to advanced contextual intelligence, the system remembers your history, injuries, goals, and yesterday's fatigue, seeing connections that normally escape the human eye.\n\nThe magic lies in absolute simplicity for you. You don't have to write out lengthy logs or manually type into spreadsheets – just upload a screenshot from your Garmin, Oura ring, or Apple Health. The AI instantly reads your sleep graphs, stress levels, and resting heart rate.\n\nAdd a photo of your plate, and the system immediately decodes the nutritional values, merging all these variables into one logical whole. Your data is the fuel that runs this ecosystem. The more honest information and visual inputs you provide, the sharper and more precise your daily strategic plan will be.\n\n",
+                summaryTitle: ">>> PROTOCOL SUMMARY <<<\n",
+                summary: "Your body constantly generates massive amounts of data, but without a smart translator, it's just useless noise. PulseMind™ gives these numbers logic and turns them into a clear, highly personalized action plan. You no longer have to guess what your body needs. With PulseMind™, you simply know.",
+                copyright: "© 2026 FuegoBlade™. All rights reserved."
+            },
+            de: {
+                title1: "PulseMind™:",
+                title2: "Dein digitaler biologischer Avatar",
+                boot: "> SYSTEMINITIALISIERUNG...\n> LADE BIOMETRISCHE DATEN...\n> ZUGRIFF GEWÄHRT.\n\n",
+                body: "PulseMind™ ist nicht nur eine weitere Fitness-App oder ein gewöhnlicher Chatbot; es ist dein persönlicher digitaler biologischer Avatar, der als zentrales Gehirn für deinen Lebensstil fungiert.\n\nEs synthetisiert ständig modernste Erkenntnisse aus Physiologie, Schlafforschung und Biomechanik, um sie mit chirurgischer Präzision auf deinen einzigartigen Körper anzuwenden. Aus leeren Empfehlungen für einen gesunden Lebensstil werden exakte, maßgeschneiderte Protokolle.\n\nDank fortschrittlicher kontextueller Intelligenz merkt sich das System deine Geschichte, Verletzungen, Ziele und die Müdigkeit von gestern und erkennt Zusammenhänge, die dem menschlichen Auge normalerweise entgehen.\n\nDer Zauber liegt in der absoluten Einfachheit für dich. Du musst nichts langwierig aufschreiben oder manuell in Tabellen tippen – lade einfach einen Screenshot von deinem Garmin, Oura-Ring oder Apple Health hoch. Die KI liest sofort deine Schlafgraphen, dein Stresslevel und deinen Ruhepuls.\n\nFüge ein Foto deines Tellers hinzu, und das System entschlüsselt sofort die Nährwerte und verbindet all diese Variablen zu einem logischen Ganzen. Deine Daten sind der Treibstoff, der dieses Ökosystem antreibt. Je mehr ehrliche Informationen und visuelle Eingaben du lieferst, desto schärfer und präziser wird dein täglicher strategischer Plan.\n\n",
+                summaryTitle: ">>> PROTOKOLLZUSAMMENFASSUNG <<<\n",
+                summary: "Dein Körper generiert ständig riesige Datenmengen, aber ohne einen intelligenten Übersetzer ist das nur nutzloses Rauschen. PulseMind™ gibt diesen Zahlen eine Logik und verwandelt sie in einen klaren, hochgradig personalisierten Aktionsplan. Du musst nicht mehr raten, was dein Körper braucht. Mit PulseMind™ weißt du es einfach.",
+                copyright: "© 2026 FuegoBlade™. Alle Rechte vorbehalten."
+            },
+            es: {
+                title1: "PulseMind™:",
+                title2: "Tu Avatar Biológico Digital",
+                boot: "> INICIALIZACIÓN DEL SISTEMA...\n> CARGANDO DATOS BIOMÉTRICOS...\n> ACCESO CONCEDIDO.\n\n",
+                body: "PulseMind™ no es solo otra aplicación de fitness o un chatbot común; es tu avatar biológico digital personal que funciona como el cerebro central de tu estilo de vida.\n\nSintetiza constantemente conocimientos de vanguardia en fisiología, ciencia del sueño y biomecánica para aplicarlos a tu cuerpo único con precisión quirúrgica. Transforma las recomendaciones vacías sobre un estilo de vida saludable en protocolos exactos y hechos a medida.\n\nGracias a la inteligencia contextual avanzada, el sistema recuerda tu historial, lesiones, objetivos y el cansancio de ayer, viendo conexiones que normalmente escapan al ojo humano.\n\nToda la magia reside en la absoluta simplicidad para ti. No tienes que escribir textos largos ni teclear manualmente en hojas de cálculo: simplemente sube una captura de pantalla de tu Garmin, anillo Oura o Apple Health. La IA lee instantáneamente tus gráficos de sueño, niveles de estrés y frecuencia cardíaca en reposo.\n\nAñade una foto de tu plato, y el sistema descifra inmediatamente los valores nutricionales y une todas estas variables en un todo lógico. Tus datos son el combustible que hace funcionar este ecosistema. Cuanta más información honesta y entradas visuales le proporciones, más nítido y preciso será tu plan estratégico diario.\n\n",
+                summaryTitle: ">>> RESUMEN DEL PROTOCOLO <<<\n",
+                summary: "Tu cuerpo genera constantemente enormes cantidades de datos, pero sin un traductor inteligente, es solo ruido inútil. PulseMind™ le da lógica a estos números y los convierte en un plan de acción claro y altamente personalizado. Ya no tienes que adivinar lo que tu cuerpo necesita. Con PulseMind™, simplemente lo sabes.",
+                copyright: "© 2026 FuegoBlade™. Todos los derechos reservados."
+            }
+        };
 
-Systém neustále vyhodnocuje tréninkovou zátěž,
-kvalitu spánku a stav nervového systému,
-aby v reálném čase určil přesné palivo pro tvůj motor.
+        // Získání jazyka a nastavení
+        const lang = localStorage.getItem("language") || "cs";
+        const currentData = langData[lang] || langData["cs"];
+        
+        document.documentElement.lang = lang;
+        document.getElementById("copyright-text").innerText = currentData.copyright;
+        
+        // Nastavení hlavičky
+        document.getElementById("section-title").innerHTML = `
+            <span class="purple">${currentData.title1}</span> 
+            <span class="white">${currentData.title2}</span>
+        `;
 
-Pokud tělo hlásí únavu →
-AI dynamicky upraví potřebu makroživin
-a doporučí cílenou suplementaci
-pro urychlení buněčné obnovy a potlačení zánětů.
+        // Struktura textu pro psaní
+        const contentBlocks = [
+            { text: currentData.boot, cssClass: "text-boot" },
+            { text: currentData.body, cssClass: "text-body" },
+            { text: currentData.summaryTitle + currentData.summary, cssClass: "text-summary" }
+        ];
 
-V odpočinkové dny optimalizuje příjem tak,
-aby nedocházelo k ukládání přebytečného tuku.
+        let blockIndex = 0;
+        let charIndex = 0;
+        const container = document.getElementById("typedText");
+        let currentSpan = null;
+        const typeSpeed = 15; // Rychlost psaní
 
-Interakce je minimalistická:
-Stačí vyfotit talíř.
-AI okamžitě rozklíčuje nutriční hodnoty
-a zasadí je do kontextu celého dne.
+        // --- AUDIO SYSTÉM PRO PÍPÁNÍ ---
+        let audioCtx;
+        
+        // Prohlížeče blokují zvuk do prvního kliknutí uživatele. 
+        // Tento event listener ho odblokuje.
+        document.addEventListener('click', () => {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+        }, { once: true });
 
-Už žádné dogmatické trendy.
-Žádné ruční počítání soust.
+        function playBeep() {
+            if (!audioCtx || audioCtx.state === 'suspended') return;
+            try {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                
+                osc.type = 'square'; // Technologický zvuk
+                osc.frequency.setValueAtTime(800, audioCtx.currentTime); 
+                
+                // Velmi tichý a velmi krátký zvuk
+                gain.gain.setValueAtTime(0.015, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.03);
+                
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.03);
+            } catch (e) {} // Bezpečné zachycení chyb
+        }
 
-PulseMind™ vytváří dynamický,
-na míru střižený protokol,
-který zásobuje organismus přesně tím,
-co potřebuje – ve správný čas.
+        // --- EFEKT PSANÍ KÓDU ---
+        function typeWriter() {
+            if (blockIndex < contentBlocks.length) {
+                // Vytvoření nového spanu pro každý blok (boot, body, summary)
+                if (charIndex === 0) {
+                    currentSpan = document.createElement("span");
+                    currentSpan.className = contentBlocks[blockIndex].cssClass;
+                    container.appendChild(currentSpan);
+                }
+                
+                let char = contentBlocks[blockIndex].text.charAt(charIndex);
+                
+                // Přepis \n na <br>
+                if (char === '\n') {
+                    currentSpan.innerHTML += '<br>';
+                } else {
+                    currentSpan.innerHTML += char;
+                }
+                
+                // Pípnutí pouze na písmena a ne s každým znakem (aby z toho nebolela hlava)
+                if (char !== ' ' && char !== '\n' && Math.random() > 0.6) {
+                    playBeep();
+                }
 
-Tvá strava už nikdy nebude založena na odhadech.
-S PulseMind™ se výživa mění v exaktní vědu.
+                charIndex++;
+                
+                if (charIndex >= contentBlocks[blockIndex].text.length) {
+                    blockIndex++;
+                    charIndex = 0;
+                    setTimeout(typeWriter, 500); // Pauza mezi bloky pro dramatičnost
+                } else {
+                    setTimeout(typeWriter, typeSpeed);
+                }
+            }
+        }
 
-</system>
-`;
+        function goBack() {
+            window.location.href = "web.html";
+        }
 
-let i = 0;
-const speed = 18;
-
-function typeWriter(){
-    if(i < text.length){
-        document.getElementById("typedText").innerHTML += text.charAt(i);
-        i++;
-        setTimeout(typeWriter, speed);
-    }
-}
-
-function goBack(){
-    window.location.href = "web.html";
-}
-
-window.onload = typeWriter;
-</script>
-
+        // Start po načtení
+        window.onload = () => {
+            setTimeout(typeWriter, 400); // Mírné zpoždění před začátkem psaní
+        };
+    </script>
 </body>
 </html>
