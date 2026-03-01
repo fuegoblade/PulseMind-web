@@ -4,10 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-    <title>PulseMind™ / App Overview</title>
+    <title>PulseMind™ / Web</title>
 
     <meta name="robots" content="noindex, nofollow, noarchive">
     <meta name="googlebot" content="noindex, nofollow, noarchive">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="fuegoblade-logo.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="fuegoblade-logo.png">
+    <link rel="apple-touch-icon" href="fuegoblade-logo.png">
 
     <style>
         /*
@@ -119,9 +123,9 @@
             filter: drop-shadow(0 0 8px #39ff14);
         }
 
-        /* FuegoBlade Logo s fialovým ohraničením */
+        /* FuegoBlade Logo s fialovým ohraničením a BÍLÝM podkladem pro text */
         .logo-wrapper {
-            background: #000; 
+            background: #fff; 
             border-radius: 50%;
             width: 80px; 
             height: 80px;
@@ -379,8 +383,8 @@
     </div>
 
     <div class="header">
-        <div class="title">PulseMind™</div>
-        <button class="app-btn" id="appBtn" onclick="goApp()">VSTOUPIT DO APP PULSEMIND™</button>
+        <div class="title">PulseMind™ Web</div>
+        <button class="app-btn" id="appBtn" onclick="goApp()">Vstoupit do App</button>
     </div>
 
     <div class="sections" id="sections"></div>
@@ -399,7 +403,7 @@
     <script>
         const uiTranslations = {
             cs: {
-                appBtn: "VSTOUPIT DO APP PULSEMIND™",
+                appBtn: "Vstoupit do App",
                 contact: "KONTAKT",
                 terms: "VŠEOBECNÉ OBCHODNÍ PODMÍNKY",
                 privacy: "OCHRANA OSOBNÍCH ÚDAJŮ",
@@ -407,7 +411,7 @@
                 copyright: "© 2026 FuegoBlade™. Všechna práva vyhrazena."
             },
             en: {
-                appBtn: "ENTER APP PULSEMIND™",
+                appBtn: "Enter App",
                 contact: "CONTACT",
                 terms: "TERMS OF SERVICE",
                 privacy: "PRIVACY POLICY",
@@ -415,7 +419,7 @@
                 copyright: "© 2026 FuegoBlade™. All rights reserved."
             },
             de: {
-                appBtn: "PULSEMIND™ APP ÖFFNEN",
+                appBtn: "App öffnen",
                 contact: "KONTAKT",
                 terms: "ALLGEMEINE GESCHÄFTSBEDINGUNGEN",
                 privacy: "DATENSCHUTZRICHTLINIE",
@@ -423,7 +427,7 @@
                 copyright: "© 2026 FuegoBlade™. Alle Rechte vorbehalten."
             },
             es: {
-                appBtn: "ENTRAR A LA APP PULSEMIND™",
+                appBtn: "Entrat a la App",
                 contact: "CONTACTO",
                 terms: "TÉRMINOS DE SERVICIO",
                 privacy: "POLÍTICA DE PRIVACIDAD",
@@ -441,7 +445,7 @@
                 ["Metabolická Architektura", "Palivo bez dohadů", "Jídlo nejsou jen prázdné kalorie, je to informační kód, který programuje tvé tělo. PulseMind™ neuznává univerzální diety. Vypočítá tvou přesnou biologickou rovnici a navrhne stravu i suplementaci tak, abys maximalizoval výkon a zkrátil regeneraci na minimum.", "sekce-eat.html"],
                 ["Elitní Výkon", "Architektura Profesionálů", "Ve světě, kde o vítězství rozhodují zlomky procent, už nestačí jen tvrdě dřít. PulseMind™ ti dává do rukou analytickou převahu světových šampionů. Eliminuj dohady, vylaď svůj motor na absolutní maximum a posouvej hranice lidského potenciálu s chladnou přesností.", "sekce-professional.html"],
                 ["Longevity Protokol", "Architektura Aktivního Věku", "Věk je pouhý datový bod, nikoliv tvůj limit. PulseMind™ přepisuje tradiční pravidla stárnutí a mění je v exaktně řízený proces aktivní dlouhověkosti. Udrž si ostrou mysl, silné tělo a absolutní svobodu pohybu díky personalizované biologické strategii.", "sekce-senior.html"],
-                ["Architektura Růstu", "Inteligentní základ pro budoucnost", "Dětské tělo není zmenšenina dospělého, je to systém v neustálém, dynamickém vývoji. PulseMind™ pomáhá rodičům pochopit přirozené biologické rytmy svých dětí. Bez tlaku na výkon chráníme regeneraci, podporujeme vývoj mozku a budujeme zdravé návyky už od samého začátku.", "sekce-child.html"],
+                ["Architektura Růstu", "Inteligentní základ pro budoucnost", "Dětské tělo není zmenšenina dospělého, je to systém v neustálém, dynamickém vývoji. PulseMind™ ti pomůže pochopit přirozené biologické rytmy tvých dětí. Bez tlaku na výkon chráníme jejich regeneraci, podporujeme vývoj mozku a budujeme zdravé návyky už od samého začátku.", "sekce-child.html"],
                 ["Architektura Klidu", "Exaktně řízená regenerace", "Odpočinek není slabost, je to tvá nejmocnější taktická zbraň. PulseMind™ mění pasivní lenošení na vědecky řízený proces buněčné obnovy. Nauč se vědomě přepínat svůj nervový systém, snižovat kortizol a nabíjet baterie s maximální možnou efektivitou.", "sekce-relax.html"],
                 ["Architektura Energie", "Inteligentní obnova mateřské síly", "Mateřství je extrémní biologický výkon, který vyžaduje tu nejchytřejší možnou strategii. PulseMind™ tě nenutí k vyčerpávajícím tréninkům na úkor spánku. Analyzuje tvůj deficit, optimalizuje tvou regeneraci a pomáhá ti budovat nezdolnou energii pro tebe i tvé dítě.", "sekce-mother.html"]
             ],
@@ -453,21 +457,21 @@
                 ["Metabolic Architecture", "Fuel without guesswork", "Food isn't just empty calories; it's information code that programs your body. PulseMind™ doesn't recognize universal diets. It calculates your exact biological equation and suggests diet and supplementation to maximize performance and cut recovery to a minimum.", "sekce-eat.html"],
                 ["Elite Performance", "Architecture of Professionals", "In a world where fractions of a percent decide victory, working hard is no longer enough. PulseMind™ gives you the analytical edge of world champions. Eliminate guesswork, tune your engine to the absolute maximum, and push the boundaries of human potential with cold precision.", "sekce-professional.html"],
                 ["Longevity Protocol", "Architecture of Active Aging", "Age is just a data point, not your limit. PulseMind™ rewrites the traditional rules of aging and turns them into a strictly managed process of active longevity. Keep a sharp mind, a strong body, and absolute freedom of movement through a personalized biological strategy.", "sekce-senior.html"],
-                ["Growth Architecture", "Intelligent foundation for the future", "A child's body is not a miniature adult; it's a system in constant, dynamic development. PulseMind™ helps parents understand the natural biological rhythms of their children. Without performance pressure, we protect recovery, support brain development, and build healthy habits from the very beginning.", "sekce-child.html"],
+                ["Growth Architecture", "Intelligent foundation for the future", "A child's body is not a miniature adult; it's a system in constant, dynamic development. PulseMind™ helps you understand the natural biological rhythms of your children. Without performance pressure, we protect recovery, support brain development, and build healthy habits from the very beginning.", "sekce-child.html"],
                 ["Architecture of Calm", "Precisely managed recovery", "Rest is not a weakness; it's your most powerful tactical weapon. PulseMind™ turns passive lounging into a scientifically managed process of cellular renewal. Learn to consciously switch your nervous system, lower cortisol, and recharge your batteries with maximum efficiency.", "sekce-relax.html"],
                 ["Energy Architecture", "Intelligent restoration of maternal strength", "Motherhood is an extreme biological feat that requires the smartest possible strategy. PulseMind™ won't force you into exhausting workouts at the expense of sleep. It analyzes your deficit, optimizes your recovery, and helps you build indestructible energy for you and your child.", "sekce-mother.html"]
             ],
             de: [
-                ["PulseMind™", "Ihr digitaler biologischer Avatar", "Vergessen Sie universelle Vorlagen und allgemeine Fitnessratschläge. Ihre Biologie ist ein einzigartiger Code. PulseMind™ ist das erste KI-System, das ihn in Echtzeit lesen, verstehen und optimieren kann. Übernehmen Sie die absolute Kontrolle über Ihren Körper und Ihre Leistung.", "sekce-pulsemind.html"],
-                ["Kognitiver Kern", "Künstliche Intelligenz ohne Kompromisse", "Unter der Haube von PulseMind™ schlägt das fortschrittlichste moderne neuronale Netz. Es ist nicht nur Code; es ist Ihr persönliches Team aus Elite-Wissenschaftlern und Trainern, das niemals schläft und aus jedem Herzschlag lernt.", "sekce-ai.html"],
-                ["Schwangerschaft", "Die ultimative biologische Transformation", "Schwangerschaft ist keine Krankheit; es ist der komplexeste Stoffwechselprozess Ihres Lebens. PulseMind™ passt sich in Echtzeit an Ihren sich verändernden Körper an. Es überwacht Ihre Energie, Ihren Schlaf und Ihr Nervensystem, damit Sie diese Transformation mit voller Kraft und absoluter Balance bewältigen können.", "sekce-gravidite.html"],
-                ["Adaptive Rekalibrierung", "Intelligente Rückkehr zur Leistung", "Eine Verletzung ist nicht das Ende; es ist nur eine neue Variable in Ihrem Code. PulseMind™ rekalibriert Ihre Strategie dynamisch, um Ihre Schwachstellen zu schützen, die Heilung zu beschleunigen und Ihr hart erarbeitetes Fundament zu erhalten. Machen Sie Einschränkungen zu Ihrem taktischen Vorteil.", "sekce-invalid.html"],
-                ["Metabolische Architektur", "Treibstoff ohne Raten", "Essen ist nicht nur leere Kalorien; es ist ein Informationscode, der Ihren Körper programmiert. PulseMind™ erkennt keine universellen Diäten an. Es berechnet Ihre genaue biologische Gleichung und schlägt Ernährung und Nahrungsergänzung vor, um die Leistung zu maximieren und die Regeneration auf ein Minimum zu reduzieren.", "sekce-eat.html"],
-                ["Elite-Leistung", "Architektur der Profis", "In einer Welt, in der Bruchteile von Prozenten über den Sieg entscheiden, reicht harte Arbeit allein nicht mehr aus. PulseMind™ gibt Ihnen den analytischen Vorsprung von Weltmeistern. Eliminieren Sie Rätselraten, stimmen Sie Ihren Motor auf das absolute Maximum ab und verschieben Sie die Grenzen des menschlichen Potenzials mit kalter Präzision.", "sekce-professional.html"],
-                ["Longevity-Protokoll", "Architektur des aktiven Alters", "Das Alter ist nur ein Datenpunkt, nicht Ihr Limit. PulseMind™ schreibt die traditionellen Regeln des Alterns neu und verwandelt sie in einen exakt gesteuerten Prozess der aktiven Langlebigkeit. Behalten Sie einen scharfen Verstand, einen starken Körper und absolute Bewegungsfreiheit durch eine personalisierte biologische Strategie.", "sekce-senior.html"],
-                ["Wachstumsarchitektur", "Intelligente Basis für die Zukunft", "Der Körper eines Kindes ist kein kleiner Erwachsener; er ist ein System in ständiger, dynamischer Entwicklung. PulseMind™ hilft Eltern, die natürlichen biologischen Rhythmen ihrer Kinder zu verstehen. Ohne Leistungsdruck schützen wir die Regeneration, unterstützen die Gehirnentwicklung und bauen von Anfang an gesunde Gewohnheiten auf.", "sekce-child.html"],
-                ["Architektur der Ruhe", "Exakt gesteuerte Regeneration", "Ruhe ist keine Schwäche; sie ist Ihre mächtigste taktische Waffe. PulseMind™ verwandelt passives Faulenzen in einen wissenschaftlich gesteuerten Prozess der Zellerneuerung. Lernen Sie, Ihr Nervensystem bewusst umzuschalten, Cortisol zu senken und Ihre Batterien mit maximaler Effizienz aufzuladen.", "sekce-relax.html"],
-                ["Energiearchitektur", "Intelligente Wiederherstellung der mütterlichen Kraft", "Mutterschaft ist eine extreme biologische Leistung, die die intelligenteste Strategie erfordert. PulseMind™ zwingt Sie nicht zu anstrengenden Workouts auf Kosten des Schlafes. Es analysiert Ihr Defizit, optimiert Ihre Regeneration und hilft Ihnen, unzerstörbare Energie für sich und Ihr Kind aufzubauen.", "sekce-mother.html"]
+                ["PulseMind™", "Dein digitaler biologischer Avatar", "Vergiss universelle Vorlagen und allgemeine Fitnessratschläge. Deine Biologie ist ein einzigartiger Code. PulseMind™ ist das erste KI-System, das ihn in Echtzeit lesen, verstehen und optimieren kann. Übernimm die absolute Kontrolle über deinen Körper und deine Leistung.", "sekce-pulsemind.html"],
+                ["Kognitiver Kern", "Künstliche Intelligenz ohne Kompromisse", "Unter der Haube von PulseMind™ schlägt das fortschrittlichste moderne neuronale Netz. Es ist nicht nur Code; es ist dein persönliches Team aus Elite-Wissenschaftlern und Trainern, das niemals schläft und aus jedem Herzschlag lernt.", "sekce-ai.html"],
+                ["Schwangerschaft", "Die ultimative biologische Transformation", "Schwangerschaft ist keine Krankheit; es ist der komplexeste Stoffwechselprozess deines Lebens. PulseMind™ passt sich in Echtzeit an deinen sich verändernden Körper an. Es überwacht deine Energie, deinen Schlaf und dein Nervensystem, damit du diese Transformation mit voller Kraft und absoluter Balance bewältigen kannst.", "sekce-gravidite.html"],
+                ["Adaptive Rekalibrierung", "Intelligente Rückkehr zur Leistung", "Eine Verletzung ist nicht das Ende; es ist nur eine neue Variable in deinem Code. PulseMind™ rekalibriert deine Strategie dynamisch, um deine Schwachstellen zu schützen, die Heilung zu beschleunigen und dein hart erarbeitetes Fundament zu erhalten. Mache Einschränkungen zu deinem taktischen Vorteil.", "sekce-invalid.html"],
+                ["Metabolische Architektur", "Treibstoff ohne Raten", "Essen ist nicht nur leere Kalorien; es ist ein Informationscode, der deinen Körper programmiert. PulseMind™ erkennt keine universellen Diäten an. Es berechnet deine genaue biologische Gleichung und schlägt Ernährung und Nahrungsergänzung vor, um die Leistung zu maximieren und die Regeneration auf ein Minimum zu reduzieren.", "sekce-eat.html"],
+                ["Elite-Leistung", "Architektur der Profis", "In einer Welt, in der Bruchteile von Prozenten über den Sieg entscheiden, reicht harte Arbeit allein nicht mehr aus. PulseMind™ gibt dir den analytischen Vorsprung von Weltmeistern. Eliminiere Rätselraten, stimme deinen Motor auf das absolute Maximum ab und verschiebe die Grenzen des menschlichen Potenzials mit kalter Präzision.", "sekce-professional.html"],
+                ["Longevity-Protokoll", "Architektur des aktiven Alters", "Das Alter ist nur ein Datenpunkt, nicht dein Limit. PulseMind™ schreibt die traditionellen Regeln des Alterns neu und verwandelt sie in einen exakt gesteuerten Prozess der aktiven Langlebigkeit. Behalte einen scharfen Verstand, einen starken Körper und absolute Bewegungsfreiheit durch eine personalisierte biologische Strategie.", "sekce-senior.html"],
+                ["Wachstumsarchitektur", "Intelligente Basis für die Zukunft", "Der Körper eines Kindes ist kein kleiner Erwachsener; er ist ein System in ständiger, dynamischer Entwicklung. PulseMind™ hilft dir, die natürlichen biologischen Rhythmen deiner Kinder zu verstehen. Ohne Leistungsdruck schützen wir die Regeneration, unterstützen die Gehirnentwicklung und bauen von Anfang an gesunde Gewohnheiten auf.", "sekce-child.html"],
+                ["Architektur der Ruhe", "Exakt gesteuerte Regeneration", "Ruhe ist keine Schwäche; sie ist deine mächtigste taktische Waffe. PulseMind™ verwandelt passives Faulenzen in einen wissenschaftlich gesteuerten Prozess der Zellerneuerung. Lerne, dein Nervensystem bewusst umzuschalten, Cortisol zu senken und deine Batterien mit maximaler Effizienz aufzuladen.", "sekce-relax.html"],
+                ["Energiearchitektur", "Intelligente Wiederherstellung der mütterlichen Kraft", "Mutterschaft ist eine extreme biologische Leistung, die die intelligenteste Strategie erfordert. PulseMind™ zwingt dich nicht zu anstrengenden Workouts auf Kosten des Schlafes. Es analysiert dein Defizit, optimiert deine Regeneration und hilft dir, unzerstörbare Energie für dich und dein Kind aufzubauen.", "sekce-mother.html"]
             ],
             es: [
                 ["PulseMind™", "Tu Avatar Biológico Digital", "Olvídate de plantillas universales y consejos de fitness genéricos. Tu biología es un código único. PulseMind™ es el primer sistema de IA que puede leerlo, comprenderlo y optimizarlo en tiempo real. Toma el control absoluto de tu cuerpo y rendimiento.", "sekce-pulsemind.html"],
@@ -477,7 +481,7 @@
                 ["Arquitectura Metabólica", "Combustible sin conjeturas", "La comida no son solo calorías vacías; es un código de información que programa tu cuerpo. PulseMind™ no reconoce dietas universales. Calcula tu ecuación biológica exacta y sugiere dieta y suplementación para maximizar el rendimiento y reducir la recuperación al mínimo.", "sekce-eat.html"],
                 ["Rendimiento de Élite", "Arquitectura de Profesionales", "En un mundo donde fracciones de porcentaje deciden la victoria, trabajar duro ya no es suficiente. PulseMind™ te brinda la ventaja analítica de los campeones mundiales. Elimina las conjeturas, afina tu motor al máximo absoluto y empuja los límites del potencial humano con fría precisión.", "sekce-professional.html"],
                 ["Protocolo de Longevidad", "Arquitectura del Envejecimiento Activo", "La edad es solo un dato, no tu límite. PulseMind™ reescribe las reglas tradicionales del envejecimiento y las convierte en un proceso estrictamente controlado de longevidad activa. Mantén una mente aguda, un cuerpo fuerte y libertad absoluta de movimiento a través de una estrategia biológica personalizada.", "sekce-senior.html"],
-                ["Arquitectura de Crecimiento", "Base inteligente para el futuro", "El cuerpo de un niño no es un adulto en miniatura; es un sistema en constante y dinámico desarrollo. PulseMind™ ayuda a los padres a comprender los ritmos biológicos naturales de sus hijos. Sin presión por el rendimiento, protegemos la recuperación, apoyamos el desarrollo cerebral y construimos hábitos saludables desde el principio.", "sekce-child.html"],
+                ["Arquitectura de Crecimiento", "Base inteligente para el futuro", "El cuerpo de un niño no es un adulto en miniatura; es un sistema en constante y dinámico desarrollo. PulseMind™ te ayuda a comprender los ritmos biológicos naturales de tus hijos. Sin presión por el rendimiento, protegemos la recuperación, apoyamos el desarrollo cerebral y construimos hábitos saludables desde el principio.", "sekce-child.html"],
                 ["Arquitectura de la Calma", "Recuperación gestionada con precisión", "El descanso no es una debilidad; es tu arma táctica más poderosa. PulseMind™ convierte el descanso pasivo en un proceso de renovación celular gestionado científicamente. Aprende a cambiar conscientemente tu sistema nervioso, reducir el cortisol y recargar tus baterías con la máxima eficiencia.", "sekce-relax.html"],
                 ["Arquitectura de Energía", "Restauración inteligente de la fuerza materna", "La maternidad es un esfuerzo biológico extremo que requiere la estrategia más inteligente posible. PulseMind™ no te obligará a realizar entrenamientos agotadores a expensas del sueño. Analiza tu déficit, optimiza tu recuperación y te ayuda a construir una energía indestructible para ti y tu hijo.", "sekce-mother.html"]
             ]
