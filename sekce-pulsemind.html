@@ -2,7 +2,7 @@
 <html lang="cs">
 <head>
 
-<meta charset="UTF-8" />
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>PulseMind™ / Protokol 01</title>
@@ -48,14 +48,19 @@
             to { background-position: 50px 50px; }
         }
 
-        /* Back Arrow */
+        /* Top Bar */
         .top-bar {
             position: fixed;
             top: 20px;
             left: 20px;
+            right: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             z-index: 100;
         }
 
+        /* Back Arrow */
         .back-arrow {
             width: 16px;
             height: 16px;
@@ -70,6 +75,30 @@
         .back-arrow:hover {
             transform: rotate(45deg) scale(1.1);
             filter: drop-shadow(0 0 10px #39ff14);
+        }
+
+        /* Sound Toggle Button */
+        .sound-toggle {
+            cursor: pointer;
+            width: 24px;
+            height: 24px;
+            color: rgba(255, 255, 255, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .sound-toggle:hover {
+            color: #39ff14;
+            filter: drop-shadow(0 0 5px rgba(57, 255, 20, 0.5));
+        }
+
+        .sound-toggle.active {
+            color: #39ff14;
+            filter: drop-shadow(0 0 8px #39ff14);
+        }
+
+        .sound-toggle svg {
+            width: 100%;
+            height: 100%;
         }
 
         /* Image Section */
@@ -180,6 +209,14 @@
 
     <div class="top-bar">
         <div class="back-arrow" onclick="goBack()"></div>
+        
+        <div class="sound-toggle" id="soundToggle" onclick="toggleSound()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                <line x1="23" y1="9" x2="17" y2="15"></line>
+                <line x1="17" y1="9" x2="23" y2="15"></line>
+            </svg>
+        </div>
     </div>
 
     <div class="hero-image">
@@ -237,20 +274,17 @@
             }
         };
 
-        // Získání jazyka a nastavení
         const lang = localStorage.getItem("language") || "cs";
         const currentData = langData[lang] || langData["cs"];
         
         document.documentElement.lang = lang;
         document.getElementById("copyright-text").innerText = currentData.copyright;
         
-        // Nastavení hlavičky
         document.getElementById("section-title").innerHTML = `
             <span class="purple">${currentData.title1}</span> 
             <span class="white">${currentData.title2}</span>
         `;
 
-        // Struktura textu pro psaní
         const contentBlocks = [
             { text: currentData.boot, cssClass: "text-boot" },
             { text: currentData.body, cssClass: "text-body" },
@@ -261,32 +295,55 @@
         let charIndex = 0;
         const container = document.getElementById("typedText");
         let currentSpan = null;
-        const typeSpeed = 15; // Rychlost psaní
+        const typeSpeed = 15; 
 
-        // --- AUDIO SYSTÉM PRO PÍPÁNÍ ---
+        // --- AUDIO SYSTÉM PRO PÍPÁNÍ A TLAČÍTKO ---
         let audioCtx;
-        
-        // Prohlížeče blokují zvuk do prvního kliknutí uživatele. 
-        // Tento event listener ho odblokuje.
-        document.addEventListener('click', () => {
+        let isSoundEnabled = false;
+
+        function toggleSound() {
+            // První inicializace při kliknutí
             if (!audioCtx) {
                 audioCtx = new (window.AudioContext || window.webkitAudioContext)();
             }
             if (audioCtx.state === 'suspended') {
                 audioCtx.resume();
             }
-        }, { once: true });
+
+            isSoundEnabled = !isSoundEnabled;
+            const btn = document.getElementById("soundToggle");
+
+            if (isSoundEnabled) {
+                btn.classList.add('active');
+                // Ikonka: Zvuk zapnutý
+                btn.innerHTML = `
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                    </svg>
+                `;
+            } else {
+                btn.classList.remove('active');
+                // Ikonka: Zvuk vypnutý (škrtnutý)
+                btn.innerHTML = `
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                        <line x1="23" y1="9" x2="17" y2="15"></line>
+                        <line x1="17" y1="9" x2="23" y2="15"></line>
+                    </svg>
+                `;
+            }
+        }
 
         function playBeep() {
-            if (!audioCtx || audioCtx.state === 'suspended') return;
+            if (!audioCtx || audioCtx.state === 'suspended' || !isSoundEnabled) return;
             try {
                 const osc = audioCtx.createOscillator();
                 const gain = audioCtx.createGain();
                 
-                osc.type = 'square'; // Technologický zvuk
+                osc.type = 'square'; 
                 osc.frequency.setValueAtTime(800, audioCtx.currentTime); 
                 
-                // Velmi tichý a velmi krátký zvuk
                 gain.gain.setValueAtTime(0.015, audioCtx.currentTime);
                 gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.03);
                 
@@ -295,13 +352,12 @@
                 
                 osc.start();
                 osc.stop(audioCtx.currentTime + 0.03);
-            } catch (e) {} // Bezpečné zachycení chyb
+            } catch (e) {}
         }
 
         // --- EFEKT PSANÍ KÓDU ---
         function typeWriter() {
             if (blockIndex < contentBlocks.length) {
-                // Vytvoření nového spanu pro každý blok (boot, body, summary)
                 if (charIndex === 0) {
                     currentSpan = document.createElement("span");
                     currentSpan.className = contentBlocks[blockIndex].cssClass;
@@ -310,14 +366,13 @@
                 
                 let char = contentBlocks[blockIndex].text.charAt(charIndex);
                 
-                // Přepis \n na <br>
                 if (char === '\n') {
                     currentSpan.innerHTML += '<br>';
                 } else {
                     currentSpan.innerHTML += char;
                 }
                 
-                // Pípnutí pouze na písmena a ne s každým znakem (aby z toho nebolela hlava)
+                // Pípnutí pouze pokud je zvuk povolen (isSoundEnabled === true)
                 if (char !== ' ' && char !== '\n' && Math.random() > 0.6) {
                     playBeep();
                 }
@@ -327,7 +382,7 @@
                 if (charIndex >= contentBlocks[blockIndex].text.length) {
                     blockIndex++;
                     charIndex = 0;
-                    setTimeout(typeWriter, 500); // Pauza mezi bloky pro dramatičnost
+                    setTimeout(typeWriter, 500);
                 } else {
                     setTimeout(typeWriter, typeSpeed);
                 }
@@ -340,7 +395,7 @@
 
         // Start po načtení
         window.onload = () => {
-            setTimeout(typeWriter, 400); // Mírné zpoždění před začátkem psaní
+            setTimeout(typeWriter, 400); 
         };
     </script>
 </body>
