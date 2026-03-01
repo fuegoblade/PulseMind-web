@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>PulseMind™ / Impresum</title>
+
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <meta name="googlebot" content="noindex, nofollow, noarchive">
+    <meta name="google" content="nositelinkssearchbox">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="fuegoblade-logo.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="fuegoblade-logo.png">
+    <link rel="apple-touch-icon" href="fuegoblade-logo.png">
+
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Background */
+        .bg {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(143,0,255,0.1) 0%, #000 80%);
+            z-index: -2;
+        }
+
+        .grid {
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 30s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes gridMove {
+            from { background-position: 0 0; }
+            to { background-position: 50px 50px; }
+        }
+
+        /* Top Bar with Logo */
+        .top-bar {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+
+        /* Back Arrow */
+        .back-arrow {
+            width: 16px;
+            height: 16px;
+            border-left: 2px solid #39ff14;
+            border-bottom: 2px solid #39ff14;
+            transform: rotate(45deg);
+            cursor: pointer;
+            filter: drop-shadow(0 0 6px #39ff14);
+            transition: 0.3s;
+        }
+        
+        .back-arrow:hover {
+            transform: rotate(45deg) scale(1.1);
+            filter: drop-shadow(0 0 10px #39ff14);
+        }
+
+        /* Top Right Controls (Sound + Logo) */
+        .top-right-controls {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Sound Toggle Button */
+        .sound-toggle {
+            cursor: pointer;
+            width: 24px;
+            height: 24px;
+            color: rgba(255, 255, 255, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .sound-toggle:hover {
+            color: #39ff14;
+            filter: drop-shadow(0 0 5px rgba(57, 255, 20, 0.5));
+        }
+
+        .sound-toggle.active {
+            color: #39ff14;
+            filter: drop-shadow(0 0 8px #39ff14);
+        }
+
+        .sound-toggle svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* FuegoBlade Logo */
+        .logo-wrapper {
+            background: #fff; 
+            border-radius: 50%;
+            width: 70px; 
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden; 
+            box-shadow: 0 0 20px rgba(143, 0, 255, 0.3);
+            border: 2px solid #8F00FF; 
+            margin-left: 25px;
+        }
+
+        .logo-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* Code Window */
+        .code-window {
+            max-width: 900px;
+            margin: 120px auto 80px; 
+            background: rgba(12, 12, 18, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid rgba(143,0,255,0.3);
+            box-shadow: 0 0 40px rgba(143,0,255,0.15), inset 0 0 20px rgba(0,0,0,0.8);
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        .code-header {
+            margin-bottom: 30px;
+            font-size: 1.4rem;
+            font-weight: 900;
+            border-bottom: 1px dashed rgba(255,255,255,0.2);
+            padding-bottom: 15px;
+        }
+
+        .purple { color: #8F00FF; text-shadow: 0 0 10px rgba(143,0,255,0.5); }
+        .white { color: #ffffff; }
+
+        .code-content {
+            white-space: pre-wrap;
+            display: inline; /* To align correctly with the cursor */
+        }
+
+        /* Třídy pro formátování psaného textu */
+        .text-boot { color: #39ff14; font-weight: bold; opacity: 0.8; }
+        .text-body { color: #d1d1d1; font-family: system-ui, -apple-system, sans-serif; font-size: 1.1rem; line-height: 1.7; }
+        .text-summary { color: #00e5ff; font-weight: 700; text-shadow: 0 0 10px rgba(0, 229, 255, 0.4); font-family: system-ui, -apple-system, sans-serif; font-size: 1.1rem; line-height: 1.7; display: block; margin-top: 20px; border-left: 3px solid #00e5ff; padding-left: 15px; }
+
+        /* Neonový obdélníkový kurzor */
+        .cursor {
+            display: inline-block;
+            width: 12px;
+            height: 1.1em;
+            background: #39ff14;
+            vertical-align: middle;
+            margin-left: 5px;
+            box-shadow: 0 0 10px #39ff14;
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin: 40px 0 40px;
+            font-size: 0.85rem;
+            opacity: 0.5;
+            font-weight: 600;
+        }
+
+        @media (max-width: 600px) {
+            .code-window { padding: 25px; margin: 100px 20px 20px; font-size: 0.95rem; }
+            .code-header { font-size: 1.1rem; }
+            .text-body, .text-summary { font-size: 1rem; }
+            .logo-wrapper { width: 50px; height: 50px; margin-left: 15px; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="bg"></div>
+    <div class="grid"></div>
+
+    <div class="top-bar">
+        <div class="back-arrow" onclick="goBack()"></div>
+        
+        <div class="top-right-controls">
+            <div class="sound-toggle" id="soundToggle" onclick="toggleSound()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                    <line x1="23" y1="9" x2="17" y2="15"></line>
+                    <line x1="17" y1="9" x2="23" y2="15"></line>
+                </svg>
+            </div>
+            
+            <div class="logo-wrapper">
+                <img src="fuegoblade-logo.png" alt="FuegoBlade">
+            </div>
+        </div>
+    </div>
+
+    <div class="code-window">
+        <div class="code-header" id="section-title">
+            </div>
+        <div class="code-content" id="typedText"></div><span class="cursor"></span>
+    </div>
+
+    <div class="footer" id="copyright-text">
+        © 2026 FuegoBlade™. Všechna práva vyhrazena.
+    </div>
+
+    <script>
+        // Jazyková databáze (Impresum)
+        const langData = {
+            cs: {
+                title1: "Impresum:",
+                title2: "Právní doložka a kontakt",
+                boot: "> INICIALIZACE IMPRESA...\n> NAČÍTÁNÍ PRÁVNÍCH ÚDAJŮ...\n> PŘÍSTUP POVOLEN.\n\n",
+                body: "Údaje podle § 5 TMG (Telemediengesetz)\nProvozovatel webových stránek a digitální služby PulseMind™:\nRichard Zak\nMichael-Ulmer-Weg 10\n73235 Weilheim an der Teck\nNěmecko\nE-mail: richardzak@fuegoblade.com\n\nProvozovatel vystupuje jako fyzická osoba (Einzelunternehmer).\nPozn.: Údaje týkající se živnostenské registrace a daňové identifikace budou doplněny po jejich vydání příslušnými úřady.\n\n----------------------------------------\n\nOdpovědnost za obsah\nObsah těchto webových stránek byl vytvořen s maximální péčí. Přesto nelze zaručit jeho správnost, úplnost ani aktuálnost.\n\nPodle § 7 odst. 1 TMG je provozovatel odpovědný za vlastní obsah na těchto stránkách. Podle §§ 8–10 TMG však není povinen monitorovat přenášené nebo uložené informace třetích stran ani aktivně vyhledávat okolnosti poukazující na protiprávní jednání.\n\nPovinnost odstranit nebo zablokovat obsah zůstává nedotčena právními předpisy. Odpovědnost je však možná až od okamžiku, kdy se provozovatel o konkrétním porušení zákona prokazatelně dozví.\n\n----------------------------------------\n\nOdpovědnost za odkazy\nTato webová stránka může obsahovat odkazy na externí webové stránky třetích stran. Na jejich obsah nemá provozovatel žádný vliv a nemůže za něj převzít záruku.\n\nZa obsah externích stránek odpovídá výhradně jejich provozovatel. V době vložení odkazu nebyly zjištěny žádné protiprávní prvky. Při zjištění porušení zákona bude daný odkaz okamžitě odstraněn.\n\n----------------------------------------\n\nAutorská práva\nObsah a díla zveřejněná na těchto stránkách podléhají autorskému právu. Kopírování, úpravy, šíření nebo jiné využití mimo zákonné meze autorského práva vyžadují předchozí písemný souhlas autora.\n\nStahování a kopírování obsahu je povoleno pouze pro osobní, nekomerční účely.\nPokud zjistíte porušení autorských práv, informujte prosím provozovatele; neprodleně bude provedena náprava.\n\n----------------------------------------\n\nMimosoudní řešení sporů (ODR)\nEvropská komise poskytuje platformu pro online řešení sporů (OS):\nhttps://ec.europa.eu/consumers/odr/\n\nProvozovatel není povinen ani ochoten účastnit se řízení před spotřebitelskou smírčí komisí.\n\n",
+                summaryTitle: ">>> PRÁVNÍ RÁMEC <<<\n",
+                summary: "Provoz těchto stránek se řídí právními předpisy Spolkové republiky Německo.",
+                copyright: "© 2026 FuegoBlade™. Všechna práva vyhrazena."
+            },
+            en: {
+                title1: "Imprint:",
+                title2: "Legal Notice and Contact",
+                boot: "> IMPRINT INITIALIZATION...\n> LOADING LEGAL DATA...\n> ACCESS GRANTED.\n\n",
+                body: "Information pursuant to § 5 TMG (Telemediengesetz)\nOperator of the website and digital service PulseMind™:\nRichard Zak\nMichael-Ulmer-Weg 10\n73235 Weilheim an der Teck\nGermany\nE-mail: richardzak@fuegoblade.com\n\nThe operator acts as a sole proprietor (Einzelunternehmer).\nNote: Data regarding business registration and tax identification will be added after issuance by the relevant authorities.\n\n----------------------------------------\n\nLiability for Content\nThe content of this website has been created with the utmost care. However, we cannot guarantee its accuracy, completeness, or timeliness.\n\nAccording to § 7 para. 1 TMG, the operator is responsible for their own content on these pages. However, according to §§ 8-10 TMG, the operator is not obliged to monitor transmitted or stored third-party information or actively search for circumstances indicating illegal activity.\n\nObligations to remove or block content remain unaffected by law. Liability is only possible from the moment the operator becomes demonstrably aware of a specific legal violation.\n\n----------------------------------------\n\nLiability for Links\nThis website may contain links to external third-party websites. The operator has no influence on their content and cannot assume any liability for it.\n\nThe respective provider or operator of the pages is always responsible for the content of the linked pages. No illegal content was found at the time of linking. Upon notification of violations, such links will be removed immediately.\n\n----------------------------------------\n\nCopyright\nThe content and works published on this website are subject to copyright. Copying, modification, distribution, or any other use outside the statutory limits of copyright law requires the prior written consent of the author.\n\nDownloads and copies of this content are only permitted for private, non-commercial use.\n\n----------------------------------------\n\nOnline Dispute Resolution (ODR)\nThe European Commission provides a platform for online dispute resolution (OS):\nhttps://ec.europa.eu/consumers/odr/\n\nThe operator is neither obliged nor willing to participate in dispute resolution proceedings before a consumer arbitration board.\n\n",
+                summaryTitle: ">>> LEGAL FRAMEWORK <<<\n",
+                summary: "The operation of this website is governed by the laws of the Federal Republic of Germany.",
+                copyright: "© 2026 FuegoBlade™. All rights reserved."
+            },
+            de: {
+                title1: "Impressum:",
+                title2: "Rechtliche Hinweise und Kontakt",
+                boot: "> IMPRESSUM INITIALISIERUNG...\n> LADE RECHTLICHE DATEN...\n> ZUGRIFF GEWÄHRT.\n\n",
+                body: "Angaben gemäß § 5 TMG\nBetreiber der Website und des digitalen Dienstes PulseMind™:\nRichard Zak\nMichael-Ulmer-Weg 10\n73235 Weilheim an der Teck\nDeutschland\nE-Mail: richardzak@fuegoblade.com\n\nDer Betreiber handelt als Einzelunternehmer.\nHinweis: Daten zur Gewerbeanmeldung und Steueridentifikation werden nach Ausstellung durch die zuständigen Behörden ergänzt.\n\n----------------------------------------\n\nHaftung für Inhalte\nDie Inhalte dieser Website wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen.\n\nGemäß § 7 Abs.1 TMG ist der Betreiber für eigene Inhalte auf diesen Seiten verantwortlich. Nach §§ 8 bis 10 TMG ist der Betreiber jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.\n\nVerpflichtungen zur Entfernung oder Sperrung von Inhalten bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich.\n\n----------------------------------------\n\nHaftung für Links\nDiese Website kann Links zu externen Websites Dritter enthalten. Auf deren Inhalte hat der Betreiber keinen Einfluss und kann dafür keine Gewähr übernehmen.\n\nFür die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Zum Zeitpunkt der Verlinkung wurden keine rechtswidrigen Inhalte erkannt. Bei Bekanntwerden von Rechtsverletzungen werden derartige Links umgehend entfernt.\n\n----------------------------------------\n\nUrheberrecht\nDie durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der vorherigen schriftlichen Zustimmung des jeweiligen Autors.\n\nDownloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet.\n\n----------------------------------------\n\nStreitschlichtung (ODR)\nDie Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:\nhttps://ec.europa.eu/consumers/odr/\n\nDer Betreiber ist nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.\n\n",
+                summaryTitle: ">>> RECHTLICHER RAHMEN <<<\n",
+                summary: "Der Betrieb dieser Website unterliegt den Gesetzen der Bundesrepublik Deutschland.",
+                copyright: "© 2026 FuegoBlade™. Alle Rechte vorbehalten."
+            },
+            es: {
+                title1: "Aviso Legal:",
+                title2: "Información legal y Contacto",
+                boot: "> INICIALIZACIÓN DE AVISO LEGAL...\n> CARGANDO DATOS LEGALES...\n> ACCESO CONCEDIDO.\n\n",
+                body: "Información conforme al § 5 TMG (Telemediengesetz)\nOperador del sitio web y del servicio digital PulseMind™:\nRichard Zak\nMichael-Ulmer-Weg 10\n73235 Weilheim an der Teck\nAlemania\nCorreo electrónico: richardzak@fuegoblade.com\n\nEl operador actúa como propietario único (Einzelunternehmer).\nNota: Los datos relativos al registro comercial y la identificación fiscal se añadirán tras su emisión por las autoridades competentes.\n\n----------------------------------------\n\nResponsabilidad por el contenido\nEl contenido de este sitio web ha sido creado con el mayor cuidado. Sin embargo, no podemos garantizar su precisión, integridad o actualidad.\n\nSegún el § 7 párrafo 1 TMG, el operador es responsable de su propio contenido en estas páginas. Sin embargo, según los §§ 8-10 TMG, el operador no está obligado a monitorear la información de terceros transmitida o almacenada, ni a buscar activamente circunstancias que indiquen una actividad ilegal.\n\nLas obligaciones de eliminar o bloquear contenido permanecen inalteradas por la ley. Sin embargo, la responsabilidad solo es posible a partir del momento en que el operador tiene conocimiento demostrable de una violación legal específica.\n\n----------------------------------------\n\nResponsabilidad por los enlaces\nEste sitio web puede contener enlaces a sitios web externos de terceros. El operador no tiene influencia sobre su contenido y no puede asumir ninguna responsabilidad por el mismo.\n\nEl respectivo proveedor u operador de las páginas es siempre responsable del contenido de las páginas enlazadas. No se encontraron contenidos ilegales en el momento de crear el enlace. Tras la notificación de violaciones, dichos enlaces se eliminarán de inmediato.\n\n----------------------------------------\n\nDerechos de autor\nEl contenido y las obras publicadas en este sitio web están sujetos a derechos de autor. La copia, modificación, distribución o cualquier otro uso fuera de los límites legales de los derechos de autor requiere el consentimiento previo por escrito del autor.\n\nLas descargas y copias de este contenido solo están permitidas para uso privado y no comercial.\n\n----------------------------------------\n\nResolución de litigios en línea (ODR)\nLa Comisión Europea proporciona una plataforma para la resolución de litigios en línea (OS):\nhttps://ec.europa.eu/consumers/odr/\n\nEl operador no está obligado ni dispuesto a participar en procedimientos de resolución de litigios ante una junta de arbitraje de consumo.\n\n",
+                summaryTitle: ">>> MARCO LEGAL <<<\n",
+                summary: "El funcionamiento de este sitio web se rige por las leyes de la República Federal de Alemania.",
+                copyright: "© 2026 FuegoBlade™. Todos los derechos reservados."
+            }
+        };
+
+        const lang = localStorage.getItem("language") || "cs";
+        const currentData = langData[lang] || langData["cs"];
+        
+        document.documentElement.lang = lang;
+        document.getElementById("copyright-text").innerText = currentData.copyright;
+        
+        document.getElementById("section-title").innerHTML = `
+            <span class="purple">${currentData.title1}</span> 
+            <span class="white">${currentData.title2}</span>
+        `;
+
+        const contentBlocks = [
+            { text: currentData.boot, cssClass: "text-boot" },
+            { text: currentData.body, cssClass: "text-body" },
+            { text: currentData.summaryTitle + currentData.summary, cssClass: "text-summary" }
+        ];
+
+        let blockIndex = 0;
+        let charIndex = 0;
+        const container = document.getElementById("typedText");
+        let currentSpan = null;
+        const typeSpeed = 6; // Rychlejší přepis pro dlouhé právní texty
+
+        // --- AUDIO SYSTÉM PRO PÍPÁNÍ A TLAČÍTKO ---
+        let audioCtx;
+        let isSoundEnabled = false;
+
+        function toggleSound() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+
+            isSoundEnabled = !isSoundEnabled;
+            const btn = document.getElementById("soundToggle");
+
+            if (isSoundEnabled) {
+                btn.classList.add('active');
+                btn.innerHTML = `
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                    </svg>
+                `;
+            } else {
+                btn.classList.remove('active');
+                btn.innerHTML = `
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                        <line x1="23" y1="9" x2="17" y2="15"></line>
+                        <line x1="17" y1="9" x2="23" y2="15"></line>
+                    </svg>
+                `;
+            }
+        }
+
+        function playBeep() {
+            if (!audioCtx || audioCtx.state === 'suspended' || !isSoundEnabled) return;
+            try {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                
+                osc.type = 'square'; 
+                osc.frequency.setValueAtTime(800, audioCtx.currentTime); 
+                
+                gain.gain.setValueAtTime(0.015, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.03);
+                
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.03);
+            } catch (e) {}
+        }
+
+        // --- EFEKT PSANÍ KÓDU ---
+        function typeWriter() {
+            if (blockIndex < contentBlocks.length) {
+                if (charIndex === 0) {
+                    currentSpan = document.createElement("span");
+                    currentSpan.className = contentBlocks[blockIndex].cssClass;
+                    container.appendChild(currentSpan);
+                }
+                
+                let char = contentBlocks[blockIndex].text.charAt(charIndex);
+                
+                if (char === '\n') {
+                    currentSpan.innerHTML += '<br>';
+                } else {
+                    currentSpan.innerHTML += char;
+                }
+                
+                if (char !== ' ' && char !== '\n' && Math.random() > 0.6) {
+                    playBeep();
+                }
+
+                charIndex++;
+                
+                if (charIndex >= contentBlocks[blockIndex].text.length) {
+                    blockIndex++;
+                    charIndex = 0;
+                    setTimeout(typeWriter, 400);
+                } else {
+                    setTimeout(typeWriter, typeSpeed);
+                }
+            }
+        }
+
+        function goBack() {
+            window.location.href = "web.html";
+        }
+
+        window.onload = () => {
+            setTimeout(typeWriter, 400); 
+        };
+    </script>
+</body>
+</html>
