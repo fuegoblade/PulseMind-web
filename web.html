@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>PulseMind™</title>
+    <meta name="description" content="PulseMind™ — Your Digital Biological Avatar." />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://fuegoblade.com/web.html">
+
+    <!-- Favicon + Icons -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
+
+    <!-- OG Tags -->
+    <meta property="og:title" content="PulseMind™">
+    <meta property="og:description" content="Your Digital Biological Avatar.">
+    <meta property="og:image" content="og-pulsemind.jpg">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://fuegoblade.com/web.html">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Cyber Background */
+        .bg-container {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .bg-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            animation: gridMove 30s linear infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes gridMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 60px 60px; }
+        }
+
+        .bg-glow {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(143, 0, 255, 0.15), #000 75%);
+        }
+
+        /* Sections */
+        section {
+            padding: 120px 20px;
+            max-width: 900px;
+            margin: auto;
+            text-align: center;
+        }
+
+        h1, h2 {
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            margin-bottom: 20px;
+        }
+
+        .claim {
+            font-size: 2.4rem;
+            background: linear-gradient(135deg, #ffffff 0%, #d3b1ff 60%, #ffffff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+
+        .subclaim {
+            font-size: 1rem;
+            color: #b88cff;
+            opacity: 0.9;
+            margin-bottom: 50px;
+        }
+
+        /* Features */
+        .features {
+            display: grid;
+            gap: 40px;
+            padding-top: 40px;
+        }
+
+        .feature-box {
+            background: rgba(20,20,25,0.45);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 18px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 8px 30px rgba(143,0,255,0.15);
+        }
+
+        .launch-btn {
+            padding: 18px 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.15);
+            background: linear-gradient(90deg, #8F00FF, #b300ff);
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 900;
+            letter-spacing: 0.25em;
+            cursor: pointer;
+            text-transform: uppercase;
+            margin-top: 40px;
+            transition: 0.3s;
+            box-shadow: 0 10px 30px rgba(143,0,255,0.3);
+        }
+
+        .launch-btn:hover {
+            transform: scale(1.05);
+        }
+
+        footer {
+            margin-top: 100px;
+            padding: 30px;
+            text-align: center;
+            opacity: 0.7;
+            color: #ccc;
+        }
+
+        footer a {
+            color: #8F00FF;
+            text-decoration: none;
+            margin: 0 12px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="bg-container">
+        <div class="bg-grid"></div>
+        <div class="bg-glow"></div>
+    </div>
+
+    <!-- HERO -->
+    <section id="hero">
+        <h1 class="claim" id="claim">Your Digital Biological Avatar</h1>
+        <p class="subclaim" id="subclaim">
+            PulseMind transforms your inner rhythms into a clear digital map.
+        </p>
+        <button class="launch-btn" onclick="launchApp()" id="launch-app-btn">LAUNCH APP</button>
+    </section>
+
+    <!-- WHAT IS PULSEMIND -->
+    <section id="what">
+        <h2 id="what-title">What is PulseMind?</h2>
+        <p id="what-text">
+            PulseMind projects your physical and mental rhythms into a digital form.
+            It helps you understand patterns, balance, and internal signals with clarity.
+        </p>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features">
+        <h2 id="features-title">Features</h2>
+
+        <div class="features">
+
+            <div class="feature-box">
+                <h3 id="f1-title">BioPulse Map</h3>
+                <p id="f1-text">A living map of your daily rhythms.</p>
+            </div>
+
+            <div class="feature-box">
+                <h3 id="f2-title">MindSync Timeline</h3>
+                <p id="f2-text">A timeline of emotions, habits, and mental states.</p>
+            </div>
+
+            <div class="feature-box">
+                <h3 id="f3-title">Avatar State Engine</h3>
+                <p id="f3-text">Your personal digital avatar created from your own signals.</p>
+            </div>
+
+            <div class="feature-box">
+                <h3 id="f4-title">Adaptive Insights</h3>
+                <p id="f4-text">Guidance based on your patterns—not generic advice.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="cta">
+        <h2 id="cta-title">Ready to meet your avatar?</h2>
+        <button class="launch-btn" onclick="launchApp()" id="cta-btn">LAUNCH APP</button>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <a href="kontakt.html" id="contact-link">Kontakt</a>
+        <a href="galerie.html" id="gallery-link">Galerie</a>
+        <br><br>
+        PulseMind™ © 2026
+    </footer>
+
+    <script>
+        // Jazykové texty
+        const LANG = localStorage.getItem("language") || "en";
+
+        const translations = {
+            cs: {
+                claim: "Váš digitální biologický avatar",
+                subclaim: "PulseMind převádí vaše vnitřní rytmy do jasné digitální mapy.",
+                whatTitle: "Co je PulseMind?",
+                whatText: "PulseMind promítá vaše fyzické a mentální rytmy do digitální podoby.",
+                featuresTitle: "Funkce",
+                f1t: "BioPulse Mapa",
+                f1d: "Živá mapa vašich denních rytmů.",
+                f2t: "MindSync Timeline",
+                f2d: "Časová osa emocí, návyků a mentálních stavů.",
+                f3t: "Avatar State Engine",
+                f3d: "Digitální avatar vytvořený z vašich vlastních signálů.",
+                f4t: "Adaptive Insights",
+                f4d: "Doporučení založené na vašich vzorcích.",
+                ctaTitle: "Připraveni poznat svého avatara?",
+                launch: "SPUSTIT APLIKACI",
+                contact: "Kontakt",
+                gallery: "Galerie"
+            },
+            en: {
+                claim: "Your Digital Biological Avatar",
+                subclaim: "PulseMind transforms your inner rhythms into a clear digital map.",
+                whatTitle: "What is PulseMind?",
+                whatText: "PulseMind projects your physical and mental rhythms into a digital form.",
+                featuresTitle: "Features",
+                f1t: "BioPulse Map",
+                f1d: "A living map of your daily rhythms.",
+                f2t: "MindSync Timeline",
+                f2d: "A timeline of emotions, habits, and mental states.",
+                f3t: "Avatar State Engine",
+                f3d: "Your personal digital avatar created from your signals.",
+                f4t: "Adaptive Insights",
+                f4d: "Guidance based on your real patterns.",
+                ctaTitle: "Ready to meet your avatar?",
+                launch: "LAUNCH APP",
+                contact: "Contact",
+                gallery: "Gallery"
+            }
+        };
+
+        function applyLanguage() {
+            const t = translations[LANG];
+
+            document.getElementById("claim").innerText = t.claim;
+            document.getElementById("subclaim").innerText = t.subclaim;
+
+            document.getElementById("what-title").innerText = t.whatTitle;
+            document.getElementById("what-text").innerText = t.whatText;
+
+            document.getElementById("features-title").innerText = t.featuresTitle;
+
+            document.getElementById("f1-title").innerText = t.f1t;
+            document.getElementById("f1-text").innerText = t.f1d;
+
+            document.getElementById("f2-title").innerText = t.f2t;
+            document.getElementById("f2-text").innerText = t.f2d;
+
+            document.getElementById("f3-title").innerText = t.f3t;
+            document.getElementById("f3-text").innerText = t.f3d;
+
+            document.getElementById("f4-title").innerText = t.f4t;
+            document.getElementById("f4-text").innerText = t.f4d;
+
+            document.getElementById("cta-title").innerText = t.ctaTitle;
+            document.getElementById("cta-btn").innerText = t.launch;
+            document.getElementById("launch-app-btn").innerText = t.launch;
+
+            document.getElementById("contact-link").innerText = t.contact;
+            document.getElementById("gallery-link").innerText = t.gallery;
+        }
+
+        applyLanguage();
+
+        function launchApp() {
+            window.location.href = "https://app.fuegoblade.com";
+        }
+    </script>
+
+</body>
+</html>
