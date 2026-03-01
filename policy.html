@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+
+<meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>PulseMind™ / Privacy Policy</title>
+
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <meta name="googlebot" content="noindex, nofollow, noarchive">
+    <meta name="google" content="nositelinkssearchbox">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="fuegoblade-logo.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="fuegoblade-logo.png">
+    <link rel="apple-touch-icon" href="fuegoblade-logo.png">
+
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Background */
+        .bg {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(143,0,255,0.1) 0%, #000 80%);
+            z-index: -2;
+        }
+
+        .grid {
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 30s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes gridMove {
+            from { background-position: 0 0; }
+            to { background-position: 50px 50px; }
+        }
+
+        /* Top Bar with Logo */
+        .top-bar {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+
+        /* Back Arrow */
+        .back-arrow {
+            width: 16px;
+            height: 16px;
+            border-left: 2px solid #39ff14;
+            border-bottom: 2px solid #39ff14;
+            transform: rotate(45deg);
+            cursor: pointer;
+            filter: drop-shadow(0 0 6px #39ff14);
+            transition: 0.3s;
+        }
+        
+        .back-arrow:hover {
+            transform: rotate(45deg) scale(1.1);
+            filter: drop-shadow(0 0 10px #39ff14);
+        }
+
+        /* Top Right Controls (Sound + Logo) */
+        .top-right-controls {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Sound Toggle Button */
+        .sound-toggle {
+            cursor: pointer;
+            width: 24px;
+            height: 24px;
+            color: rgba(255, 255, 255, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .sound-toggle:hover {
+            color: #39ff14;
+            filter: drop-shadow(0 0 5px rgba(57, 255, 20, 0.5));
+        }
+
+        .sound-toggle.active {
+            color: #39ff14;
+            filter: drop-shadow(0 0 8px #39ff14);
+        }
+
+        .sound-toggle svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* FuegoBlade Logo */
+        .logo-wrapper {
+            background: #fff; 
+            border-radius: 50%;
+            width: 70px; 
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden; 
+            box-shadow: 0 0 20px rgba(143, 0, 255, 0.3);
+            border: 2px solid #8F00FF; 
+            margin-left: 25px;
+        }
+
+        .logo-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* Code Window */
+        .code-window {
+            max-width: 900px;
+            margin: 120px auto 80px; 
+            background: rgba(12, 12, 18, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid rgba(143,0,255,0.3);
+            box-shadow: 0 0 40px rgba(143,0,255,0.15), inset 0 0 20px rgba(0,0,0,0.8);
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        .code-header {
+            margin-bottom: 30px;
+            font-size: 1.4rem;
+            font-weight: 900;
+            border-bottom: 1px dashed rgba(255,255,255,0.2);
+            padding-bottom: 15px;
+        }
+
+        .purple { color: #8F00FF; text-shadow: 0 0 10px rgba(143,0,255,0.5); }
+        .white { color: #ffffff; }
+
+        .code-content {
+            white-space: pre-wrap;
+            display: inline; /* To align correctly with the cursor */
+        }
+
+        /* Třídy pro formátování psaného textu */
+        .text-boot { color: #39ff14; font-weight: bold; opacity: 0.8; }
+        .text-body { color: #d1d1d1; font-family: system-ui, -apple-system, sans-serif; font-size: 1.1rem; line-height: 1.7; }
+        .text-summary { color: #00e5ff; font-weight: 700; text-shadow: 0 0 10px rgba(0, 229, 255, 0.4); font-family: system-ui, -apple-system, sans-serif; font-size: 1.1rem; line-height: 1.7; display: block; margin-top: 20px; border-left: 3px solid #00e5ff; padding-left: 15px; }
+
+        /* Neonový obdélníkový kurzor */
+        .cursor {
+            display: inline-block;
+            width: 12px;
+            height: 1.1em;
+            background: #39ff14;
+            vertical-align: middle;
+            margin-left: 5px;
+            box-shadow: 0 0 10px #39ff14;
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin: 40px 0 40px;
+            font-size: 0.85rem;
+            opacity: 0.5;
+            font-weight: 600;
+        }
+
+        @media (max-width: 600px) {
+            .code-window { padding: 25px; margin: 100px 20px 20px; font-size: 0.95rem; }
+            .code-header { font-size: 1.1rem; }
+            .text-body, .text-summary { font-size: 1rem; }
+            .logo-wrapper { width: 50px; height: 50px; margin-left: 15px; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="bg"></div>
+    <div class="grid"></div>
+
+    <div class="top-bar">
+        <div class="back-arrow" onclick="goBack()"></div>
+        
+        <div class="top-right-controls">
+            <div class="sound-toggle" id="soundToggle" onclick="toggleSound()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                    <line x1="23" y1="9" x2="17" y2="15"></line>
+                    <line x1="17" y1="9" x2="23" y2="15"></line>
+                </svg>
+            </div>
+            
+            <div class="logo-wrapper">
+                <img src="fuegoblade-logo.png" alt="FuegoBlade">
+            </div>
+        </div>
+    </div>
+
+    <div class="code-window">
+        <div class="code-header" id="section-title">
+            </div>
+        <div class="code-content" id="typedText"></div><span class="cursor"></span>
+    </div>
+
+    <div class="footer" id="copyright-text">
+        © 2026 FuegoBlade™. Všechna práva vyhrazena.
+    </div>
+
+    <script>
+        // Jazyková databáze (Privacy Policy)
+        const langData = {
+            cs: {
+                title1: "Privacy Policy:",
+                title2: "Zásady ochrany osobních údajů",
+                boot: "> INICIALIZACE ZÁSAD OCHRANY SOUKROMÍ...\n> ŠIFROVÁNÍ DATOVÝCH TOKŮ...\n> PŘÍSTUP POVOLEN.\n\nPoslední aktualizace: 2026\nTento dokument popisuje, jak jsou v rámci služby PulseMind™ shromažďovány, zpracovávány a chráněny osobní údaje uživatelů v souladu s obecným nařízením o ochraně osobních údajů (GDPR – EU 2016/679). Používáním aplikace a webových služeb uživatel potvrzuje, že se s těmito zásadami seznámil.\n\n----------------------------------------\n\n",
+                body: "1. Správce osobních údajů\nSprávcem údajů je:\nRichard Zak\nMichael-Ulmer-Weg 10\n73235 Weilheim an der Teck\nNěmecko\nE-mail: richardzak@fuegoblade.com\n\nSprávce vystupuje jako fyzická osoba (Einzelunternehmer). Údaje týkající se živnostenské registrace budou doplněny po jejich vydání.\n\n----------------------------------------\n\n2. Jaké údaje zpracováváme\nPulseMind™ může zpracovávat tyto typy údajů:\n\n2.1 Údaje poskytnuté uživatelem\n- jméno, e-mail, přihlašovací údaje\n- věk, výška, váha (pokud je zadána)\n- údaje o životním stylu a aktivitě\n- preference jazyka\n\n2.2 Údaje nutné pro chod aplikace\n- technické údaje o zařízení\n- IP adresa\n- typ prohlížeče / operační systém\n- čas přístupu, cookies, localStorage\n- logy a diagnostická data\n\n2.3 Údaje o výživě a aktivitě (dobrovolně)\nPulseMind™ pracuje s daty, která uživatel výslovně zadá, např.:\n- fotografie jídla\n- tréninkové výstupy\n- údaje o spánku\n- biometrické hodnoty (nepovinné)\n\n2.4 Údaje o platbách\nPlatby zpracovává výhradně poskytovatel Stripe. Stripe nám zpřístupňuje pouze: informaci o úspěšné/neudálé platbě, typ předplatného, datum transakce. Nedostáváme žádné údaje o platebních kartách.\n\n----------------------------------------\n\n3. Účel zpracování údajů\nOsobní údaje zpracováváme pouze pro tyto účely:\n- poskytování služeb PulseMind™\n- personalizace uživatelských protokolů\n- analytické výpočty AI\n- zajištění bezpečnosti a technického provozu\n- vyúčtování předplatného\n- komunikace s uživatelem\n- plnění zákonných povinností\n\n----------------------------------------\n\n4. Právní základ zpracování\nZpracování probíhá na základě:\n- čl. 6 odst. 1 písm. b) GDPR – plnění smlouvy\n- čl. 6 odst. 1 písm. a) GDPR – souhlas uživatele\n- čl. 6 odst. 1 písm. f) GDPR – oprávněný zájem\n- čl. 6 odst. 1 písm. c) GDPR – splnění zákonných povinností\n\n----------------------------------------\n\n5. Uchovávání údajů\nÚdaje se uchovávají pouze po nezbytnou dobu:\n- účetní data: dle zákona (DE – obvykle 10 let)\n- uživatelský účet: po dobu používání služby\n- analytická data: dokud je uživatel neodstraní nebo nezruší účet\n- logy: zpravidla 30–90 dnů\nPo zrušení účtu jsou data anonymizována nebo bezpečně odstraněna.\n\n----------------------------------------\n\n6. Předávání údajů třetím stranám\nÚdaje NEprodáváme a neposkytujeme třetím osobám pro marketing. Data mohou být sdílena pouze s nezbytnými poskytovateli: Stripe (platby), Supabase (databáze) a Vercel (hosting). Se všemi je uzavřena Data Processing Agreement (DPA).\n\n----------------------------------------\n\n7. Cookies a localStorage\nSlužba používá technické cookies, localStorage a analytická data pouze v rámci aplikace. Uživatel může cookies kdykoliv omezit v nastavení prohlížeče.\n\n----------------------------------------\n\n8. Bezpečnost dat\nData jsou chráněna pomocí šifrovaného přenosu (HTTPS), řízeného přístupu, autentizačních mechanismů a segmentace databáze.\n\n----------------------------------------\n\n9. Práva uživatele podle GDPR\nUživatel má právo na přístup, opravu, výmaz („právo být zapomenut“), omezení zpracování, vznesení námitky, přenositelnost a odvolání souhlasu.\n\n----------------------------------------\n\n10. Profilování a AI rozhodování\nPulseMind™ využívá AI pro personalizovaná doporučení a interpretaci biologických vzorců. AI neprovádí závazné automatizované rozhodování ve smyslu čl. 22 GDPR.\n\n----------------------------------------\n\n11. Přenos dat mimo EU\nPokud dochází k přenosu dat mimo EU (např. Stripe), probíhá pouze na základě Standardních smluvních doložek (SCC) a v souladu s GDPR.\n\n----------------------------------------\n\n12. Změny dokumentu\nZásady mohou být aktualizovány. Pokračující používání znamená souhlas s aktualizovanými zásadami.\n\n",
+                summaryTitle: ">>> KONTAKT PRO OCHRANU DAT <<<\n",
+                summary: "E-mail: richardzak@fuegoblade.com\nSprávce: Richard Zak\n\nVeškeré žádosti ohledně výkonu vašich práv podle GDPR směřujte na výše uvedenou e-mailovou adresu.",
+                copyright: "© 2026 FuegoBlade™. Všechna práva vyhrazena."
+            },
+            en: {
+                title1: "Privacy Policy:",
+                title2: "Data Protection Regulations",
+                boot: "> PRIVACY POLICY INITIALIZATION...\n> ENCRYPTING DATA STREAMS...\n> ACCESS GRANTED.\n\nLast update: 2026\nThis document describes how personal data of users is collected, processed, and protected within the PulseMind™ service in accordance with the General Data Protection Regulation (GDPR - EU 2016/679). By using the application, the user confirms they have read this policy.\n\n----------------------------------------\n\n",
+                body: "1. Data Controller\nThe data controller is:\nRichard Zak\nMichael-Ulmer-Weg 10\n73235 Weilheim an der Teck\nGermany\nE-mail: richardzak@fuegoblade.com\n\nThe controller acts as a sole proprietor (Einzelunternehmer). Business registration details will be added upon issuance.\n\n----------------------------------------\n\n2. What Data We Process\nPulseMind™ may process the following data types:\n\n2.1 Data provided by the user\n- name, e-mail, login credentials\n- age, height, weight (if entered)\n- lifestyle and activity data\n- language preference\n\n2.2 Data necessary for app operation\n- technical device data\n- IP address\n- browser type / operating system\n- access time, cookies, localStorage\n- logs and diagnostic data\n\n2.3 Nutrition and activity data (voluntary)\nPulseMind™ works with data explicitly entered by the user, e.g.:\n- food photos\n- training outputs\n- sleep data\n- biometric values (optional)\n\n2.4 Payment data\nPayments are processed exclusively by Stripe. Stripe only provides us with: info on successful/failed payment, subscription type, transaction date. We do not receive any credit card details.\n\n----------------------------------------\n\n3. Purpose of Data Processing\nWe process personal data only for:\n- providing PulseMind™ services\n- personalizing user protocols\n- analytical AI calculations\n- ensuring security and technical operation\n- subscription billing\n- communicating with the user\n- fulfilling legal obligations\n\n----------------------------------------\n\n4. Legal Basis for Processing\nProcessing is based on:\n- Art. 6(1)(b) GDPR – performance of a contract\n- Art. 6(1)(a) GDPR – user consent\n- Art. 6(1)(f) GDPR – legitimate interest\n- Art. 6(1)(c) GDPR – compliance with legal obligations\n\n----------------------------------------\n\n5. Data Retention\nData is kept only as long as necessary:\n- accounting data: as per law (DE – usually 10 years)\n- user account: for the duration of service use\n- analytical data: until user deletes it or closes account\n- logs: usually 30–90 days\nUpon account cancellation, data is anonymized or securely deleted.\n\n----------------------------------------\n\n6. Data Transfer to Third Parties\nWe DO NOT sell or provide data to third parties for marketing. Data is shared only with necessary service providers: Stripe (payments), Supabase (database), and Vercel (hosting). A Data Processing Agreement (DPA) is in place with all.\n\n----------------------------------------\n\n7. Cookies and localStorage\nThe service uses technical cookies, localStorage, and analytical data only within the app. Users can limit cookies in their browser settings at any time.\n\n----------------------------------------\n\n8. Data Security\nData is protected using encrypted transmission (HTTPS), controlled access, authentication mechanisms, and database segmentation.\n\n----------------------------------------\n\n9. User Rights under GDPR\nThe user has the right to access, rectification, erasure (\"right to be forgotten\"), restriction of processing, object, data portability, and withdrawal of consent.\n\n----------------------------------------\n\n10. Profiling and AI Decision Making\nPulseMind™ uses AI for personalized recommendations and biological pattern interpretation. The AI does not make binding automated decisions within the meaning of Art. 22 GDPR.\n\n----------------------------------------\n\n11. Data Transfer outside the EU\nIf data is transferred outside the EU (e.g., Stripe), it occurs only based on Standard Contractual Clauses (SCC) and complies with GDPR.\n\n----------------------------------------\n\n12. Document Changes\nPolicies may be updated. Continued use constitutes acceptance of updated policies.\n\n",
+                summaryTitle: ">>> DATA PROTECTION CONTACT <<<\n",
+                summary: "E-mail: richardzak@fuegoblade.com\nController: Richard Zak\n\nPlease direct all requests regarding the exercise of your GDPR rights to the e-mail address above.",
+                copyright: "© 2026 FuegoBlade™. All rights reserved."
+            },
+            de: {
+                title1: "Datenschutzrichtlinie:",
+                title2: "Privacy Policy (DSGVO)",
+                boot: "> INITIALISIERUNG DER DATENSCHUTZRICHTLINIE...\n> VERSCHLÜSSELUNG VON DATENSTRÖMEN...\n> ZUGRIFF GEWÄHRT.\n\nLetzte Aktualisierung: 2026\nDieses Dokument beschreibt, wie personenbezogene Daten von Nutzern im Rahmen des Dienstes PulseMind™ gemäß der Datenschutz-Grundverordnung (DSGVO – EU 2016/679) erfasst, verarbeitet und geschützt werden. Mit der Nutzung bestätigt der Nutzer, diese Richtlinie gelesen zu haben.\n\n----------------------------------------\n\n",
+                body: "1. Verantwortlicher\nDer Datenverantwortliche ist:\nRichard Zak\nMichael-Ulmer-Weg 10\n73235 Weilheim an der Teck\nDeutschland\nE-Mail: richardzak@fuegoblade.com\n\nDer Verantwortliche handelt als Einzelunternehmer. Daten zur Gewerbeanmeldung werden nach Ausstellung ergänzt.\n\n----------------------------------------\n\n2. Welche Daten wir verarbeiten\nPulseMind™ kann folgende Datenarten verarbeiten:\n\n2.1 Vom Nutzer bereitgestellte Daten\n- Name, E-Mail, Anmeldedaten\n- Alter, Größe, Gewicht (falls angegeben)\n- Lebensstil- und Aktivitätsdaten\n- Spracheinstellung\n\n2.2 Für den App-Betrieb notwendige Daten\n- technische Gerätedaten\n- IP-Adresse\n- Browsertyp / Betriebssystem\n- Zugriffszeit, Cookies, localStorage\n- Protokolle und Diagnosedaten\n\n2.3 Ernährungs- und Aktivitätsdaten (freiwillig)\nPulseMind™ arbeitet mit Daten, die der Nutzer ausdrücklich eingibt, z.B.:\n- Lebensmittelfotos\n- Trainingsdaten\n- Schlafdaten\n- biometrische Werte (optional)\n\n2.4 Zahlungsdaten\nZahlungen werden ausschließlich von Stripe abgewickelt. Stripe übermittelt uns nur: Info über erfolgreiche/fehlgeschlagene Zahlung, Abonnementtyp, Transaktionsdatum. Wir erhalten keine Kreditkartendaten.\n\n----------------------------------------\n\n3. Zweck der Datenverarbeitung\nWir verarbeiten personenbezogene Daten nur für:\n- Bereitstellung der PulseMind™-Dienste\n- Personalisierung von Nutzerprotokollen\n- analytische KI-Berechnungen\n- Gewährleistung der Sicherheit und des technischen Betriebs\n- Abonnementabrechnung\n- Kommunikation mit dem Nutzer\n- Erfüllung gesetzlicher Pflichten\n\n----------------------------------------\n\n4. Rechtsgrundlage der Verarbeitung\nDie Verarbeitung erfolgt auf Grundlage von:\n- Art. 6 Abs. 1 lit. b DSGVO – Vertragserfüllung\n- Art. 6 Abs. 1 lit. a DSGVO – Einwilligung des Nutzers\n- Art. 6 Abs. 1 lit. f DSGVO – berechtigtes Interesse\n- Art. 6 Abs. 1 lit. c DSGVO – Erfüllung gesetzlicher Pflichten\n\n----------------------------------------\n\n5. Datenspeicherung\nDaten werden nur so lange wie nötig aufbewahrt:\n- Buchhaltungsdaten: gemäß Gesetz (DE – meist 10 Jahre)\n- Benutzerkonto: für die Dauer der Dienstnutzung\n- Analysedaten: bis der Nutzer sie löscht oder das Konto schließt\n- Logs: in der Regel 30–90 Tage\nNach Kontolöschung werden die Daten anonymisiert oder sicher gelöscht.\n\n----------------------------------------\n\n6. Datenweitergabe an Dritte\nWir verkaufen KEINE Daten an Dritte für Marketingzwecke. Daten werden nur mit notwendigen Dienstleistern geteilt: Stripe (Zahlungen), Supabase (Datenbank) und Vercel (Hosting). Mit allen wurde ein Auftragsverarbeitungsvertrag (AVV/DPA) geschlossen.\n\n----------------------------------------\n\n7. Cookies und localStorage\nDer Dienst nutzt technische Cookies, localStorage und Analysedaten nur innerhalb der App. Der Nutzer kann Cookies jederzeit in den Browsereinstellungen einschränken.\n\n----------------------------------------\n\n8. Datensicherheit\nDie Daten werden durch verschlüsselte Übertragung (HTTPS), kontrollierten Zugriff, Authentifizierungsmechanismen und Datenbanksegmentierung geschützt.\n\n----------------------------------------\n\n9. Nutzerrechte nach DSGVO\nDer Nutzer hat das Recht auf Auskunft, Berichtigung, Löschung („Recht auf Vergessenwerden“), Einschränkung der Verarbeitung, Widerspruch, Datenübertragbarkeit und Widerruf der Einwilligung.\n\n----------------------------------------\n\n10. Profiling und KI-Entscheidungsfindung\nPulseMind™ nutzt KI für personalisierte Empfehlungen. Die KI trifft keine bindenden automatisierten Entscheidungen im Sinne von Art. 22 DSGVO.\n\n----------------------------------------\n\n11. Datenübertragung außerhalb der EU\nErfolgt eine Datenübertragung außerhalb der EU (z.B. Stripe), so geschieht dies nur auf Basis von Standardvertragsklauseln (SCC) und in Übereinstimmung mit der DSGVO.\n\n----------------------------------------\n\n12. Dokumentänderungen\nDie Richtlinien können aktualisiert werden. Die fortgesetzte Nutzung gilt als Zustimmung zu den aktualisierten Richtlinien.\n\n",
+                summaryTitle: ">>> KONTAKT FÜR DATENSCHUTZ <<<\n",
+                summary: "E-Mail: richardzak@fuegoblade.com\nVerantwortlicher: Richard Zak\n\nBitte richten Sie alle Anfragen zur Ausübung Ihrer Rechte nach der DSGVO an die oben genannte E-Mail-Adresse.",
+                copyright: "© 2026 FuegoBlade™. Alle Rechte vorbehalten."
+            },
+            es: {
+                title1: "Política de Privacidad:",
+                title2: "Protección de Datos",
+                boot: "> INICIALIZACIÓN DE POLÍTICA DE PRIVACIDAD...\n> CIFRANDO FLUJOS DE DATOS...\n> ACCESO CONCEDIDO.\n\nÚltima actualización: 2026\nEste documento describe cómo se recopilan, procesan y protegen los datos personales de los usuarios dentro del servicio PulseMind™ de acuerdo con el Reglamento General de Protección de Datos (RGPD - UE 2016/679). Al utilizar la aplicación, el usuario confirma que ha leído esta política.\n\n----------------------------------------\n\n",
+                body: "1. Responsable del Tratamiento\nEl responsable de los datos es:\nRichard Zak\nMichael-Ulmer-Weg 10\n73235 Weilheim an der Teck\nAlemania\nE-mail: richardzak@fuegoblade.com\n\nEl responsable actúa como propietario único (Einzelunternehmer). Los detalles del registro comercial se agregarán tras su emisión.\n\n----------------------------------------\n\n2. Qué datos procesamos\nPulseMind™ puede procesar los siguientes tipos de datos:\n\n2.1 Datos proporcionados por el usuario\n- nombre, correo, credenciales de inicio de sesión\n- edad, altura, peso (si se ingresan)\n- datos de estilo de vida y actividad\n- preferencia de idioma\n\n2.2 Datos necesarios para el funcionamiento de la app\n- datos técnicos del dispositivo\n- dirección IP\n- tipo de navegador / sistema operativo\n- hora de acceso, cookies, localStorage\n- registros y datos de diagnóstico\n\n2.3 Datos de nutrición y actividad (voluntario)\nPulseMind™ trabaja con datos ingresados explícitamente por el usuario, ej.:\n- fotos de comida\n- datos de entrenamiento\n- datos de sueño\n- valores biométricos (opcional)\n\n2.4 Datos de pago\nLos pagos son procesados exclusivamente por Stripe. Stripe solo nos proporciona: información sobre pago exitoso/fallido, tipo de suscripción, fecha de transacción. No recibimos detalles de tarjetas de crédito.\n\n----------------------------------------\n\n3. Propósito del Procesamiento de Datos\nProcesamos datos personales solo para:\n- proporcionar servicios PulseMind™\n- personalizar protocolos de usuario\n- cálculos analíticos de IA\n- garantizar seguridad y operación técnica\n- facturación de suscripción\n- comunicación con el usuario\n- cumplimiento de obligaciones legales\n\n----------------------------------------\n\n4. Base Legal para el Procesamiento\nEl procesamiento se basa en:\n- Art. 6(1)(b) RGPD – ejecución de un contrato\n- Art. 6(1)(a) RGPD – consentimiento del usuario\n- Art. 6(1)(f) RGPD – interés legítimo\n- Art. 6(1)(c) RGPD – cumplimiento de obligaciones legales\n\n----------------------------------------\n\n5. Retención de Datos\nLos datos se conservan solo el tiempo necesario:\n- datos contables: según la ley (DE – usualmente 10 años)\n- cuenta de usuario: durante el uso del servicio\n- datos analíticos: hasta que el usuario los elimine o cierre la cuenta\n- registros (logs): usualmente 30–90 días\nTras la cancelación de la cuenta, los datos se anonimizan o se eliminan de forma segura.\n\n----------------------------------------\n\n6. Transferencia de Datos a Terceros\nNO vendemos ni proporcionamos datos a terceros para marketing. Los datos se comparten solo con proveedores de servicios necesarios: Stripe (pagos), Supabase (base de datos) y Vercel (hosting). Existe un Acuerdo de Procesamiento de Datos (DPA) con todos ellos.\n\n----------------------------------------\n\n7. Cookies y localStorage\nEl servicio utiliza cookies técnicas, localStorage y datos analíticos solo dentro de la aplicación. El usuario puede limitar las cookies en la configuración de su navegador en cualquier momento.\n\n----------------------------------------\n\n8. Seguridad de los Datos\nLos datos están protegidos mediante transmisión cifrada (HTTPS), acceso controlado, mecanismos de autenticación y segmentación de bases de datos.\n\n----------------------------------------\n\n9. Derechos del Usuario bajo el RGPD\nEl usuario tiene derecho de acceso, rectificación, supresión (\"derecho al olvido\"), restricción del procesamiento, oposición, portabilidad de datos y retirada del consentimiento.\n\n----------------------------------------\n\n10. Elaboración de Perfiles y Decisiones de IA\nPulseMind™ utiliza IA para recomendaciones personalizadas y la interpretación de patrones biológicos. La IA no toma decisiones automatizadas vinculantes en el sentido del Art. 22 del RGPD.\n\n----------------------------------------\n\n11. Transferencia de Datos fuera de la UE\nSi los datos se transfieren fuera de la UE (ej. Stripe), se realiza solo en base a Cláusulas Contractuales Tipo (SCC) y cumple con el RGPD.\n\n----------------------------------------\n\n12. Cambios en el Documento\nLas políticas pueden actualizarse. El uso continuo constituye la aceptación de las políticas actualizadas.\n\n",
+                summaryTitle: ">>> CONTACTO PARA PROTECCIÓN DE DATOS <<<\n",
+                summary: "Correo electrónico: richardzak@fuegoblade.com\nResponsable: Richard Zak\n\nPor favor, dirija todas las solicitudes relacionadas con el ejercicio de sus derechos RGPD a la dirección de correo electrónico anterior.",
+                copyright: "© 2026 FuegoBlade™. Todos los derechos reservados."
+            }
+        };
+
+        const lang = localStorage.getItem("language") || "cs";
+        const currentData = langData[lang] || langData["cs"];
+        
+        document.documentElement.lang = lang;
+        document.getElementById("copyright-text").innerText = currentData.copyright;
+        
+        document.getElementById("section-title").innerHTML = `
+            <span class="purple">${currentData.title1}</span> 
+            <span class="white">${currentData.title2}</span>
+        `;
+
+        const contentBlocks = [
+            { text: currentData.boot, cssClass: "text-boot" },
+            { text: currentData.body, cssClass: "text-body" },
+            { text: currentData.summaryTitle + currentData.summary, cssClass: "text-summary" }
+        ];
+
+        let blockIndex = 0;
+        let charIndex = 0;
+        const container = document.getElementById("typedText");
+        let currentSpan = null;
+        const typeSpeed = 5; // Rychlejší přepis pro dlouhý právní text
+
+        // --- AUDIO SYSTÉM PRO PÍPÁNÍ A TLAČÍTKO ---
+        let audioCtx;
+        let isSoundEnabled = false;
+
+        function toggleSound() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+
+            isSoundEnabled = !isSoundEnabled;
+            const btn = document.getElementById("soundToggle");
+
+            if (isSoundEnabled) {
+                btn.classList.add('active');
+                btn.innerHTML = `
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                    </svg>
+                `;
+            } else {
+                btn.classList.remove('active');
+                btn.innerHTML = `
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                        <line x1="23" y1="9" x2="17" y2="15"></line>
+                        <line x1="17" y1="9" x2="23" y2="15"></line>
+                    </svg>
+                `;
+            }
+        }
+
+        function playBeep() {
+            if (!audioCtx || audioCtx.state === 'suspended' || !isSoundEnabled) return;
+            try {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                
+                osc.type = 'square'; 
+                osc.frequency.setValueAtTime(800, audioCtx.currentTime); 
+                
+                gain.gain.setValueAtTime(0.015, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.03);
+                
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.03);
+            } catch (e) {}
+        }
+
+        // --- EFEKT PSANÍ KÓDU ---
+        function typeWriter() {
+            if (blockIndex < contentBlocks.length) {
+                if (charIndex === 0) {
+                    currentSpan = document.createElement("span");
+                    currentSpan.className = contentBlocks[blockIndex].cssClass;
+                    container.appendChild(currentSpan);
+                }
+                
+                let char = contentBlocks[blockIndex].text.charAt(charIndex);
+                
+                if (char === '\n') {
+                    currentSpan.innerHTML += '<br>';
+                } else {
+                    currentSpan.innerHTML += char;
+                }
+                
+                if (char !== ' ' && char !== '\n' && Math.random() > 0.6) {
+                    playBeep();
+                }
+
+                charIndex++;
+                
+                if (charIndex >= contentBlocks[blockIndex].text.length) {
+                    blockIndex++;
+                    charIndex = 0;
+                    setTimeout(typeWriter, 300);
+                } else {
+                    setTimeout(typeWriter, typeSpeed);
+                }
+            }
+        }
+
+        function goBack() {
+            window.location.href = "web.html";
+        }
+
+        window.onload = () => {
+            setTimeout(typeWriter, 400); 
+        };
+    </script>
+</body>
+</html>

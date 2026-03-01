@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+
+<meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>PulseMind™ / Terms of Service</title>
+
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <meta name="googlebot" content="noindex, nofollow, noarchive">
+    <meta name="google" content="nositelinkssearchbox">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="fuegoblade-logo.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="fuegoblade-logo.png">
+    <link rel="apple-touch-icon" href="fuegoblade-logo.png">
+
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Background */
+        .bg {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(143,0,255,0.1) 0%, #000 80%);
+            z-index: -2;
+        }
+
+        .grid {
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 30s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes gridMove {
+            from { background-position: 0 0; }
+            to { background-position: 50px 50px; }
+        }
+
+        /* Top Bar with Logo */
+        .top-bar {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+
+        /* Back Arrow */
+        .back-arrow {
+            width: 16px;
+            height: 16px;
+            border-left: 2px solid #39ff14;
+            border-bottom: 2px solid #39ff14;
+            transform: rotate(45deg);
+            cursor: pointer;
+            filter: drop-shadow(0 0 6px #39ff14);
+            transition: 0.3s;
+        }
+        
+        .back-arrow:hover {
+            transform: rotate(45deg) scale(1.1);
+            filter: drop-shadow(0 0 10px #39ff14);
+        }
+
+        /* Top Right Controls (Sound + Logo) */
+        .top-right-controls {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Sound Toggle Button */
+        .sound-toggle {
+            cursor: pointer;
+            width: 24px;
+            height: 24px;
+            color: rgba(255, 255, 255, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .sound-toggle:hover {
+            color: #39ff14;
+            filter: drop-shadow(0 0 5px rgba(57, 255, 20, 0.5));
+        }
+
+        .sound-toggle.active {
+            color: #39ff14;
+            filter: drop-shadow(0 0 8px #39ff14);
+        }
+
+        .sound-toggle svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* FuegoBlade Logo */
+        .logo-wrapper {
+            background: #fff; 
+            border-radius: 50%;
+            width: 70px; 
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden; 
+            box-shadow: 0 0 20px rgba(143, 0, 255, 0.3);
+            border: 2px solid #8F00FF; 
+            margin-left: 25px;
+        }
+
+        .logo-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* Code Window */
+        .code-window {
+            max-width: 900px;
+            margin: 120px auto 80px; 
+            background: rgba(12, 12, 18, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid rgba(143,0,255,0.3);
+            box-shadow: 0 0 40px rgba(143,0,255,0.15), inset 0 0 20px rgba(0,0,0,0.8);
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        .code-header {
+            margin-bottom: 30px;
+            font-size: 1.4rem;
+            font-weight: 900;
+            border-bottom: 1px dashed rgba(255,255,255,0.2);
+            padding-bottom: 15px;
+        }
+
+        .purple { color: #8F00FF; text-shadow: 0 0 10px rgba(143,0,255,0.5); }
+        .white { color: #ffffff; }
+
+        .code-content {
+            white-space: pre-wrap;
+            display: inline; /* To align correctly with the cursor */
+        }
+
+        /* Třídy pro formátování psaného textu */
+        .text-boot { color: #39ff14; font-weight: bold; opacity: 0.8; }
+        .text-body { color: #d1d1d1; font-family: system-ui, -apple-system, sans-serif; font-size: 1.1rem; line-height: 1.7; }
+        .text-summary { color: #00e5ff; font-weight: 700; text-shadow: 0 0 10px rgba(0, 229, 255, 0.4); font-family: system-ui, -apple-system, sans-serif; font-size: 1.1rem; line-height: 1.7; display: block; margin-top: 20px; border-left: 3px solid #00e5ff; padding-left: 15px; }
+
+        /* Neonový obdélníkový kurzor */
+        .cursor {
+            display: inline-block;
+            width: 12px;
+            height: 1.1em;
+            background: #39ff14;
+            vertical-align: middle;
+            margin-left: 5px;
+            box-shadow: 0 0 10px #39ff14;
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin: 40px 0 40px;
+            font-size: 0.85rem;
+            opacity: 0.5;
+            font-weight: 600;
+        }
+
+        @media (max-width: 600px) {
+            .code-window { padding: 25px; margin: 100px 20px 20px; font-size: 0.95rem; }
+            .code-header { font-size: 1.1rem; }
+            .text-body, .text-summary { font-size: 1rem; }
+            .logo-wrapper { width: 50px; height: 50px; margin-left: 15px; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="bg"></div>
+    <div class="grid"></div>
+
+    <div class="top-bar">
+        <div class="back-arrow" onclick="goBack()"></div>
+        
+        <div class="top-right-controls">
+            <div class="sound-toggle" id="soundToggle" onclick="toggleSound()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                    <line x1="23" y1="9" x2="17" y2="15"></line>
+                    <line x1="17" y1="9" x2="23" y2="15"></line>
+                </svg>
+            </div>
+            
+            <div class="logo-wrapper">
+                <img src="fuegoblade-logo.png" alt="FuegoBlade">
+            </div>
+        </div>
+    </div>
+
+    <div class="code-window">
+        <div class="code-header" id="section-title">
+            </div>
+        <div class="code-content" id="typedText"></div><span class="cursor"></span>
+    </div>
+
+    <div class="footer" id="copyright-text">
+        © 2026 FuegoBlade™. Všechna práva vyhrazena.
+    </div>
+
+    <script>
+        // Jazyková databáze (Terms of Service)
+        const langData = {
+            cs: {
+                title1: "Podmínky používání:",
+                title2: "AGB & Medical Disclaimer",
+                boot: "> INICIALIZACE OBCHODNÍCH PODMÍNEK...\n> VERIFIKACE UŽIVATELSKÉHO SOUHLASU...\n> PŘÍSTUP POVOLEN.\n\nPoslední aktualizace: 2026\nPoužíváním aplikace PulseMind™ a souvisejících služeb vyjadřujete souhlas s následujícími podmínkami. Před zahájením užívání si je prosím pozorně přečtěte.\n\n----------------------------------------\n\n",
+                body: "1. Provozovatel služby\nProvozovatelem digitální služby PulseMind™ je:\n\nRichard Zak\nMichael-Ulmer-Weg 10\n73235 Weilheim an der Teck\nNěmecko\nE-mail: richardzak@fuegoblade.com\n\nProvozovatel vystupuje jako fyzická osoba (Einzelunternehmer).\nÚdaje o živnostenské registraci budou doplněny po jejich vydání.\n\n----------------------------------------\n\n2. Předmět služby\nPulseMind™ je digitální AI systém poskytující:\n- analytické výstupy založené na datech uživatele\n- doporučení týkající se výživy, regenerace, tréninku a životního stylu\n- vizualizace a interpretace biologických parametrů\n- inteligentní personalizované protokoly\n\nPulseMind™ není zdravotnické zařízení ani zdravotnický prostředek.\nSlužba nenahrazuje lékařskou diagnostiku, léčbu ani odborné zdravotní poradenství.\n\n----------------------------------------\n\n3. Uživatelský účet\nUživatel je povinen:\n- uvádět pravdivé a úplné informace\n- chránit přístupové údaje\n- používat službu pouze pro osobní účely\n- nezasahovat do technického provozu systému\n\nProvozovatel může účet pozastavit nebo zrušit v případě:\n- porušení podmínek\n- zneužití systému\n- podezřelé aktivity\n- útoku na infrastrukturu nebo databázi\n\n----------------------------------------\n\n4. Předplatné a platby\nSlužba PulseMind™ funguje na základě předplatného.\nUživatel souhlasí, že:\n- předplatné je hrazeno prostřednictvím platební brány (Stripe)\n- poplatky mohou být měsíční / roční\n- předplatné se automaticky obnovuje, dokud není zrušeno\n- zrušení probíhá přímo v uživatelském účtu\n\nV případě neuhrazení může být účet dočasně pozastaven.\nCeny služeb mohou být aktualizovány, uživatel bude o změně informován.\n\n----------------------------------------\n\n5. Licence k užívání\nUživatel získává omezenou, nevýhradní, nepřenosnou a odvolatelnou licenci k používání software PulseMind™ pro osobní účely.\n\nJe zakázáno:\n- kopírovat, upravovat nebo distribuovat software\n- provádět reverse engineering nebo dekompilaci\n- používat data nebo výstupy pro komerční účely bez povolení\n- automatizovaně získávat data (scraping)\n- pokoušet se obejít ochranné mechanismy nebo limity API\n\n----------------------------------------\n\n6. Odpovědnost a omezení odpovědnosti (DISCLAIMER)\n\n6.1 Zdravotní upozornění\nPulseMind™ neposkytuje medicínskou péči. Všechna doporučení mají informativní charakter.\n\nUživatel výslovně potvrzuje, že:\n- systém nenahrazuje lékaře, fyzioterapeuta ani specialistu\n- doporučení AI nejsou medicínskou diagnózou\n- jakékoli zdravotní komplikace musí být konzultovány s lékařem\n- provozovatel nenese odpovědnost za následky nesprávného použití aplikace\n\nPulseMind™ NENÍ zdravotnickým prostředkem dle MDR (EU 2017/745).\n\n6.2 Sportovní a výkonnostní doporučení\nDoporučení týkající se výkonu, tréninku či regenerace jsou založena na algoritmech a předpokladech, nikoli na individuálním klinickém hodnocení.\n\nUživatel přebírá plnou odpovědnost za:\n- dodržování svých fyzických limitů\n- vlastní tréninkovou zátěž\n- stravovací volby\n- suplementaci\n\nProvozovatel nenese odpovědnost za zranění, únavu ani výkonové poklesy vzniklé nevhodným použitím systému.\n\n----------------------------------------\n\n7. AI systém a datová omezení\nPulseMind™ pracuje se strojovým učením a algoritmy, které:\n- mohou poskytovat doporučení na základě pravděpodobností\n- nejsou vždy stoprocentně přesné\n- se mohou chovat odlišně podle kvality vstupních dat\n\nProvozovatel neručí za:\n- přesnost interpretace biologických dat\n- individuální reakce metabolismu\n- výkonnostní odchylky\n- očekávání uživatele, která přesahují charakter služby\n\n----------------------------------------\n\n8. Ochrana soukromí\nOchrana osobních údajů je popsána v samostatném dokumentu Privacy / GDPR Policy.\nPoužíváním služby uživatel potvrzuje, že dokument prostudoval a souhlasí s ním.\n\n----------------------------------------\n\n9. Změny podmínek\nProvozovatel může podmínky aktualizovat.\nO změnách budou uživatelé informováni prostřednictvím e-mailu nebo aplikace.\nPokud uživatel nesouhlasí, může službu ukončit.\nPokračující užívání znamená souhlas s aktualizovanými podmínkami.\n\n",
+                summaryTitle: ">>> 10. JURISDIKCE A ZÁVĚREČNÁ USTANOVENÍ <<<\n",
+                summary: "Na právní vztahy se vztahují právní předpisy Spolkové republiky Německo. Místně příslušný soud bude upřesněn po dokončení živnostenské registrace. Pokud je některé ustanovení neplatné, nemá to vliv na platnost ostatních částí dokumentu.",
+                copyright: "© 2026 FuegoBlade™. Všechna práva vyhrazena."
+            },
+            en: {
+                title1: "Terms of Service:",
+                title2: "TOS & Medical Disclaimer",
+                boot: "> INITIALIZING TERMS OF SERVICE...\n> VERIFYING USER CONSENT...\n> ACCESS GRANTED.\n\nLast update: 2026\nBy using the PulseMind™ application and related services, you agree to the following terms. Please read them carefully before use.\n\n----------------------------------------\n\n",
+                body: "1. Service Operator\nThe operator of the digital service PulseMind™ is:\n\nRichard Zak\nMichael-Ulmer-Weg 10\n73235 Weilheim an der Teck\nGermany\nE-mail: richardzak@fuegoblade.com\n\nThe operator acts as a sole proprietor (Einzelunternehmer).\nBusiness registration details will be added upon issuance.\n\n----------------------------------------\n\n2. Scope of Service\nPulseMind™ is a digital AI system providing:\n- analytical outputs based on user data\n- recommendations regarding nutrition, recovery, training, and lifestyle\n- visualization and interpretation of biological parameters\n- intelligent personalized protocols\n\nPulseMind™ is not a medical facility or medical device.\nThe service does not replace medical diagnosis, treatment, or professional health advice.\n\n----------------------------------------\n\n3. User Account\nThe user is obliged to:\n- provide truthful and complete information\n- protect access credentials\n- use the service for personal purposes only\n- not interfere with the technical operation of the system\n\nThe operator may suspend or terminate the account in case of:\n- violation of terms\n- system abuse\n- suspicious activity\n- attack on infrastructure or database\n\n----------------------------------------\n\n4. Subscriptions and Payments\nThe PulseMind™ service operates on a subscription basis.\nThe user agrees that:\n- subscriptions are paid via a payment gateway (Stripe)\n- fees can be monthly / annual\n- subscriptions automatically renew until canceled\n- cancellation is done directly in the user account\n\nIn case of non-payment, the account may be temporarily suspended.\nService prices may be updated; the user will be informed of any changes.\n\n----------------------------------------\n\n5. License to Use\nThe user is granted a limited, non-exclusive, non-transferable, and revocable license to use the PulseMind™ software for personal purposes.\n\nIt is prohibited to:\n- copy, modify, or distribute the software\n- perform reverse engineering or decompilation\n- use data or outputs for commercial purposes without permission\n- automatically scrape data\n- attempt to bypass protection mechanisms or API limits\n\n----------------------------------------\n\n6. Liability and Limitation of Liability (DISCLAIMER)\n\n6.1 Medical Disclaimer\nPulseMind™ does not provide medical care. All recommendations are for informational purposes.\n\nThe user explicitly confirms that:\n- the system does not replace a doctor, physiotherapist, or specialist\n- AI recommendations are not a medical diagnosis\n- any health complications must be consulted with a doctor\n- the operator is not liable for the consequences of incorrect application use\n\nPulseMind™ is NOT a medical device under the MDR (EU 2017/745).\n\n6.2 Sports and Performance Recommendations\nRecommendations regarding performance, training, or recovery are based on algorithms and assumptions, not individual clinical evaluation.\n\nThe user assumes full responsibility for:\n- respecting their physical limits\n- their own training load\n- dietary choices\n- supplementation\n\nThe operator is not liable for injuries, fatigue, or performance drops resulting from inappropriate use of the system.\n\n----------------------------------------\n\n7. AI System and Data Limitations\nPulseMind™ works with machine learning and algorithms that:\n- may provide recommendations based on probabilities\n- are not always 100% accurate\n- may behave differently depending on the quality of input data\n\nThe operator is not liable for:\n- accuracy of biological data interpretation\n- individual metabolic responses\n- performance deviations\n- user expectations that exceed the nature of the service\n\n----------------------------------------\n\n8. Privacy Protection\nPersonal data protection is described in a separate Privacy / GDPR Policy document.\nBy using the service, the user confirms they have read and agree to the document.\n\n----------------------------------------\n\n9. Changes to Terms\nThe operator may update the terms.\nUsers will be informed of changes via email or the application.\nIf the user disagrees, they may terminate the service.\nContinued use constitutes acceptance of the updated terms.\n\n",
+                summaryTitle: ">>> 10. JURISDICTION & FINAL PROVISIONS <<<\n",
+                summary: "Legal relations are governed by the laws of the Federal Republic of Germany. The locally competent court will be specified upon completion of business registration. If any provision is invalid, it does not affect the validity of the remaining parts of the document.",
+                copyright: "© 2026 FuegoBlade™. All rights reserved."
+            },
+            de: {
+                title1: "Nutzungsbedingungen:",
+                title2: "AGB & Medical Disclaimer",
+                boot: "> INITIALISIERUNG DER NUTZUNGSBEDINGUNGEN...\n> ÜBERPRÜFUNG DER NUTZERZUSTIMMUNG...\n> ZUGRIFF GEWÄHRT.\n\nLetzte Aktualisierung: 2026\nDurch die Nutzung der PulseMind™-Anwendung und der damit verbundenen Dienste erklären Sie sich mit den folgenden Bedingungen einverstanden. Bitte lesen Sie diese vor der Nutzung sorgfältig durch.\n\n----------------------------------------\n\n",
+                body: "1. Diensteanbieter\nDer Betreiber des digitalen Dienstes PulseMind™ ist:\n\nRichard Zak\nMichael-Ulmer-Weg 10\n73235 Weilheim an der Teck\nDeutschland\nE-Mail: richardzak@fuegoblade.com\n\nDer Betreiber handelt als Einzelunternehmer.\nDaten zur Gewerbeanmeldung werden nach Ausstellung ergänzt.\n\n----------------------------------------\n\n2. Leistungsgegenstand\nPulseMind™ ist ein digitales KI-System, das Folgendes bietet:\n- analytische Auswertungen basierend auf Nutzerdaten\n- Empfehlungen zu Ernährung, Regeneration, Training und Lebensstil\n- Visualisierung und Interpretation biologischer Parameter\n- intelligente, personalisierte Protokolle\n\nPulseMind™ ist keine medizinische Einrichtung und kein Medizinprodukt.\nDer Dienst ersetzt keine medizinische Diagnose, Behandlung oder professionelle Gesundheitsberatung.\n\n----------------------------------------\n\n3. Benutzerkonto\nDer Nutzer ist verpflichtet:\n- wahrheitsgemäße und vollständige Angaben zu machen\n- Zugangsdaten zu schützen\n- den Dienst nur für persönliche Zwecke zu nutzen\n- nicht in den technischen Betrieb des Systems einzugreifen\n\nDer Betreiber kann das Konto sperren oder kündigen bei:\n- Verstoß gegen die Bedingungen\n- Systemmissbrauch\n- verdächtigen Aktivitäten\n- Angriffen auf die Infrastruktur oder Datenbank\n\n----------------------------------------\n\n4. Abonnements und Zahlungen\nDer PulseMind™-Dienst funktioniert auf Abonnementbasis.\nDer Nutzer stimmt zu, dass:\n- Abonnements über ein Zahlungs-Gateway (Stripe) bezahlt werden\n- Gebühren monatlich / jährlich anfallen können\n- sich Abonnements automatisch verlängern, bis sie gekündigt werden\n- die Kündigung direkt im Benutzerkonto erfolgt\n\nBei Nichtzahlung kann das Konto vorübergehend gesperrt werden.\nServicepreise können aktualisiert werden; der Nutzer wird über Änderungen informiert.\n\n----------------------------------------\n\n5. Nutzungslizenz\nDem Nutzer wird eine eingeschränkte, nicht exklusive, nicht übertragbare und widerrufliche Lizenz zur Nutzung der PulseMind™-Software für persönliche Zwecke gewährt.\n\nEs ist untersagt:\n- die Software zu kopieren, zu modifizieren oder zu verbreiten\n- Reverse Engineering oder Dekompilierung durchzuführen\n- Daten oder Ausgaben ohne Genehmigung für kommerzielle Zwecke zu nutzen\n- Daten automatisiert zu erfassen (Scraping)\n- zu versuchen, Schutzmechanismen oder API-Limits zu umgehen\n\n----------------------------------------\n\n6. Haftung und Haftungsbeschränkung (DISCLAIMER)\n\n6.1 Medizinischer Haftungsausschluss\nPulseMind™ bietet keine medizinische Versorgung. Alle Empfehlungen dienen Informationszwecken.\n\nDer Nutzer bestätigt ausdrücklich, dass:\n- das System keinen Arzt, Physiotherapeuten oder Spezialisten ersetzt\n- KI-Empfehlungen keine medizinische Diagnose sind\n- jegliche gesundheitlichen Komplikationen mit einem Arzt konsultiert werden müssen\n- der Betreiber nicht für die Folgen einer unsachgemäßen Nutzung der Anwendung haftet\n\nPulseMind™ ist KEIN Medizinprodukt gemäß der MDR (EU 2017/745).\n\n6.2 Sport- und Leistungsempfehlungen\nEmpfehlungen zu Leistung, Training oder Regeneration basieren auf Algorithmen und Annahmen, nicht auf einer individuellen klinischen Bewertung.\n\nDer Nutzer übernimmt die volle Verantwortung für:\n- die Beachtung seiner körperlichen Grenzen\n- seine eigene Trainingsbelastung\n- Ernährungsentscheidungen\n- Supplementierung\n\nDer Betreiber haftet nicht für Verletzungen, Erschöpfung oder Leistungseinbußen, die durch unsachgemäße Nutzung des Systems entstehen.\n\n----------------------------------------\n\n7. KI-System und Datenbeschränkungen\nPulseMind™ arbeitet mit maschinellem Lernen und Algorithmen, die:\n- Empfehlungen basierend auf Wahrscheinlichkeiten geben können\n- nicht immer zu 100 % genau sind\n- sich je nach Qualität der Eingabedaten unterschiedlich verhalten können\n\nDer Betreiber haftet nicht für:\n- die Genauigkeit der Interpretation biologischer Daten\n- individuelle Stoffwechselreaktionen\n- Leistungsabweichungen\n- Nutzererwartungen, die über die Art des Dienstes hinausgehen\n\n----------------------------------------\n\n8. Datenschutz\nDer Schutz personenbezogener Daten wird in einem separaten Dokument (Privacy / GDPR Policy) beschrieben.\nDurch die Nutzung des Dienstes bestätigt der Nutzer, das Dokument gelesen zu haben und ihm zuzustimmen.\n\n----------------------------------------\n\n9. Änderungen der Bedingungen\nDer Betreiber kann die Bedingungen aktualisieren.\nNutzer werden per E-Mail oder über die Anwendung über Änderungen informiert.\nWenn der Nutzer nicht zustimmt, kann er den Dienst beenden.\nDie fortgesetzte Nutzung gilt als Zustimmung zu den aktualisierten Bedingungen.\n\n",
+                summaryTitle: ">>> 10. RECHT & SCHLUSSBESTIMMUNGEN <<<\n",
+                summary: "Für die Rechtsbeziehungen gelten die Gesetze der Bundesrepublik Deutschland. Das örtlich zuständige Gericht wird nach Abschluss der Gewerbeanmeldung festgelegt. Sollte eine Bestimmung unwirksam sein, berührt dies nicht die Gültigkeit der übrigen Teile des Dokuments.",
+                copyright: "© 2026 FuegoBlade™. Alle Rechte vorbehalten."
+            },
+            es: {
+                title1: "Términos de Servicio:",
+                title2: "TOS & Aviso Médico",
+                boot: "> INICIALIZANDO TÉRMINOS DE SERVICIO...\n> VERIFICANDO CONSENTIMIENTO DEL USUARIO...\n> ACCESO CONCEDIDO.\n\nÚltima actualización: 2026\nAl utilizar la aplicación PulseMind™ y los servicios relacionados, aceptas los siguientes términos. Por favor, léelos cuidadosamente antes de usarlos.\n\n----------------------------------------\n\n",
+                body: "1. Operador del Servicio\nEl operador del servicio digital PulseMind™ es:\n\nRichard Zak\nMichael-Ulmer-Weg 10\n73235 Weilheim an der Teck\nAlemania\nCorreo electrónico: richardzak@fuegoblade.com\n\nEl operador actúa como propietario único (Einzelunternehmer).\nLos detalles del registro comercial se agregarán tras su emisión.\n\n----------------------------------------\n\n2. Alcance del Servicio\nPulseMind™ es un sistema de IA digital que proporciona:\n- resultados analíticos basados en datos del usuario\n- recomendaciones sobre nutrición, recuperación, entrenamiento y estilo de vida\n- visualización e interpretación de parámetros biológicos\n- protocolos personalizados inteligentes\n\nPulseMind™ no es una instalación médica ni un dispositivo médico.\nEl servicio no reemplaza el diagnóstico médico, el tratamiento ni el asesoramiento de salud profesional.\n\n----------------------------------------\n\n3. Cuenta de Usuario\nEl usuario está obligado a:\n- proporcionar información veraz y completa\n- proteger las credenciales de acceso\n- utilizar el servicio solo para fines personales\n- no interferir con el funcionamiento técnico del sistema\n\nEl operador puede suspender o cancelar la cuenta en caso de:\n- violación de los términos\n- abuso del sistema\n- actividad sospechosa\n- ataque a la infraestructura o base de datos\n\n----------------------------------------\n\n4. Suscripciones y Pagos\nEl servicio PulseMind™ funciona mediante suscripción.\nEl usuario acepta que:\n- las suscripciones se pagan a través de una pasarela de pago (Stripe)\n- las tarifas pueden ser mensuales / anuales\n- las suscripciones se renuevan automáticamente hasta que se cancelen\n- la cancelación se realiza directamente en la cuenta del usuario\n\nEn caso de falta de pago, la cuenta puede ser suspendida temporalmente.\nLos precios de los servicios pueden actualizarse; el usuario será informado de cualquier cambio.\n\n----------------------------------------\n\n5. Licencia de Uso\nSe otorga al usuario una licencia limitada, no exclusiva, intransferible y revocable para utilizar el software PulseMind™ con fines personales.\n\nEstá prohibido:\n- copiar, modificar o distribuir el software\n- realizar ingeniería inversa o descompilación\n- utilizar datos o resultados con fines comerciales sin permiso\n- extraer datos automáticamente (scraping)\n- intentar eludir los mecanismos de protección o los límites de la API\n\n----------------------------------------\n\n6. Responsabilidad y Limitación de Responsabilidad (DISCLAIMER)\n\n6.1 Aviso Médico\nPulseMind™ no brinda atención médica. Todas las recomendaciones son para fines informativos.\n\nEl usuario confirma explícitamente que:\n- el sistema no reemplaza a un médico, fisioterapeuta o especialista\n- las recomendaciones de la IA no son un diagnóstico médico\n- cualquier complicación de salud debe consultarse con un médico\n- el operador no es responsable de las consecuencias del uso incorrecto de la aplicación\n\nPulseMind™ NO es un dispositivo médico según el MDR (UE 2017/745).\n\n6.2 Recomendaciones de Deportes y Rendimiento\nLas recomendaciones con respecto al rendimiento, entrenamiento o recuperación se basan en algoritmos y suposiciones, no en evaluaciones clínicas individuales.\n\nEl usuario asume toda la responsabilidad por:\n- respetar sus límites físicos\n- su propia carga de entrenamiento\n- opciones dietéticas\n- suplementación\n\nEl operador no se hace responsable de lesiones, fatiga o caídas en el rendimiento resultantes del uso inadecuado del sistema.\n\n----------------------------------------\n\n7. Limitaciones del Sistema de IA y Datos\nPulseMind™ funciona con aprendizaje automático y algoritmos que:\n- pueden proporcionar recomendaciones basadas en probabilidades\n- no siempre son 100% precisos\n- pueden comportarse de manera diferente según la calidad de los datos de entrada\n\nEl operador no se hace responsable de:\n- la precisión de la interpretación de datos biológicos\n- respuestas metabólicas individuales\n- desviaciones de rendimiento\n- expectativas del usuario que excedan la naturaleza del servicio\n\n----------------------------------------\n\n8. Protección de la Privacidad\nLa protección de datos personales se describe en un documento separado de Política de Privacidad / GDPR.\nAl utilizar el servicio, el usuario confirma que ha leído y está de acuerdo con el documento.\n\n----------------------------------------\n\n9. Cambios en los Términos\nEl operador puede actualizar los términos.\nLos usuarios serán informados de los cambios por correo electrónico o mediante la aplicación.\nSi el usuario no está de acuerdo, puede cancelar el servicio.\nEl uso continuo constituye la aceptación de los términos actualizados.\n\n",
+                summaryTitle: ">>> 10. JURISDICCIÓN Y DISPOSICIONES FINALES <<<\n",
+                summary: "Las relaciones legales se rigen por las leyes de la República Federal de Alemania. El tribunal local competente se especificará una vez completado el registro comercial. Si alguna disposición no es válida, no afecta la validez de las partes restantes del documento.",
+                copyright: "© 2026 FuegoBlade™. Todos los derechos reservados."
+            }
+        };
+
+        const lang = localStorage.getItem("language") || "cs";
+        const currentData = langData[lang] || langData["cs"];
+        
+        document.documentElement.lang = lang;
+        document.getElementById("copyright-text").innerText = currentData.copyright;
+        
+        document.getElementById("section-title").innerHTML = `
+            <span class="purple">${currentData.title1}</span> 
+            <span class="white">${currentData.title2}</span>
+        `;
+
+        const contentBlocks = [
+            { text: currentData.boot, cssClass: "text-boot" },
+            { text: currentData.body, cssClass: "text-body" },
+            { text: currentData.summaryTitle + currentData.summary, cssClass: "text-summary" }
+        ];
+
+        let blockIndex = 0;
+        let charIndex = 0;
+        const container = document.getElementById("typedText");
+        let currentSpan = null;
+        const typeSpeed = 5; // Rychlejší přepis pro dlouhé právní texty (rychlost Matrixu)
+
+        // --- AUDIO SYSTÉM PRO PÍPÁNÍ A TLAČÍTKO ---
+        let audioCtx;
+        let isSoundEnabled = false;
+
+        function toggleSound() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+
+            isSoundEnabled = !isSoundEnabled;
+            const btn = document.getElementById("soundToggle");
+
+            if (isSoundEnabled) {
+                btn.classList.add('active');
+                btn.innerHTML = `
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                    </svg>
+                `;
+            } else {
+                btn.classList.remove('active');
+                btn.innerHTML = `
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                        <line x1="23" y1="9" x2="17" y2="15"></line>
+                        <line x1="17" y1="9" x2="23" y2="15"></line>
+                    </svg>
+                `;
+            }
+        }
+
+        function playBeep() {
+            if (!audioCtx || audioCtx.state === 'suspended' || !isSoundEnabled) return;
+            try {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                
+                osc.type = 'square'; 
+                osc.frequency.setValueAtTime(800, audioCtx.currentTime); 
+                
+                gain.gain.setValueAtTime(0.015, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.03);
+                
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.03);
+            } catch (e) {}
+        }
+
+        // --- EFEKT PSANÍ KÓDU ---
+        function typeWriter() {
+            if (blockIndex < contentBlocks.length) {
+                if (charIndex === 0) {
+                    currentSpan = document.createElement("span");
+                    currentSpan.className = contentBlocks[blockIndex].cssClass;
+                    container.appendChild(currentSpan);
+                }
+                
+                let char = contentBlocks[blockIndex].text.charAt(charIndex);
+                
+                if (char === '\n') {
+                    currentSpan.innerHTML += '<br>';
+                } else {
+                    currentSpan.innerHTML += char;
+                }
+                
+                // Občasné vynechání pípnutí pro organičtější pocit a menší zátěž procesoru při rychlém psaní
+                if (char !== ' ' && char !== '\n' && Math.random() > 0.6) {
+                    playBeep();
+                }
+
+                charIndex++;
+                
+                if (charIndex >= contentBlocks[blockIndex].text.length) {
+                    blockIndex++;
+                    charIndex = 0;
+                    setTimeout(typeWriter, 300);
+                } else {
+                    setTimeout(typeWriter, typeSpeed);
+                }
+            }
+        }
+
+        function goBack() {
+            window.location.href = "web.html";
+        }
+
+        window.onload = () => {
+            setTimeout(typeWriter, 400); 
+        };
+    </script>
+</body>
+</html>
