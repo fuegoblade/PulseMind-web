@@ -51,7 +51,11 @@ PulseMind™ is built on a modern, lightning-fast, and scalable stack capable of
 ### 📂 Repository Blueprint
 
 ```text
-PulseMind/
+PulseMind-web/
+├── .gitignore
+├── CNAME
+├── LICENSE
+├── README.md
 ├── index.html                # ⚡ Gateway (Landing Page with language selection)
 ├── web.html                  # 🧠 Main Dashboard
 ├── sekce-*.html              # 🧬 10x Thematic protocols (AI, Metabolism, Longevity...)
@@ -118,7 +122,11 @@ PulseMind™ je postaven na moderním, bleskově rychlém a škálovatelném sta
 ### 📂 Blueprint Repozitáře
 
 ```text
-PulseMind/
+PulseMind-web/
+├── .gitignore
+├── CNAME
+├── LICENSE
+├── README.md
 ├── index.html                # ⚡ Vstupní brána (Landing Page s výběrem jazyků)
 ├── web.html                  # 🧠 Hlavní rozcestník (Dashboard)
 ├── sekce-*.html              # 🧬 10x Tematické protokoly (AI, Metabolismus, Longevity...)
