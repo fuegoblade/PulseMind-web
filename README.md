@@ -64,10 +64,9 @@ PulseMind/
 ├── impressum.html            # 🏛️ Impressum (via TMG)
 ├── assets...                 # 🎨 Visual Identity (Logos, Icons, OG images)
 └── favicons...
-
+```
 
 ---
-
 
 <a name="ceska-verze"></a>
 ## 🇨🇿 Česká verze
@@ -128,4 +127,4 @@ PulseMind/
 ├── impressum.html            # 🏛️ Impressum (dle TMG)
 ├── assets...                 # 🎨 Vizuální identita (Loga, Ikony, OG images)
 └── favicons...
-
+```
