@@ -1,12 +1,10 @@
-# ⚡ PulseMind™
-### Adaptive Biological Intelligence System by FuegoBlade™
-
-[English Version](#english-version) | [Česká verze](#ceska-verze)
+[English Version](#english-version) / [Česká verze](#ceska-verze)
 
 ---
 
 <a name="english-version"></a>
-## 🇺🇸 English Version
+# 💗 PulseMind™ - 🇺🇸 English Version
+### Adaptive Biological Intelligence System by FuegoBlade™
 
 > *"Your biology is not just a physical shell. It is the most complex algorithm in the universe. And we have created a system capable of deciphering, understanding, and rewriting it for maximum performance."*
 
@@ -67,9 +65,11 @@ PulseMind/
 ```
 
 ---
+[Česká verze](#ceska-verze) / [English Version](#english-version)
 
 <a name="ceska-verze"></a>
-## 🇨🇿 Česká verze
+# 💗 PulseMind™ - 🇨🇿 Česká verze
+### Adaptive Biological Intelligence System by FuegoBlade™
 
 > *"Tvoje biologie není jen fyzická schránka. Je to ten nejsložitější algoritmus ve vesmíru. A my jsme vytvořili systém, který ho dokáže dešifrovat, pochopit a přepsat pro maximální výkon."*
 
