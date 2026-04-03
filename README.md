@@ -1,11 +1,11 @@
-# ⚡ PulseMind™
-### Adaptive Biological Intelligence System by FuegoBlade™
-
 [English Version](#-english-version) | [Česká verze](#-česká-verze)
 
 ---
 
 ## 🇺🇸 English Version
+
+# ⚡ PulseMind™
+### Adaptive Biological Intelligence System by FuegoBlade™
 
 > *"Your biology is not just a physical shell. It is the most complex algorithm in the universe. And we have created a system capable of deciphering, understanding, and rewriting it for maximum performance."*
 
@@ -66,6 +66,8 @@ PulseMind/
 
 ---
 
+## 🇨🇿 Česká verze
+
 # ⚡ PulseMind™
 ### Adaptive Biological Intelligence System by FuegoBlade™
 
@@ -81,7 +83,7 @@ Projekt byl vykován v laboratořích **FuegoBlade™**.
 
 ---
 
-## 🚀 Architektura Systému (Hlavní funkce)
+### 🚀 Architektura Systému (Hlavní funkce)
 
 PulseMind™ operuje na bázi dynamického vyhodnocování. Neuznáváme statické tabulky. Tady vládne živý kód:
 
@@ -93,7 +95,7 @@ PulseMind™ operuje na bázi dynamického vyhodnocování. Neuznáváme statick
 
 ---
 
-## ⚙️ Technologický Motor (Stack)
+### ⚙️ Technologický Motor (Stack)
 
 PulseMind™ je postaven na moderním, bleskově rychlém a škálovatelném stacku, který zvládne obrovské toky dat.
 
@@ -112,7 +114,7 @@ PulseMind™ je postaven na moderním, bleskově rychlém a škálovatelném sta
 
 ---
 
-## 📂 Blueprint Repozitáře
+### 📂 Blueprint Repozitáře
 
 ```text
 PulseMind/
