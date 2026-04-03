@@ -1,4 +1,4 @@
-[English Version](#english-version) / [Česká verze](#ceska-verze)
+[English Version](#english-version) | [Česká verze](#ceska-verze)
 
 ---
 
@@ -65,7 +65,7 @@ PulseMind/
 ```
 
 ---
-[Česká verze](#ceska-verze) / [English Version](#english-version)
+[Česká verze](#ceska-verze) | [English Version](#english-version)
 
 <a name="ceska-verze"></a>
 # 💗 PulseMind™ - 🇨🇿 Česká verze
