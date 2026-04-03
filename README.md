@@ -17,6 +17,8 @@
 
 The project was forged in the **FuegoBlade™** laboratories.
 
+---
+
 ### 🚀 System Architecture (Core Features)
 
 PulseMind™ operates on the basis of dynamic evaluation. We do not recognize static tables. Here, live code rules:
@@ -27,17 +29,19 @@ PulseMind™ operates on the basis of dynamic evaluation. We do not recognize st
 * ⚡ **Adaptive Recalibration:** Performance analysis for elite athletes, intelligent return to movement after injury, and managed recovery of the nervous system.
 * 🛡️ **Longevity & Growth:** Specialized modules for active longevity (Seniors), safe development (Children), and extreme metabolic transformations (Pregnancy).
 
+---
+
 ### ⚙️ Technology Stack
 
 PulseMind™ is built on a modern, lightning-fast, and scalable stack capable of handling massive data flows.
 
-**Frontend:**
+**Frontend (User Interface):**
 * `Next.js` / `React`
 * `Tailwind CSS` (Custom FuegoBlade™ Cyberpunk UI)
-* Hosting: `Vercel` / `GitHub Pages`
+* Hosting: `Vercel` / `GitHub Pages` (Marketing)
 
-**Backend & Data:**
-* `Supabase` (PostgreSQL, RLS Security)
+**Backend & Data (Cognitive Core):**
+* `Supabase` (PostgreSQL database, RLS Security)
 * `Supabase Auth` (Secure authentication)
 * REST API & Edge Functions for AI processes
 
@@ -46,25 +50,7 @@ PulseMind™ is built on a modern, lightning-fast, and scalable stack capable of
 
 ---
 
-## 🇨🇿 Česká verze
-
-> *"Tvoje biologie není jen fyzická schránka. Je to ten nejsložitější algoritmus ve vesmíru. A my jsme vytvořili systém, který ho dokáže dešifrovat, pochopit a přepsat pro maximální výkon."*
-
-**PulseMind™** není další obyčejná fitness aplikace. Je to nekompromisní digitální analytický nástroj, který funguje jako tvůj osobní biologický avatar. Prostřednictvím pokročilých neuronových sítí a umělé inteligence systém v reálném čase analyzuje tvůj výkon, spánek, stravu a regeneraci, aby ti doručil exaktní strategické protokoly. 
-
-Projekt byl vykován v laboratořích **FuegoBlade™**.
-
-### 🚀 Architektura Systému (Core Features)
-
-* 🧬 **Digitální Biologický Avatar:** Unikátní datový model, který se neustále učí z tvého chování a biometrických vstupů.
-* 🧠 **Kognitivní Jádro:** AI analýza, která dešifruje souvislosti mezi únavou a centrálním nervovým systémem.
-* 🥩 **Metabolická Architektura:** Exaktní výživové protokoly na bázi rozpoznávání fotografií jídla.
-* ⚡ **Adaptivní Rekalibrace:** Výkonnostní analýzy pro elity a řízená regenerace.
-* 🛡️ **Longevity & Růst:** Moduly pro dlouhověkost, děti a specifické stavy (gravidita).
-
----
-
-## 📂 Blueprint Repozitáře / Repository Blueprint
+### 📂 Repository Blueprint
 
 ```text
 PulseMind/
@@ -75,5 +61,67 @@ PulseMind/
 ├── policy.html               # 🔒 Privacy Policy (GDPR)
 ├── copy.html                 # © Copyright
 ├── impressum.html            # 🏛️ Impressum (via TMG)
-├── assets...                 # 🎨 Visual Identity
+├── assets...                 # 🎨 Visual Identity (Logos, Icons, OG images)
+└── favicons...
+
+---
+
+# ⚡ PulseMind™
+### Adaptive Biological Intelligence System by FuegoBlade™
+
+> *"Tvoje biologie není jen fyzická schránka. Je to ten nejsložitější algoritmus ve vesmíru. A my jsme vytvořili systém, který ho dokáže dešifrovat, pochopit a přepsat pro maximální výkon."*
+
+![PulseMind Version](https://img.shields.io/badge/Version-1.0.0--Elite-8F00FF?style=for-the-badge)
+![AI Core](https://img.shields.io/badge/AI_Core-Active-39ff14?style=for-the-badge)
+![License](https://img.shields.io/badge/License-Proprietary-ff2a2a?style=for-the-badge)
+
+**PulseMind™** není další obyčejná fitness aplikace. Je to nekompromisní digitální analytický nástroj, který funguje jako tvůj osobní biologický avatar. Prostřednictvím pokročilých neuronových sítí a umělé inteligence systém v reálném čase analyzuje tvůj výkon, spánek, stravu a regeneraci, aby ti doručil exaktní strategické protokoly. 
+
+Projekt byl vykován v laboratořích **FuegoBlade™**.
+
+---
+
+## 🚀 Architektura Systému (Hlavní funkce)
+
+PulseMind™ operuje na bázi dynamického vyhodnocování. Neuznáváme statické tabulky. Tady vládne živý kód:
+
+* 🧬 **Digitální Biologický Avatar:** Unikátní datový model, který se neustále učí z tvého chování, stresu a biometrických vstupů (Garmin, Oura, Apple Health).
+* 🧠 **Kognitivní Jádro:** Pokročilá AI analýza, která dešifruje souvislosti mezi tvou únavou, spánkovou architekturou a centrálním nervovým systémem.
+* 🥩 **Metabolická Architektura:** Exaktní výživové protokoly. Stačí vyfotit jídlo a AI okamžitě rozklíčuje makroživiny a zasadí je do kontextu tvého energetického výdeje.
+* ⚡ **Adaptivní Rekalibrace:** Výkonnostní analýzy pro elitní sportovce, inteligentní návrat k pohybu po zranění a řízená regenerace nervového systému.
+* 🛡️ **Longevity & Růst:** Speciální moduly pro aktivní dlouhověkost (Senioři), bezpečný vývoj (Děti) a extrémní metabolické transformace (Gravidita).
+
+---
+
+## ⚙️ Technologický Motor (Stack)
+
+PulseMind™ je postaven na moderním, bleskově rychlém a škálovatelném stacku, který zvládne obrovské toky dat.
+
+**Frontend (Uživatelské rozhraní):**
+* `Next.js` / `React`
+* `Tailwind CSS` (Custom FuegoBlade™ Cyberpunk UI)
+* Hosting: `Vercel` / `GitHub Pages` (Marketing)
+
+**Backend & Data (Kognitivní Jádro):**
+* `Supabase` (PostgreSQL databáze, RLS Security)
+* `Supabase Auth` (Bezpečná autentizace)
+* REST API & Edge Functions pro AI procesy
+
+**Monetizace & Infrastruktura:**
+* `Stripe` (Fakturace a správa předplatného: STARTER, PRO, PRO+ ELITE)
+
+---
+
+## 📂 Blueprint Repozitáře
+
+```text
+PulseMind/
+├── index.html                # ⚡ Vstupní brána (Landing Page s výběrem jazyků)
+├── web.html                  # 🧠 Hlavní rozcestník (Dashboard)
+├── sekce-*.html              # 🧬 10x Tematické protokoly (AI, Metabolismus, Longevity...)
+├── terms.html                # ⚖️ Obchodní podmínky & Medical Disclaimer
+├── policy.html               # 🔒 Ochrana soukromí (GDPR)
+├── copy.html                 # © Autorská práva
+├── impressum.html            # 🏛️ Impressum (dle TMG)
+├── assets...                 # 🎨 Vizuální identita (Loga, Ikony, OG images)
 └── favicons...
