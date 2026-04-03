@@ -55,5 +55,5 @@ PulseMind/
 ├── policy.html               # 🔒 Ochrana soukromí (GDPR)
 ├── copy.html                 # © Autorská práva
 ├── impressum.html            # 🏛️ Impressum (dle TMG)
-├── assets/                   # 🎨 Vizuální identita (Loga, Ikony, OG images)
-└── app/                      # 💻 Zdrojový kód aplikace (Next.js produkční jádro)
+├── assets...                 # 🎨 Vizuální identita (Loga, Ikony, OG images)
+└── favicons...
